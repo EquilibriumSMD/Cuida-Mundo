@@ -2,6 +2,7 @@ var canvas;
 var tiles = [];
 var img = [];
 var lixo = [];
+var iLixo = [];
 var bonequinho;
 var display;
 
@@ -22,6 +23,15 @@ function setup() {
       lixo[x][y] = floor(random(10));
     }
   }
+  for (x = 0; x < 24; x++) {
+    iLixo[x] = [];
+    for (y = 0; y < 24; y++) {
+      if (lixo[x][y] != 0 && lixo[x][y] < 6) {
+        iLixo[x][y] = createImg("img/lixo" + lixo[x][y] + ".png");
+        iLixo[x][y].position(treesholdX(x, y), treesholdY(x, y) - 27);
+      }
+    }
+  }
   bonequinho = new Boneco();
   canvas.remove();
   canvas.parent(document.body);
@@ -33,7 +43,6 @@ function setup() {
 function draw() {
   clear();
   background(0, 0);
-  drawLixo();
   drawbonequinho();
 }
 
@@ -44,38 +53,6 @@ function drawbonequinho() {
     treesholdX(bonequinho.x, bonequinho.y) + 32, treesholdY(bonequinho.x, bonequinho.y) + 8);
   fill(255, 127, 0);
   ellipse(treesholdX(bonequinho.x, bonequinho.y) + 32, treesholdY(bonequinho.x, bonequinho.y) - 30, 20, 20);
-}
-
-function drawLixo() {
-  for (x = 0; x < 24; x++) {
-    for (y = 0; y < 24; y++) {
-      switch (lixo[x][y]) {
-        case 1:
-          fill(255, 25, 25);
-          ellipse(treesholdX(x, y) + 32, treesholdY(x, y) + 8, 10, 10);
-          break;
-        case 2:
-          fill(25, 255, 25);
-          ellipse(treesholdX(x, y) + 32, treesholdY(x, y) + 8, 10, 10);
-          break;
-        case 3:
-          fill(25, 25, 255);
-          ellipse(treesholdX(x, y) + 32, treesholdY(x, y) + 8, 10, 10);
-          break;
-        case 4:
-          fill(255, 255, 25);
-          ellipse(treesholdX(x, y) + 32, treesholdY(x, y) + 8, 10, 10);
-          break;
-        case 5:
-          fill(25, 25, 25);
-          ellipse(treesholdX(x, y) + 32, treesholdY(x, y) + 8, 10, 10);
-          break;
-        default:
-          lixo[x][y] = 0;
-          break;
-      }
-    }
-  }
 }
 
 function keyPressed() {
@@ -102,25 +79,31 @@ function keyPressed() {
       case 1:
         bonequinho.plast++;
         lixo[bonequinho.x][bonequinho.y] = 0;
+        iLixo[bonequinho.x][bonequinho.y].remove();
         break;
       case 2:
         bonequinho.vidro++;
         lixo[bonequinho.x][bonequinho.y] = 0;
+        iLixo[bonequinho.x][bonequinho.y].remove();
         break;
       case 3:
         bonequinho.papel++;
         lixo[bonequinho.x][bonequinho.y] = 0;
+        iLixo[bonequinho.x][bonequinho.y].remove();
         break;
       case 4:
         bonequinho.metal++;
         lixo[bonequinho.x][bonequinho.y] = 0;
+        iLixo[bonequinho.x][bonequinho.y].remove();
         break;
       case 5:
         bonequinho.lixoC++;
         lixo[bonequinho.x][bonequinho.y] = 0;
+        iLixo[bonequinho.x][bonequinho.y].remove();
         break;
       default:
         lixo[bonequinho.x][bonequinho.y] = 0;
+        iLixo[bonequinho.x][bonequinho.y].remove();
         break;
     }
     score();
