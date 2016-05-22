@@ -3,6 +3,7 @@ var tiles = [];
 var img = [];
 var lixo = [];
 var bonequinho;
+var display;
 
 
 function setup() {
@@ -11,7 +12,7 @@ function setup() {
   for (x = 0; x < 24; x++) {
     img[x] = [];
     for (y = 0; y < 24; y++) {
-      img[x][y] = createImg("../refactored-spork/img/test" + floor((noise(x, y) * 3) + 1) + ".png");
+      img[x][y] = createImg("img/test" + floor((noise(x, y) * 3) + 1) + ".png");
       img[x][y].position(treesholdX(x, y), treesholdY(x, y));
     }
   }
@@ -21,10 +22,11 @@ function setup() {
       lixo[x][y] = floor(random(10));
     }
   }
-  bonequinho = new p5.Vector(12, 12);
-  blendMode(REPLACE);
+  bonequinho = new Boneco();
   canvas.remove();
   canvas.parent(document.body);
+  display = createDiv("");
+  score();
   noStroke();
 }
 
@@ -78,25 +80,76 @@ function drawLixo() {
 
 function keyPressed() {
   switch (keyCode) {
-    case UP_ARROW:
-      bonequinho.y++;
-      break;
     case DOWN_ARROW:
-      bonequinho.y--;
+      if (bonequinho.y < 23)
+        bonequinho.y++;
+      break;
+    case UP_ARROW:
+      if (bonequinho.y > 0)
+        bonequinho.y--;
       break;
     case LEFT_ARROW:
-      bonequinho.x--;
+      if (bonequinho.x > 0)
+        bonequinho.x--;
       break;
     case RIGHT_ARROW:
-      bonequinho.x++;
+      if (bonequinho.x < 23)
+        bonequinho.x++;
       break;
+  }
+  if (key == " ") {
+    switch (lixo[bonequinho.x][bonequinho.y]) {
+      case 1:
+        bonequinho.plast++;
+        lixo[bonequinho.x][bonequinho.y] = 0;
+        break;
+      case 2:
+        bonequinho.vidro++;
+        lixo[bonequinho.x][bonequinho.y] = 0;
+        break;
+      case 3:
+        bonequinho.papel++;
+        lixo[bonequinho.x][bonequinho.y] = 0;
+        break;
+      case 4:
+        bonequinho.metal++;
+        lixo[bonequinho.x][bonequinho.y] = 0;
+        break;
+      case 5:
+        bonequinho.lixoC++;
+        lixo[bonequinho.x][bonequinho.y] = 0;
+        break;
+      default:
+        lixo[bonequinho.x][bonequinho.y] = 0;
+        break;
+    }
+    score();
   }
 }
 
-function treesholdX(x, y) {
-  return windowWidth / 2 - 32 * x + 32 * y;
+function treesholdX(y, x) {
+  return 840 - 32 * x + 32 * y;
 }
 
-function treesholdY(x, y) {
+function treesholdY(y, x) {
   return 64 + 16 * x + 16 * y;
+}
+
+function score() {
+  display.html(
+    "Plástico: " + bonequinho.plast + "<br>" +
+    "Vidro: " + bonequinho.vidro + "<br>" +
+    "Papel: " + bonequinho.papel + "<br>" +
+    "Metal: " + bonequinho.metal + "<br>" +
+    "Lixo Comum: " + bonequinho.lixoC + "<br>");
+}
+
+function Boneco() {
+  this.x = 12;
+  this.y = 12;
+  this.plast = 0;
+  this.vidro = 0;
+  this.papel = 0;
+  this.metal = 0;
+  this.lixoC = 0;
 }
