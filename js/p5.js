@@ -26,7 +26,7 @@ function setup() {
   for (x = 0; x < 24; x++) {
     iLixo[x] = [];
     for (y = 0; y < 24; y++) {
-      if (lixo[x][y] != 0 && lixo[x][y] < 6) {
+      if (lixo[x][y] !== 0 && lixo[x][y] < 6) {
         iLixo[x][y] = createImg("img/lixo" + lixo[x][y] + ".png");
         iLixo[x][y].position(treesholdX(x, y), treesholdY(x, y) - 27);
       }
@@ -36,7 +36,7 @@ function setup() {
   canvas.remove();
   canvas.parent(document.body);
   display = createDiv("");
-  score();
+  bonequinho.score();
   noStroke();
 }
 
@@ -58,55 +58,20 @@ function drawbonequinho() {
 function keyPressed() {
   switch (keyCode) {
     case DOWN_ARROW:
-      if (bonequinho.y < 23)
-        bonequinho.y++;
+      bonequinho.down();
       break;
     case UP_ARROW:
-      if (bonequinho.y > 0)
-        bonequinho.y--;
+      bonequinho.up();
       break;
     case LEFT_ARROW:
-      if (bonequinho.x > 0)
-        bonequinho.x--;
+      bonequinho.left();
       break;
     case RIGHT_ARROW:
-      if (bonequinho.x < 23)
-        bonequinho.x++;
+      bonequinho.right();
       break;
   }
   if (key == " ") {
-    switch (lixo[bonequinho.x][bonequinho.y]) {
-      case 1:
-        bonequinho.plast++;
-        lixo[bonequinho.x][bonequinho.y] = 0;
-        iLixo[bonequinho.x][bonequinho.y].remove();
-        break;
-      case 2:
-        bonequinho.vidro++;
-        lixo[bonequinho.x][bonequinho.y] = 0;
-        iLixo[bonequinho.x][bonequinho.y].remove();
-        break;
-      case 3:
-        bonequinho.papel++;
-        lixo[bonequinho.x][bonequinho.y] = 0;
-        iLixo[bonequinho.x][bonequinho.y].remove();
-        break;
-      case 4:
-        bonequinho.metal++;
-        lixo[bonequinho.x][bonequinho.y] = 0;
-        iLixo[bonequinho.x][bonequinho.y].remove();
-        break;
-      case 5:
-        bonequinho.lixoC++;
-        lixo[bonequinho.x][bonequinho.y] = 0;
-        iLixo[bonequinho.x][bonequinho.y].remove();
-        break;
-      default:
-        lixo[bonequinho.x][bonequinho.y] = 0;
-        iLixo[bonequinho.x][bonequinho.y].remove();
-        break;
-    }
-    score();
+    bonequinho.action();
   }
 }
 
@@ -118,15 +83,6 @@ function treesholdY(y, x) {
   return 64 + 16 * x + 16 * y;
 }
 
-function score() {
-  display.html(
-    "Lixo Comum: " + bonequinho.lixoC + "<br>"+
-    "Plástico: " + bonequinho.plast + "<br>" +
-    "Vidro: " + bonequinho.vidro + "<br>" +
-    "Papel: " + bonequinho.papel + "<br>" +
-    "Metal: " + bonequinho.metal);
-}
-
 function Boneco() {
   this.x = 12;
   this.y = 12;
@@ -135,4 +91,63 @@ function Boneco() {
   this.papel = 0;
   this.metal = 0;
   this.lixoC = 0;
+  
+  this.up = function() {
+      if (this.y > 0)
+        this.y--;
+  }
+  this.down = function() {
+      if (this.y < 23)
+        this.y++;
+  }
+  this.left = function() {
+      if (this.x > 0)
+        this.x--;
+  }
+  this.right = function() {
+      if (this.x < 23)
+        this.x++;
+  }
+  this.action = function() {
+    switch (lixo[this.x][this.y]) {
+      case 1:
+        this.plast++;
+        lixo[this.x][this.y] = 0;
+        iLixo[this.x][this.y].remove();
+        break;
+      case 2:
+        this.vidro++;
+        lixo[this.x][this.y] = 0;
+        iLixo[this.x][this.y].remove();
+        break;
+      case 3:
+        this.papel++;
+        lixo[this.x][this.y] = 0;
+        iLixo[this.x][this.y].remove();
+        break;
+      case 4:
+        this.metal++;
+        lixo[this.x][this.y] = 0;
+        iLixo[this.x][this.y].remove();
+        break;
+      case 5:
+        this.lixoC++;
+        lixo[this.x][this.y] = 0;
+        iLixo[this.x][this.y].remove();
+        break;
+      default:
+        lixo[this.x][this.y] = 0;
+        iLixo[this.x][this.y].remove();
+        break;
+    }
+    this.score();
+  }
+  this.score = function() {
+  display.html(
+    "Lixo Comum: " + this.lixoC + "<br>"+
+    "Plástico: " + this.plast + "<br>" +
+    "Vidro: " + this.vidro + "<br>" +
+    "Papel: " + this.papel + "<br>" +
+    "Metal: " + this.metal);
+}
 }
