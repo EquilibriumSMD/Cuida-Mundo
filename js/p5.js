@@ -120,11 +120,11 @@ function treesholdY(y, x) {
 
 function score() {
   display.html(
+    "Lixo Comum: " + bonequinho.lixoC + "<br>"+
     "Plástico: " + bonequinho.plast + "<br>" +
     "Vidro: " + bonequinho.vidro + "<br>" +
     "Papel: " + bonequinho.papel + "<br>" +
-    "Metal: " + bonequinho.metal + "<br>" +
-    "Lixo Comum: " + bonequinho.lixoC + "<br>");
+    "Metal: " + bonequinho.metal);
 }
 
 function Boneco() {
