@@ -46,22 +46,22 @@ function setup() {
   button = createButton("DOWN");
   button.size(64, 64);
   button.mousePressed(handler.down);
-  button.position(64, 861);
+  button.position(128, 861);
   button.parent(document.body);
   button = createButton("LEFT");
   button.size(64, 64);
   button.mousePressed(handler.left);
-  button.position(192, 861);
+  button.position(1488, 861);
   button.parent(document.body);
   button = createButton("RIGHT");
   button.size(64, 64);
   button.mousePressed(handler.right);
-  button.position(256, 861);
+  button.position(1616, 861);
   button.parent(document.body);
   button = createButton("ACTION");
   button.size(64, 64);
   button.mousePressed(handler.action);
-  button.position(128, 861);
+  button.position(832, 861);
   button.parent(document.body);
   display.parent(document.body);
 }
