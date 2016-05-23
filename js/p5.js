@@ -8,7 +8,7 @@ var display;
 
 
 function setup() {
-  canvas = createCanvas(1680, 925);
+  canvas = createCanvas(1680, 861);
   canvas.position(0, 0);
   for (x = 0; x < 24; x++) {
     img[x] = [];
@@ -33,11 +33,37 @@ function setup() {
     }
   }
   bonequinho = new Boneco();
-  canvas.remove();
-  canvas.parent(document.body);
   display = createDiv("");
   bonequinho.score();
   noStroke();
+  canvas.parent(document.body);
+  var handler = new ButtonHandler();
+  var button = createButton("UP");
+  button.size(64, 64);
+  button.position(0, 861);
+  button.mousePressed(handler.up);
+  button.parent(document.body);
+  button = createButton("DOWN");
+  button.size(64, 64);
+  button.mousePressed(handler.down);
+  button.position(64, 861);
+  button.parent(document.body);
+  button = createButton("LEFT");
+  button.size(64, 64);
+  button.mousePressed(handler.left);
+  button.position(192, 861);
+  button.parent(document.body);
+  button = createButton("RIGHT");
+  button.size(64, 64);
+  button.mousePressed(handler.right);
+  button.position(256, 861);
+  button.parent(document.body);
+  button = createButton("ACTION");
+  button.size(64, 64);
+  button.mousePressed(handler.action);
+  button.position(128, 861);
+  button.parent(document.body);
+  display.parent(document.body);
 }
 
 function draw() {
@@ -91,22 +117,22 @@ function Boneco() {
   this.papel = 0;
   this.metal = 0;
   this.lixoC = 0;
-  
+
   this.up = function() {
-      if (this.y > 0)
-        this.y--;
+    if (this.y > 0)
+      this.y--;
   }
   this.down = function() {
-      if (this.y < 23)
-        this.y++;
+    if (this.y < 23)
+      this.y++;
   }
   this.left = function() {
-      if (this.x > 0)
-        this.x--;
+    if (this.x > 0)
+      this.x--;
   }
   this.right = function() {
-      if (this.x < 23)
-        this.x++;
+    if (this.x < 23)
+      this.x++;
   }
   this.action = function() {
     switch (lixo[this.x][this.y]) {
@@ -143,11 +169,30 @@ function Boneco() {
     this.score();
   }
   this.score = function() {
-  display.html(
-    "Lixo Comum: " + this.lixoC + "<br>"+
-    "Plástico: " + this.plast + "<br>" +
-    "Vidro: " + this.vidro + "<br>" +
-    "Papel: " + this.papel + "<br>" +
-    "Metal: " + this.metal);
+    display.html(
+      "Lixo Comum: " + this.lixoC + "<br>" +
+      "Plástico: " + this.plast + "<br>" +
+      "Vidro: " + this.vidro + "<br>" +
+      "Papel: " + this.papel + "<br>" +
+      "Metal: " + this.metal);
+  }
 }
+
+function ButtonHandler() {
+
+  this.up = function() {
+    bonequinho.up();
+  }
+  this.down = function() {
+    bonequinho.down();
+  }
+  this.left = function() {
+    bonequinho.left();
+  }
+  this.right = function() {
+    bonequinho.right();
+  }
+  this.action = function() {
+    bonequinho.action();
+  }
 }
