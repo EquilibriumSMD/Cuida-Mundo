@@ -2,7 +2,6 @@ var canvas;
 var tiles = [];
 var img = [];
 var lixo = [];
-var iLixo = [];
 var bonequinho;
 var display;
 
@@ -13,22 +12,16 @@ function setup() {
   for (x = 0; x < 24; x++) {
     img[x] = [];
     for (y = 0; y < 24; y++) {
-      img[x][y] = createImg("img/test" + floor((noise(x, y) * 3) + 1) + ".png");
-      img[x][y].position(treesholdX(x, y), treesholdY(x, y));
+      img[x][y] = new Tile("test", floor((noise(x, y) * 3) + 1) );
+      img[x][y].img.position(treesholdX(x, y), treesholdY(x, y));
     }
   }
   for (x = 0; x < 24; x++) {
     lixo[x] = [];
     for (y = 0; y < 24; y++) {
-      lixo[x][y] = floor(random(10));
-    }
-  }
-  for (x = 0; x < 24; x++) {
-    iLixo[x] = [];
-    for (y = 0; y < 24; y++) {
-      if (lixo[x][y] !== 0 && lixo[x][y] < 6) {
-        iLixo[x][y] = createImg("img/lixo" + lixo[x][y] + ".png");
-        iLixo[x][y].position(treesholdX(x, y), treesholdY(x, y) - 27);
+      if (floor(random(10)) < 5) {
+        lixo[x][y] = new Tile("lixo", floor(random(4) +1));
+        lixo[x][y].img.position(treesholdX(x, y), treesholdY(x, y) - 27);
       }
     }
   }
@@ -42,28 +35,22 @@ function setup() {
   button.size(64, 64);
   button.position(0, 861);
   button.mousePressed(handler.up);
-  button.parent(document.body);
   button = createButton("DOWN");
   button.size(64, 64);
   button.mousePressed(handler.down);
   button.position(64, 861);
-  button.parent(document.body);
   button = createButton("LEFT");
   button.size(64, 64);
   button.mousePressed(handler.left);
   button.position(192, 861);
-  button.parent(document.body);
   button = createButton("RIGHT");
   button.size(64, 64);
   button.mousePressed(handler.right);
   button.position(256, 861);
-  button.parent(document.body);
   button = createButton("ACTION");
   button.size(64, 64);
   button.mousePressed(handler.action);
   button.position(128, 861);
-  button.parent(document.body);
-  display.parent(document.body);
 }
 
 function draw() {
@@ -138,32 +125,26 @@ function Boneco() {
     switch (lixo[this.x][this.y]) {
       case 1:
         this.plast++;
-        lixo[this.x][this.y] = 0;
-        iLixo[this.x][this.y].remove();
+        lixo[this.x][this.y].remove();
         break;
       case 2:
         this.vidro++;
-        lixo[this.x][this.y] = 0;
-        iLixo[this.x][this.y].remove();
+        lixo[this.x][this.y].remove();
         break;
       case 3:
         this.papel++;
-        lixo[this.x][this.y] = 0;
-        iLixo[this.x][this.y].remove();
+        lixo[this.x][this.y].remove();
         break;
       case 4:
         this.metal++;
-        lixo[this.x][this.y] = 0;
-        iLixo[this.x][this.y].remove();
+        lixo[this.x][this.y].remove();
         break;
       case 5:
         this.lixoC++;
-        lixo[this.x][this.y] = 0;
-        iLixo[this.x][this.y].remove();
+        lixo[this.x][this.y].remove();
         break;
       default:
-        lixo[this.x][this.y] = 0;
-        iLixo[this.x][this.y].remove();
+        lixo[this.x][this.y].remove();
         break;
     }
     this.score();
@@ -195,4 +176,15 @@ function ButtonHandler() {
   this.action = function() {
     bonequinho.action();
   }
+}
+
+function Tile(type, id) {
+    this.tType = type;
+    this.tId = id;
+    this.img = createImg("img/" + this.tType + this.tId + ".png");
+    
+    this. remove = function(){
+        this.tId = 0;
+        this.img.remove();
+    }
 }
