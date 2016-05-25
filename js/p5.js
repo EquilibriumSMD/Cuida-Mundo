@@ -1,18 +1,17 @@
 var canvas;
 var tiles = [];
-var lixo = [];
 var bonequinho;
 var display;
 
 
 function setup() {
-  canvas = createCanvas(1680, 861);
+  canvas = createCanvas(1680, 925);
   canvas.position(0, 0);
   for (x = 0; x < 24; x++) {
     tiles[x] = [];
     for (y = 0; y < 24; y++) {
 	  tiles[x][y] = [];
-      tiles[x][y][0] = new Tile("test", floor((noise(x, y) * 3) + 1) );
+      tiles[x][y][0] = new Tile("test", floor((noise(x, y, 0) * 3) + 1) );
       tiles[x][y][0].img.position(treesholdX(x, y), treesholdY(x, y, 0));
       if (floor(random(10)) < 5) {
         tiles[x][y][1] = new Tile("lixo", floor(random(5) + 1));
@@ -26,30 +25,26 @@ function setup() {
   noStroke();
   canvas.parent(document.body);
   var handler = new ButtonHandler();
-  var button = createButton("UP");
-  button.size(64, 64);
-  button.position(0, 861);
-  button.mousePressed(handler.up);
-  button = createButton("DOWN");
-  button.size(64, 64);
-  button.mousePressed(handler.down);
-  button.position(128, 861);
-  button.parent(document.body);
-  button = createButton("LEFT");
-  button.size(64, 64);
-  button.mousePressed(handler.left);
-  button.position(1488, 861);
-  button.parent(document.body);
-  button = createButton("RIGHT");
-  button.size(64, 64);
-  button.mousePressed(handler.right);
-  button.position(1616, 861);
-  button.parent(document.body);
-  button = createButton("ACTION");
-  button.size(64, 64);
-  button.mousePressed(handler.action);
-  button.position(832, 861);
-  button.parent(document.body);
+  var buttonUp = createButton("UP");
+  buttonUp.size(64, 64);
+  buttonUp.position(0, 861);
+  buttonUp.mousePressed(handler.up);
+  var buttonDown = createButton("DOWN");
+  buttonDown.size(64, 64);
+  buttonDown.mousePressed(handler.down);
+  buttonDown.position(128, 861);
+  var buttonLeft = createButton("LEFT");
+  buttonLeft.size(64, 64);
+  buttonLeft.mousePressed(handler.left);
+  buttonLeft.position(1488, 861);
+  var buttonRight = createButton("RIGHT");
+  buttonRight.size(64, 64);
+  buttonRight.mousePressed(handler.right);
+  buttonRight.position(1616, 861);
+  var buttonAction = createButton("ACTION");
+  buttonAction.size(64, 64);
+  buttonAction.mousePressed(handler.action);
+  buttonAction.position(832, 861);
   display.parent(document.body);
 }
 
@@ -107,6 +102,7 @@ function Boneco() {
   this.metal = 0;
   this.lixoC = 0;
   this.tile = new Tile("player", 0 );
+  this.tile.img.hide();
 
   this.up = function() {
     if (this.y > 0)
@@ -128,28 +124,21 @@ function Boneco() {
     switch (tiles[this.x][this.y][this.z].tId) {
       case 1:
         this.plast++;
-        tiles[this.x][this.y][this.z].remove();
-        break;
+		break;
       case 2:
         this.vidro++;
-        tiles[this.x][this.y][this.z].remove();
-        break;
+		break;
       case 3:
         this.papel++;
-        tiles[this.x][this.y][this.z].remove();
-        break;
+		break;
       case 4:
         this.metal++;
-        tiles[this.x][this.y][this.z].remove();
-        break;
+		break;
       case 5:
         this.lixoC++;
-        tiles[this.x][this.y][this.z].remove();
-        break;
-      default:
-        tiles[this.x][this.y][this.z].remove();
-        break;
+		break;
     }
+    tiles[this.x][this.y][this.z].remove();
     this.score();
   }
   this.score = function() {
