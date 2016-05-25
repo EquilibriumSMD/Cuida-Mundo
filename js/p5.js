@@ -3,7 +3,6 @@ var tiles = [];
 var bonequinho;
 var display;
 
-
 function setup() {
   canvas = createCanvas(1680, 925);
   canvas.position(0, 0);
@@ -83,8 +82,20 @@ function keyPressed() {
   }
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  for (x = 0; x < 24; x++) {
+    for (y = 0; y < 24; y++) {
+		tiles[x][y][0].img.position(treesholdX(x, y), treesholdY(x, y, 0));
+		if (!(tiles[x][y][1] === undefined)){
+		tiles[x][y][1].img.position(treesholdX(x, y), treesholdY(x, y, 1));
+		}
+    }
+  }
+}
+
 function treesholdX(y, x) {
-  return 840 - 32 * x + 32 * y;
+  return windowWidth/2 - 32 * x + 32 * y;
 }
 
 function treesholdY(y, x, z) {
@@ -175,7 +186,7 @@ function Tile(type, id) {
     this.tId = id;
     this.img = createImg("img/" + this.tType + this.tId + ".png");
     
-    this. remove = function(){
+    this.remove = function(){
         this.tId = 0;
         this.img.remove();
     }
