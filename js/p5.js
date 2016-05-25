@@ -1,6 +1,5 @@
 var canvas;
 var tiles = [];
-var img = [];
 var lixo = [];
 var bonequinho;
 var display;
@@ -10,18 +9,14 @@ function setup() {
   canvas = createCanvas(1680, 861);
   canvas.position(0, 0);
   for (x = 0; x < 24; x++) {
-    img[x] = [];
+    tiles[x] = [];
     for (y = 0; y < 24; y++) {
-      img[x][y] = new Tile("test", floor((noise(x, y) * 3) + 1) );
-      img[x][y].img.position(treesholdX(x, y), treesholdY(x, y));
-    }
-  }
-  for (x = 0; x < 24; x++) {
-    lixo[x] = [];
-    for (y = 0; y < 24; y++) {
+	  tiles[x][y] = [];
+      tiles[x][y][0] = new Tile("test", floor((noise(x, y) * 3) + 1) );
+      tiles[x][y][0].img.position(treesholdX(x, y), treesholdY(x, y, 0));
       if (floor(random(10)) < 5) {
-        lixo[x][y] = new Tile("lixo", floor(random(4) +1));
-        lixo[x][y].img.position(treesholdX(x, y), treesholdY(x, y) - 27);
+        tiles[x][y][1] = new Tile("lixo", floor(random(5) + 1));
+        tiles[x][y][1].img.position(treesholdX(x, y), treesholdY(x, y, 1));
       }
     }
   }
@@ -38,7 +33,6 @@ function setup() {
   button = createButton("DOWN");
   button.size(64, 64);
   button.mousePressed(handler.down);
-<<<<<<< HEAD
   button.position(128, 861);
   button.parent(document.body);
   button = createButton("LEFT");
@@ -57,21 +51,6 @@ function setup() {
   button.position(832, 861);
   button.parent(document.body);
   display.parent(document.body);
-=======
-  button.position(64, 861);
-  button = createButton("LEFT");
-  button.size(64, 64);
-  button.mousePressed(handler.left);
-  button.position(192, 861);
-  button = createButton("RIGHT");
-  button.size(64, 64);
-  button.mousePressed(handler.right);
-  button.position(256, 861);
-  button = createButton("ACTION");
-  button.size(64, 64);
-  button.mousePressed(handler.action);
-  button.position(128, 861);
->>>>>>> 0f6de865deee8890705f445ada33ed7e0dff1784
 }
 
 function draw() {
@@ -82,11 +61,11 @@ function draw() {
 
 function drawbonequinho() {
   fill(0, 127, 255);
-  triangle(treesholdX(bonequinho.x, bonequinho.y) + 17, treesholdY(bonequinho.x, bonequinho.y) - 17,
-    treesholdX(bonequinho.x, bonequinho.y) + 47, treesholdY(bonequinho.x, bonequinho.y) - 17,
-    treesholdX(bonequinho.x, bonequinho.y) + 32, treesholdY(bonequinho.x, bonequinho.y) + 8);
+  triangle(treesholdX(bonequinho.x, bonequinho.y) + 17, treesholdY(bonequinho.x, bonequinho.y, bonequinho.z) - 17,
+    treesholdX(bonequinho.x, bonequinho.y) + 47, treesholdY(bonequinho.x, bonequinho.y, bonequinho.z) - 17,
+    treesholdX(bonequinho.x, bonequinho.y) + 32, treesholdY(bonequinho.x, bonequinho.y, bonequinho.z) + 8);
   fill(255, 127, 0);
-  ellipse(treesholdX(bonequinho.x, bonequinho.y) + 32, treesholdY(bonequinho.x, bonequinho.y) - 30, 20, 20);
+  ellipse(treesholdX(bonequinho.x, bonequinho.y) + 32, treesholdY(bonequinho.x, bonequinho.y, bonequinho.z) - 30, 20, 20);
 }
 
 function keyPressed() {
@@ -113,18 +92,21 @@ function treesholdX(y, x) {
   return 840 - 32 * x + 32 * y;
 }
 
-function treesholdY(y, x) {
-  return 64 + 16 * x + 16 * y;
+function treesholdY(y, x, z) {
+  return 64 + 16 * x + 16 * y - z * 27;
 }
+
 
 function Boneco() {
   this.x = 12;
   this.y = 12;
+  this.z = 1;
   this.plast = 0;
   this.vidro = 0;
   this.papel = 0;
   this.metal = 0;
   this.lixoC = 0;
+  this.tile = new Tile("player", 0 );
 
   this.up = function() {
     if (this.y > 0)
@@ -143,29 +125,29 @@ function Boneco() {
       this.x++;
   }
   this.action = function() {
-    switch (lixo[this.x][this.y]) {
+    switch (tiles[this.x][this.y][this.z].tId) {
       case 1:
         this.plast++;
-        lixo[this.x][this.y].remove();
+        tiles[this.x][this.y][this.z].remove();
         break;
       case 2:
         this.vidro++;
-        lixo[this.x][this.y].remove();
+        tiles[this.x][this.y][this.z].remove();
         break;
       case 3:
         this.papel++;
-        lixo[this.x][this.y].remove();
+        tiles[this.x][this.y][this.z].remove();
         break;
       case 4:
         this.metal++;
-        lixo[this.x][this.y].remove();
+        tiles[this.x][this.y][this.z].remove();
         break;
       case 5:
         this.lixoC++;
-        lixo[this.x][this.y].remove();
+        tiles[this.x][this.y][this.z].remove();
         break;
       default:
-        lixo[this.x][this.y].remove();
+        tiles[this.x][this.y][this.z].remove();
         break;
     }
     this.score();
