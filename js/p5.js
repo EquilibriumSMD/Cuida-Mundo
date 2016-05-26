@@ -1,54 +1,55 @@
 var canvas;
 var tiles = [];
 var bonequinho;
-var display;
 var tSize;
+var handler;
+var buttonUp
+var buttonDown
+var buttonLeft
+var buttonRight
+var buttonAction
+var lixo1, lixo2, lixo3, lixo4;
 
 function setup() {
   canvas = createCanvas(1680, 925);
   canvas.position(0, 0);
-  tSize = floor(windowWidth/26);
+  tSize = floor(windowWidth / 26);
   for (x = 0; x < 24; x++) {
     tiles[x] = [];
     for (y = 0; y < 24; y++) {
-	  tiles[x][y] = [];
-      tiles[x][y][0] = new Tile("test", floor((noise(x, y, 0) * 3) + 1) );
-	  tiles[x][y][0].img.size(tSize, tSize);
+      tiles[x][y] = [];
+      tiles[x][y][0] = new Tile("test", floor((noise(x, y, 0) * 3) + 1));
+      tiles[x][y][0].img.size(tSize, tSize);
       tiles[x][y][0].img.position(treesholdX(x, y), treesholdY(x, y, 0));
       if (floor(random(10)) < 5) {
         tiles[x][y][1] = new Tile("lixo", floor(random(5) + 1));
-	    tiles[x][y][1].img.size(tSize, tSize);
+        tiles[x][y][1].img.size(tSize, tSize);
         tiles[x][y][1].img.position(treesholdX(x, y), treesholdY(x, y, 1));
       }
     }
   }
   bonequinho = new Boneco();
-  display = createDiv("");
-  bonequinho.score();
   noStroke();
   canvas.parent(document.body);
-  var handler = new ButtonHandler();
-  var buttonUp = createButton("UP");
-  buttonUp.size(tSize, tSize);
-  //buttonUp.position(0, 861);
-  buttonUp.mousePressed(handler.up);
-  var buttonDown = createButton("DOWN");
-  buttonDown.size(tSize, tSize);
-  buttonDown.mousePressed(handler.down);
-  //buttonDown.position(128, 861);
-  var buttonLeft = createButton("LEFT");
-  buttonLeft.size(tSize, tSize);
-  buttonLeft.mousePressed(handler.left);
-  //buttonLeft.position(1488, 861);
-  var buttonRight = createButton("RIGHT");
-  buttonRight.size(tSize, tSize);
-  buttonRight.mousePressed(handler.right);
-  //buttonRight.position(1616, 861);
-  var buttonAction = createButton("ACTION");
-  buttonAction.size(tSize, tSize);
-  buttonAction.mousePressed(handler.action);
-  //buttonAction.position(832, 861);
-  display.parent(document.body);
+}
+
+window.onload = function() {
+  buttonUp = document.getElementById("bt-Top");
+  buttonDown = document.getElementById("bt-Bottom");
+  buttonLeft = document.getElementById("bt-Left");
+  buttonRight = document.getElementById("bt-Right");
+  buttonAction = document.getElementById("bt-Coletar");
+  lixo1 = document.getElementById("bt-lixo1").getElementsByTagName("strong")[0];
+  lixo2 = document.getElementById("bt-lixo2").getElementsByTagName("strong")[0];
+  lixo3 = document.getElementById("bt-lixo3").getElementsByTagName("strong")[0];
+  lixo4 = document.getElementById("bt-lixo4").getElementsByTagName("strong")[0];
+  handler = new ButtonHandler();
+  buttonUp.onclick = handler.up;
+  buttonDown.onclick = handler.down;
+  buttonLeft.onclick = handler.left;
+  buttonRight.onclick = handler.right;
+  buttonAction.onclick = handler.action;
+  bonequinho.score();
 }
 
 function draw() {
@@ -88,24 +89,25 @@ function keyPressed() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  tSize = windowWidth/26;
+  tSize = windowWidth / 26;
   for (x = 0; x < 24; x++) {
     for (y = 0; y < 24; y++) {
-    for (z = 0; z < 2; z++) {
-		if (!(tiles[x][y][z] === undefined)){
-		tiles[x][y][z].img.position(treesholdX(x, y), treesholdY(x, y, z));
-		tiles[x][y][z].img.size(tSize, tSize);
-	}}
+      for (z = 0; z < 2; z++) {
+        if (!(tiles[x][y][z] === undefined)) {
+          tiles[x][y][z].img.position(treesholdX(x, y), treesholdY(x, y, z));
+          tiles[x][y][z].img.size(tSize, tSize);
+        }
+      }
     }
   }
 }
 
 function treesholdX(y, x) {
-  return floor(windowWidth/2 - tSize/2 * x + tSize/2 * y);
+  return floor(windowWidth / 2 - tSize / 2 * x + tSize / 2 * y);
 }
 
 function treesholdY(y, x, z) {
-  return floor(tSize + tSize/4 * x + tSize/4 * y - z * tSize/2.4);
+  return floor(tSize + tSize / 4 * x + tSize / 4 * y - z * tSize / 2.4);
 }
 
 
@@ -118,7 +120,7 @@ function Boneco() {
   this.papel = 0;
   this.metal = 0;
   this.lixoC = 0;
-  this.tile = new Tile("player", 0 );
+  this.tile = new Tile("player", 0);
   this.tile.img.hide();
 
   this.up = function() {
@@ -141,30 +143,28 @@ function Boneco() {
     switch (tiles[this.x][this.y][this.z].tId) {
       case 1:
         this.plast++;
-		break;
+        break;
       case 2:
         this.vidro++;
-		break;
+        break;
       case 3:
         this.papel++;
-		break;
+        break;
       case 4:
         this.metal++;
-		break;
+        break;
       case 5:
         this.lixoC++;
-		break;
+        break;
     }
     tiles[this.x][this.y][this.z].remove();
     this.score();
   }
   this.score = function() {
-    display.html(
-      "Lixo Comum: " + this.lixoC + "<br>" +
-      "Plástico: " + this.plast + "<br>" +
-      "Vidro: " + this.vidro + "<br>" +
-      "Papel: " + this.papel + "<br>" +
-      "Metal: " + this.metal);
+    lixo1.innerHTML = this.plast;
+    lixo3.innerHTML = this.vidro;
+    lixo4.innerHTML = this.papel;
+    lixo2.innerHTML = this.metal;
   }
 }
 
@@ -188,12 +188,12 @@ function ButtonHandler() {
 }
 
 function Tile(type, id) {
-    this.tType = type;
-    this.tId = id;
-    this.img = createImg("img/" + this.tType + this.tId + ".png");
-    
-    this.remove = function(){
-        this.tId = 0;
-        this.img.remove();
-    }
+  this.tType = type;
+  this.tId = id;
+  this.img = createImg("img/" + this.tType + this.tId + ".png");
+
+  this.remove = function() {
+    this.tId = 0;
+    this.img.remove();
+  }
 }
