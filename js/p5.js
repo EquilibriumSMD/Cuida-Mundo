@@ -1,5 +1,6 @@
 var canvas;
 var tiles = [];
+var grid = [];
 var bonequinho;
 var tSize;
 var handler;
@@ -14,21 +15,35 @@ function setup() {
   canvas = createCanvas(1680, 925);
   canvas.position(0, 0);
   tSize = floor(windowWidth / 26);
+  bonequinho = new Boneco();
+  for (x = 0; x < 24; x++) {
+    grid[x] = [];
+    for (y = 0; y < 24; y++) {
+      grid[x][y] = [];
+      for (z = 0; z < 5; z++) {
+        grid[x][y][z] = createDiv("");
+        grid[x][y][z].position(treesholdX(x, y), treesholdY(x, y, z));
+      }
+    }
+  }
   for (x = 0; x < 24; x++) {
     tiles[x] = [];
     for (y = 0; y < 24; y++) {
       tiles[x][y] = [];
       tiles[x][y][0] = new Tile("test", floor((noise(x, y, 0) * 3) + 1));
       tiles[x][y][0].img.size(tSize, tSize);
-      tiles[x][y][0].img.position(treesholdX(x, y), treesholdY(x, y, 0));
+      tiles[x][y][0].img.parent(grid[x][y][0]);
       if (floor(random(10)) < 5) {
         tiles[x][y][1] = new Tile("lixo", floor(random(5) + 1));
         tiles[x][y][1].img.size(tSize, tSize);
-        tiles[x][y][1].img.position(treesholdX(x, y), treesholdY(x, y, 1));
+        tiles[x][y][1].img.parent(grid[x][y][1]);
+      } else {
+        tiles[x][y][1] = new Tile("void", 0);
+        tiles[x][y][1].img.size(tSize, tSize);
+        tiles[x][y][1].img.parent(grid[x][y][1]);
       }
     }
   }
-  bonequinho = new Boneco();
   noStroke();
   canvas.parent(document.body);
 }
@@ -44,12 +59,21 @@ window.onload = function() {
   lixo3 = document.getElementById("bt-lixo3").getElementsByTagName("strong")[0];
   lixo4 = document.getElementById("bt-lixo4").getElementsByTagName("strong")[0];
   handler = new ButtonHandler();
-  buttonUp.onclick = handler.up;
-  buttonDown.onclick = handler.down;
-  buttonLeft.onclick = handler.left;
-  buttonRight.onclick = handler.right;
-  buttonAction.onclick = handler.action;
+  if (deviceOrientation === undefined) {
+    buttonUp.remove();
+    buttonDown.remove();
+    buttonLeft.remove();
+    buttonRight.remove();
+    buttonAction.remove();
+  } else {
+    buttonUp.onclick = handler.up;
+    buttonDown.onclick = handler.down;
+    buttonLeft.onclick = handler.left;
+    buttonRight.onclick = handler.right;
+    buttonAction.onclick = handler.action;
+  }
   bonequinho.score();
+  bonequinho.tile.img.parent(grid[12][12][1]);
 }
 
 function draw() {
@@ -70,20 +94,20 @@ function drawbonequinho() {
 function keyPressed() {
   switch (keyCode) {
     case DOWN_ARROW:
-      bonequinho.down();
+      handler.down();
       break;
     case UP_ARROW:
-      bonequinho.up();
+      handler.up();
       break;
     case LEFT_ARROW:
-      bonequinho.left();
+      handler.left();
       break;
     case RIGHT_ARROW:
-      bonequinho.right();
+      handler.right();
       break;
   }
   if (key == " ") {
-    bonequinho.action();
+    handler.action();
   }
 }
 
@@ -93,107 +117,12 @@ function windowResized() {
   for (x = 0; x < 24; x++) {
     for (y = 0; y < 24; y++) {
       for (z = 0; z < 2; z++) {
-        if (!(tiles[x][y][z] === undefined)) {
-          tiles[x][y][z].img.position(treesholdX(x, y), treesholdY(x, y, z));
+        grid[x][y][z].position(treesholdX(x, y), treesholdY(x, y, z));
+        bonequinho.tile.img.size(tSize, tSize);
+        if (tiles[x][y][z] !== undefined) {
           tiles[x][y][z].img.size(tSize, tSize);
         }
       }
     }
-  }
-}
-
-function treesholdX(y, x) {
-  return floor(windowWidth / 2 - tSize / 2 * x + tSize / 2 * y);
-}
-
-function treesholdY(y, x, z) {
-  return floor(tSize + tSize / 4 * x + tSize / 4 * y - z * tSize / 2.4);
-}
-
-
-function Boneco() {
-  this.x = 12;
-  this.y = 12;
-  this.z = 1;
-  this.plast = 0;
-  this.vidro = 0;
-  this.papel = 0;
-  this.metal = 0;
-  this.lixoC = 0;
-  this.tile = new Tile("player", 0);
-  this.tile.img.hide();
-
-  this.up = function() {
-    if (this.y > 0)
-      this.y--;
-  }
-  this.down = function() {
-    if (this.y < 23)
-      this.y++;
-  }
-  this.left = function() {
-    if (this.x > 0)
-      this.x--;
-  }
-  this.right = function() {
-    if (this.x < 23)
-      this.x++;
-  }
-  this.action = function() {
-    switch (tiles[this.x][this.y][this.z].tId) {
-      case 1:
-        this.plast++;
-        break;
-      case 2:
-        this.vidro++;
-        break;
-      case 3:
-        this.papel++;
-        break;
-      case 4:
-        this.metal++;
-        break;
-      case 5:
-        this.lixoC++;
-        break;
-    }
-    tiles[this.x][this.y][this.z].remove();
-    this.score();
-  }
-  this.score = function() {
-    lixo1.innerHTML = this.plast;
-    lixo3.innerHTML = this.vidro;
-    lixo4.innerHTML = this.papel;
-    lixo2.innerHTML = this.metal;
-  }
-}
-
-function ButtonHandler() {
-
-  this.up = function() {
-    bonequinho.up();
-  }
-  this.down = function() {
-    bonequinho.down();
-  }
-  this.left = function() {
-    bonequinho.left();
-  }
-  this.right = function() {
-    bonequinho.right();
-  }
-  this.action = function() {
-    bonequinho.action();
-  }
-}
-
-function Tile(type, id) {
-  this.tType = type;
-  this.tId = id;
-  this.img = createImg("img/" + this.tType + this.tId + ".png");
-
-  this.remove = function() {
-    this.tId = 0;
-    this.img.remove();
   }
 }
