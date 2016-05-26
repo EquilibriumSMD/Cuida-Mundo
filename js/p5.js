@@ -2,18 +2,22 @@ var canvas;
 var tiles = [];
 var bonequinho;
 var display;
+var tSize;
 
 function setup() {
   canvas = createCanvas(1680, 925);
   canvas.position(0, 0);
+  tSize = floor(windowWidth/26);
   for (x = 0; x < 24; x++) {
     tiles[x] = [];
     for (y = 0; y < 24; y++) {
 	  tiles[x][y] = [];
       tiles[x][y][0] = new Tile("test", floor((noise(x, y, 0) * 3) + 1) );
+	  tiles[x][y][0].img.size(tSize, tSize);
       tiles[x][y][0].img.position(treesholdX(x, y), treesholdY(x, y, 0));
       if (floor(random(10)) < 5) {
         tiles[x][y][1] = new Tile("lixo", floor(random(5) + 1));
+	    tiles[x][y][1].img.size(tSize, tSize);
         tiles[x][y][1].img.position(treesholdX(x, y), treesholdY(x, y, 1));
       }
     }
@@ -25,25 +29,25 @@ function setup() {
   canvas.parent(document.body);
   var handler = new ButtonHandler();
   var buttonUp = createButton("UP");
-  buttonUp.size(64, 64);
-  buttonUp.position(0, 861);
+  buttonUp.size(tSize, tSize);
+  //buttonUp.position(0, 861);
   buttonUp.mousePressed(handler.up);
   var buttonDown = createButton("DOWN");
-  buttonDown.size(64, 64);
+  buttonDown.size(tSize, tSize);
   buttonDown.mousePressed(handler.down);
-  buttonDown.position(128, 861);
+  //buttonDown.position(128, 861);
   var buttonLeft = createButton("LEFT");
-  buttonLeft.size(64, 64);
+  buttonLeft.size(tSize, tSize);
   buttonLeft.mousePressed(handler.left);
-  buttonLeft.position(1488, 861);
+  //buttonLeft.position(1488, 861);
   var buttonRight = createButton("RIGHT");
-  buttonRight.size(64, 64);
+  buttonRight.size(tSize, tSize);
   buttonRight.mousePressed(handler.right);
-  buttonRight.position(1616, 861);
+  //buttonRight.position(1616, 861);
   var buttonAction = createButton("ACTION");
-  buttonAction.size(64, 64);
+  buttonAction.size(tSize, tSize);
   buttonAction.mousePressed(handler.action);
-  buttonAction.position(832, 861);
+  //buttonAction.position(832, 861);
   display.parent(document.body);
 }
 
@@ -84,22 +88,24 @@ function keyPressed() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+  tSize = windowWidth/26;
   for (x = 0; x < 24; x++) {
     for (y = 0; y < 24; y++) {
-		tiles[x][y][0].img.position(treesholdX(x, y), treesholdY(x, y, 0));
-		if (!(tiles[x][y][1] === undefined)){
-		tiles[x][y][1].img.position(treesholdX(x, y), treesholdY(x, y, 1));
-		}
+    for (z = 0; z < 2; z++) {
+		if (!(tiles[x][y][z] === undefined)){
+		tiles[x][y][z].img.position(treesholdX(x, y), treesholdY(x, y, z));
+		tiles[x][y][z].img.size(tSize, tSize);
+	}}
     }
   }
 }
 
 function treesholdX(y, x) {
-  return windowWidth/2 - 32 * x + 32 * y;
+  return floor(windowWidth/2 - tSize/2 * x + tSize/2 * y);
 }
 
 function treesholdY(y, x, z) {
-  return 64 + 16 * x + 16 * y - z * 27;
+  return floor(tSize + tSize/4 * x + tSize/4 * y - z * tSize/2.4);
 }
 
 
