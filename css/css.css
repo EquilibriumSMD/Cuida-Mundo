@@ -1,4 +1,79 @@
+body{width: 100%; overflow: hidden; margin: 0;}
+
+
+.container{
+    margin: 0;
+    background: #7ed5f3;
+    background:linear-gradient(to bottom, #b7f2ee 50%, #7ed5f3 );
+    background:-moz-linear-gradient(to bottom, #b7f2ee 50%, #7ed5f3 );
+    background:-webkit-linear-gradient(to bottom, #b7f2ee 50%, #7ed5f3 );
+}
+
+.scores{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 2;
+}
+.bt-lixo{ margin-bottom: 10px;}
+.bt-lixo img{ margin-right: 5px;}
+.navegacao{
+    position: absolute;
+    top: 150px;
+    right: 20px;
+    width: 150px;
+    height: 200px;
+    z-index: 2;
+}
+.bt,
+.bt-centro{
+    background-color: rgba(36,128,175, 0.4);
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 100%;
+    height: 50px;
+    width: 50px; 
+    position: absolute;
+    text-indent: -9999px;
+    list-style: none;
+}
+#bt-Top{
+    background-image: url('../img/bt-top.png');
+    left: 50%;
+    top: 0;
+    margin-left: -25px;
+}
+#bt-Bottom{
+    background-image: url('../img/bt-bottom.png');
+    left: 50%;
+    bottom: 0;
+    margin-left: -25px;
+}
+#bt-Left{
+    background-image: url('../img/bt-left.png');
+    left: 0;
+    top: 50%;
+    margin-top: -25px;
+}
+#bt-Right{
+    background-image: url('../img/bt-right.png');
+    right: 0;
+    top: 50%;
+    margin-top: -25px;
+}
+#bt-Coletar{
+    background-image: url('../img/bt-coletar.png');
+    left: 50%;
+    margin-left: -25px;
+    top: 50%;
+    margin-top: -25px;
+}
+
 canvas{
-	border: 5px;
 	border-color: #FF7F00;
+    
+}
+#defaultCanvas0{
+    width: 100%!important;
+    height: auto!important;
 }
