@@ -89,6 +89,7 @@ function drawbonequinho() {
     treesholdX(bonequinho.x, bonequinho.y) + 32, treesholdY(bonequinho.x, bonequinho.y, bonequinho.z) + 8);
   fill(255, 127, 0);
   ellipse(treesholdX(bonequinho.x, bonequinho.y) + 32, treesholdY(bonequinho.x, bonequinho.y, bonequinho.z) - 30, 20, 20);
+    
 }
 
 function keyPressed() {
