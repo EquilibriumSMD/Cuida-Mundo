@@ -23,6 +23,7 @@ function setup() {
       for (z = 0; z < 5; z++) {
         grid[x][y][z] = createDiv("");
         grid[x][y][z].position(treesholdX(x, y), treesholdY(x, y, z));
+		grid[x][y][z].style("position", "relative");
       }
     }
   }
@@ -44,6 +45,10 @@ function setup() {
       }
     }
   }
+  tiles[7][7][1].remove();
+  tiles[7][7][1] = new Tile("test", 2);
+  tiles[7][7][1].img.size(tSize, tSize);
+  tiles[7][7][1].img.parent(grid[7][7][1]);
   noStroke();
   canvas.parent(document.body);
 }
@@ -59,7 +64,7 @@ window.onload = function() {
   lixo3 = document.getElementById("bt-lixo3").getElementsByTagName("strong")[0];
   lixo4 = document.getElementById("bt-lixo4").getElementsByTagName("strong")[0];
   handler = new ButtonHandler();
-  if (deviceOrientation === undefined) {
+  if ("true" === undefined) {
     buttonUp.remove();
     buttonDown.remove();
     buttonLeft.remove();
@@ -79,7 +84,7 @@ window.onload = function() {
 function draw() {
   clear();
   background(0, 0);
-  drawbonequinho();
+  //drawbonequinho();
 }
 
 function drawbonequinho() {

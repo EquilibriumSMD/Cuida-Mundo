@@ -27,6 +27,9 @@ function Boneco() {
   this.lixoC = 0;
   this.tile = new Tile("player", 0);
   this.tile.img.id("player");
+  this.tile.img.style("position", "absolute");
+  this.tile.img.style("left", "0px");
+  this.tile.img.style("top", "-64px");
 
   this.up = function() {
     if (this.y > 0)
