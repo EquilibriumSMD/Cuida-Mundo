@@ -31,10 +31,14 @@ function setup() {
     tiles[x] = [];
     for (y = 0; y < 24; y++) {
       tiles[x][y] = [];
-      tiles[x][y][0] = new Tile("test", floor((noise(x, y, 0) * 3) + 1));
+	  if(floor((noise(x, y, 0) * 4)) == 0){
+		  tiles[x][y][0] = new Tile("void", 0);
+	  } else {
+		  tiles[x][y][0] = new Tile("test", floor((noise(x, y, 0) * 3) + 1));
+	  }
       tiles[x][y][0].img.size(tSize, tSize);
       tiles[x][y][0].img.parent(grid[x][y][0]);
-      if (floor(random(10)) < 5) {
+      if (floor(random(10)) < 5 && tiles[x][y][0].tType != "void") {
         tiles[x][y][1] = new Tile("lixo", floor(random(5) + 1));
         tiles[x][y][1].img.size(tSize, tSize);
         tiles[x][y][1].img.parent(grid[x][y][1]);
@@ -45,10 +49,28 @@ function setup() {
       }
     }
   }
-  tiles[7][7][1].remove();
-  tiles[7][7][1] = new Tile("test", 2);
-  tiles[7][7][1].img.size(tSize, tSize);
-  tiles[7][7][1].img.parent(grid[7][7][1]);
+  for (x = 1; x < 24; x++) {
+	  if(tiles[x][0][0].tType != "void"){
+      tiles[x][0][1].remove();
+      tiles[x][0][1] = new Tile("wall", 3);
+	  tiles[x][0][1].img.size(tSize, tSize);
+	  tiles[x][0][1].img.parent(grid[x][0][1]);	
+	  } 
+  }
+  for (y = 1; y < 24; y++) {
+	  if(tiles[0][y][0].tType != "void"){
+  tiles[0][y][1].remove();
+  tiles[0][y][1] = new Tile("wall", 2);
+  tiles[0][y][1].img.size(tSize, tSize);
+  tiles[0][y][1].img.parent(grid[0][y][1]);	  
+	  }
+  }
+  if(tiles[0][0][0].tType != "void"){
+  tiles[0][0][1].remove();
+  tiles[0][0][1] = new Tile("wall", 8);
+  tiles[0][0][1].img.size(tSize, tSize);
+  tiles[0][0][1].img.parent(grid[0][0][1]);	
+	  } 
   noStroke();
   canvas.parent(document.body);
 }
@@ -124,7 +146,7 @@ function windowResized() {
     for (y = 0; y < 24; y++) {
       for (z = 0; z < 2; z++) {
         grid[x][y][z].position(treesholdX(x, y), treesholdY(x, y, z));
-        bonequinho.tile.img.size(tSize, tSize);
+        bonequinho.tile.img.size(tSize, tSize*2);
         if (tiles[x][y][z] !== undefined) {
           tiles[x][y][z].img.size(tSize, tSize);
         }
