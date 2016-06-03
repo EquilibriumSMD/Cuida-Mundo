@@ -29,28 +29,28 @@ function Boneco() {
   this.tile.img.id("player");
   this.tile.img.style("position", "absolute");
   this.tile.img.style("left", "0px");
-  this.tile.img.style("top", "-64px");
+  this.tile.img.style("top", "-"+tSize+"px");
 
   this.up = function() {
-    if (this.y > 0 && tiles[this.x][this.y-1][this.z-1].tType == "test")
+    if (this.y > 0 && tiles[this.x][this.y-1][this.z-1].tType == "test" && tiles[this.x][this.y-1][this.z].tType != "wall")
       this.y--;
     moveGrid();
     this.tile.img.parent(grid[this.x][this.y][this.z]);
   }
   this.down = function() {
-    if (this.y < 23 && tiles[this.x][this.y+1][this.z-1].tType == "test")
+    if (this.y < 23 && tiles[this.x][this.y+1][this.z-1].tType == "test" && tiles[this.x][this.y+1][this.z].tType != "wall")
       this.y++;
     moveGrid();
     this.tile.img.parent(grid[this.x][this.y][this.z]);
   }
   this.left = function() {
-    if (this.x > 0 && tiles[this.x-1][this.y][this.z-1].tType == "test")
+    if (this.x > 0 && tiles[this.x-1][this.y][this.z-1].tType == "test" && tiles[this.x-1][this.y][this.z].tType != "wall")
       this.x--;
     moveGrid();
     this.tile.img.parent(grid[this.x][this.y][this.z]);
   }
   this.right = function() {
-    if (this.x < 23 && tiles[this.x+1][this.y][this.z-1].tType == "test")
+    if (this.x < 23 && tiles[this.x+1][this.y][this.z-1].tType == "test" && tiles[this.x+1][this.y][this.z].tType != "wall")
       this.x++;
     moveGrid();
     this.tile.img.parent(grid[this.x][this.y][this.z]);

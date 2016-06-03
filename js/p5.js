@@ -147,6 +147,7 @@ function windowResized() {
       for (z = 0; z < 2; z++) {
         grid[x][y][z].position(treesholdX(x, y), treesholdY(x, y, z));
         bonequinho.tile.img.size(tSize, tSize*2);
+        bonequinho.tile.img.style("top", "-"+tSize+"px");
         if (tiles[x][y][z] !== undefined) {
           tiles[x][y][z].img.size(tSize, tSize);
         }
