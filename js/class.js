@@ -1,9 +1,9 @@
 function treesholdX(y, x) {
-  return floor(windowWidth / 2 - tSize / 2 * (x - bonequinho.y) + tSize / 2 * (y - bonequinho.x));
+  return floor(windowWidth / 2 - tSize / 2 * x + tSize / 2 * y);
 }
 
 function treesholdY(y, x, z) {
-  return floor(windowHeight / 2 + tSize / 4 * (x - bonequinho.y) + tSize / 4 * (y - bonequinho.x) - z * tSize / 2.4);
+  return floor(tSize + tSize / 4 * x + tSize / 4 * y - z * tSize / 2.4);
 }
 
 function moveGrid() {
@@ -25,6 +25,7 @@ function Boneco() {
   this.papel = 0;
   this.metal = 0;
   this.lixoC = 0;
+  this.total = 0;
   this.tile = new Tile("player", 0);
   this.tile.img.id("player");
   this.tile.img.style("position", "absolute");
@@ -75,14 +76,12 @@ function Boneco() {
           break;
       }
       tiles[this.x][this.y][this.z].remove();
+      this.total++;
       this.score();
     }
   }
   this.score = function() {
-    lixo1.innerHTML = this.plast;
-    lixo3.innerHTML = this.vidro;
-    lixo4.innerHTML = this.papel;
-    lixo2.innerHTML = this.metal;
+    lixoC.innerHTML = this.total;
   }
 }
 
