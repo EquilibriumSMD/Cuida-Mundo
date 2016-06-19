@@ -32,6 +32,7 @@ function preload() {
 function setup() {
   canvas = createCanvas(1680, 925);
   canvas.position(0, 0);
+  canvas.id("area");
   for (x = 0; x < 24; x++) {
     tiles[x] = [];
     for (y = 0; y < 24; y++) {
