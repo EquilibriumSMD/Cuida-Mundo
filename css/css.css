@@ -69,10 +69,6 @@ body{width: 100%; overflow: hidden; margin: 0;}
     margin-top: -25px;
 }
 
-canvas{
-	border-color: #FF7F00;
-    
-}
 #defaultCanvas0{
     width: 100%!important;
     height: auto!important;

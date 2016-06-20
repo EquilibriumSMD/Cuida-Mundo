@@ -1,19 +1,9 @@
 function treesholdX(y, x) {
-  return floor(windowWidth / 2 - tSize / 2 * x + tSize / 2 * y);
+  return Math.floor(window.Width / 2 - tSize / 2 * x + tSize / 2 * y);
 }
 
 function treesholdY(y, x, z) {
-  return floor(tSize + tSize / 4 * x + tSize / 4 * y - z * tSize / 2.4);
-}
-
-function moveGrid() {
-  for (x = 0; x < 24; x++) {
-    for (y = 0; y < 24; y++) {
-      for (z = 0; z < 2; z++) {
-        grid[x][y][z].position(treesholdX(x, y), treesholdY(x, y, z));
-      }
-    }
-  }
+  return Math.floor(tSize + tSize / 4 * x + tSize / 4 * y - z * tSize / 2.4);
 }
 
 function Boneco() {
@@ -27,10 +17,6 @@ function Boneco() {
   this.lixoC = 0;
   this.total = 0;
   this.tile = new Tile("player", 0);
-  this.tile.img.id("player");
-  this.tile.img.style("position", "absolute");
-  this.tile.img.style("left", "0px");
-  this.tile.img.style("top", "-"+tSize+"px");
 
   this.up = function() {
     if (this.y > 0 && tiles[this.x][this.y-1][this.z-1].tType == "test" && tiles[this.x][this.y-1][this.z].tType != "wall")
@@ -107,7 +93,7 @@ function ButtonHandler() {
 function Tile(type, id) {
   this.tType = type;
   this.tId = id;
-  this.img = createImg("img/" + this.tType + this.tId + ".png");
+  this.img =  new createjs.Bitmap("img/" + this.tType + this.tId + ".png");
   if (this.tType == "void") {
     this.tId = 0;
     this.img.remove();
@@ -115,6 +101,6 @@ function Tile(type, id) {
 
   this.remove = function() {
     this.tId = 0;
-    this.img.remove();
+    canvas.removeChild(this.img);
   }
 }
