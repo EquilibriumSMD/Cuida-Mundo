@@ -108,22 +108,24 @@ function draw() {
   canvas.update();
 }
 
-function keyPressed() {
-  switch (keyCode) {
-    case DOWN_ARROW:
+document.addEventListener('keydown', keyPressed);
+	
+function keyPressed(event) {
+  switch (event.keyCode) {
+    case 40:
       handler.down();
       break;
-    case UP_ARROW:
+    case 38:
       handler.up();
       break;
-    case LEFT_ARROW:
+    case 37:
       handler.left();
       break;
-    case RIGHT_ARROW:
+    case 39:
       handler.right();
       break;
   }
-  if (key == " ") {
+  if (event.key == " ") {
     handler.action();
   }
 }
