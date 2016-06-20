@@ -25,7 +25,7 @@ function Boneco() {
 	  this.tile.img.y = treesholdY(this.x, this.y, this.z+2);
   }
   this.down = function() {
-    if (this.y < 23 && tiles[this.x][this.y+1][this.z-3].tType == "test" && tiles[this.x][this.y+1][this.z].tType != "wall")
+    if (this.y < 23 && tiles[this.x][this.y+1][this.z-1].tType == "test" && tiles[this.x][this.y+1][this.z].tType != "wall")
       this.y++;
 	  this.tile.img.x = treesholdX(this.x, this.y);
 	  this.tile.img.y = treesholdY(this.x, this.y, this.z+2);

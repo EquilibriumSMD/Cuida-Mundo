@@ -11,7 +11,6 @@ var buttonAction
 var lixoC, lixoT;
 var total = 0;
 var holdOnload;
-var pn = new Perlin('S');
 
 createjs.Ticker.addEventListener("tick", draw);
 
@@ -21,14 +20,16 @@ function setup() {
     tiles[x] = [];
     for (y = 0; y < 24; y++) {
       tiles[x][y] = [];
-      if (Math.floor((pn.noise(x, y, 0) * 4)) === 0) {
+      if (Math.floor(Math.random()*4) === 0) {
         tiles[x][y][0] = new Tile("void", 0);
       } else {
-        tiles[x][y][0] = new Tile("test", Math.floor((pn.noise(x, y, 0) * 3) + 1));
+        tiles[x][y][0] = new Tile("test", Math.floor(Math.random()*3+1));
       }
       canvas.addChild(tiles[x][y][0].img);
-      if (Math.floor(Math.random(10)) < 5 && tiles[x][y][0].tType != "void") {
-        tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random(5) + 1));
+		tiles[x][y][0].img.x = treesholdX(x, y);
+		tiles[x][y][0].img.y = treesholdY(x, y, 0);
+      if (Math.floor(Math.random()*10) < 5 && tiles[x][y][0].tType != "void") {
+        tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random()*5 + 1));
 		tiles[x][y][1].img.x = treesholdX(x, y);
 		tiles[x][y][1].img.y = treesholdY(x, y, 1);
         canvas.addChild(tiles[x][y][1].img);
@@ -40,6 +41,13 @@ function setup() {
         canvas.addChild(tiles[x][y][1].img);
       }
     }
+  }
+  if (tiles[0][0][0].tType != "void") {
+    tiles[0][0][1].remove();
+    tiles[0][0][1] = new Tile("wall", 8);
+	tiles[0][0][1].img.x = treesholdX(0, 0);
+	tiles[0][0][1].img.y = treesholdY(0, 0, 1);
+	canvas.addChild(tiles[0][0][1].img);
   }
   for (x = 1; x < 24; x++) {
     if (tiles[x][0][0].tType != "void") {
@@ -58,13 +66,6 @@ function setup() {
 	  tiles[0][y][1].img.y = treesholdY(0, y, 1);
 	  canvas.addChild(tiles[0][y][1].img);
     }
-  }
-  if (tiles[0][0][0].tType != "void") {
-    tiles[0][0][1].remove();
-    tiles[0][0][1] = new Tile("wall", 8);
-	tiles[0][0][1].img.x = treesholdX(0, 0);
-	tiles[0][0][1].img.y = treesholdY(0, 0, 1);
-	canvas.addChild(tiles[0][0][1].img);
   }
   holdOnload = true;
 }
@@ -104,8 +105,6 @@ window.onload = function() {
 }
 
 function draw() {
-  //clear();
-  //background(0, 0);
   canvas.update();
 }
 
