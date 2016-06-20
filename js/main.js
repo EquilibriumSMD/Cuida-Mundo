@@ -13,14 +13,7 @@ var total = 0;
 var holdOnload;
 var pn = new Perlin('S');
 
-preload();
-setup();
 createjs.Ticker.addEventListener("tick", draw);
-
-function preload() {
-  tSize = 64;
-  bonequinho = new Boneco();
-}
 
 function setup() {
   canvas =  new createjs.Stage("defaultCanvas0");
@@ -77,6 +70,9 @@ function setup() {
 }
 
 window.onload = function() {
+  tSize = 64;
+  bonequinho = new Boneco();
+  setup();
   if (holdOnload) {
     buttonUp = document.getElementById("bt-Top");
     buttonDown = document.getElementById("bt-Bottom");
@@ -102,7 +98,7 @@ window.onload = function() {
     }
     bonequinho.score();
 	bonequinho.tile.img.x = treesholdX(12, 12);
-	bonequinho.tile.img.y = treesholdY(12, 12, 1);
+	bonequinho.tile.img.y = treesholdY(12, 12, 3);
     canvas.addChild(bonequinho.tile.img);
   }
 }

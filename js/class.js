@@ -1,5 +1,5 @@
 function treesholdX(y, x) {
-  return Math.floor(window.Width / 2 - tSize / 2 * x + tSize / 2 * y);
+  return Math.floor(screen.width / 2 - tSize / 2 * x + tSize / 2 * y);
 }
 
 function treesholdY(y, x, z) {
@@ -21,26 +21,26 @@ function Boneco() {
   this.up = function() {
     if (this.y > 0 && tiles[this.x][this.y-1][this.z-1].tType == "test" && tiles[this.x][this.y-1][this.z].tType != "wall")
       this.y--;
-    moveGrid();
-    this.tile.img.parent(grid[this.x][this.y][this.z]);
+	  this.tile.img.x = treesholdX(this.x, this.y);
+	  this.tile.img.y = treesholdY(this.x, this.y, this.z+2);
   }
   this.down = function() {
-    if (this.y < 23 && tiles[this.x][this.y+1][this.z-1].tType == "test" && tiles[this.x][this.y+1][this.z].tType != "wall")
+    if (this.y < 23 && tiles[this.x][this.y+1][this.z-3].tType == "test" && tiles[this.x][this.y+1][this.z].tType != "wall")
       this.y++;
-    moveGrid();
-    this.tile.img.parent(grid[this.x][this.y][this.z]);
+	  this.tile.img.x = treesholdX(this.x, this.y);
+	  this.tile.img.y = treesholdY(this.x, this.y, this.z+2);
   }
   this.left = function() {
     if (this.x > 0 && tiles[this.x-1][this.y][this.z-1].tType == "test" && tiles[this.x-1][this.y][this.z].tType != "wall")
       this.x--;
-    moveGrid();
-    this.tile.img.parent(grid[this.x][this.y][this.z]);
+	  this.tile.img.x = treesholdX(this.x, this.y);
+	  this.tile.img.y = treesholdY(this.x, this.y, this.z+2);
   }
   this.right = function() {
     if (this.x < 23 && tiles[this.x+1][this.y][this.z-1].tType == "test" && tiles[this.x+1][this.y][this.z].tType != "wall")
       this.x++;
-    moveGrid();
-    this.tile.img.parent(grid[this.x][this.y][this.z]);
+	  this.tile.img.x = treesholdX(this.x, this.y);
+	  this.tile.img.y = treesholdY(this.x, this.y, this.z+2);
   }
   this.action = function() {
     if (tiles[this.x][this.y][this.z].tType == "lixo") {
@@ -96,11 +96,11 @@ function Tile(type, id) {
   this.img =  new createjs.Bitmap("img/" + this.tType + this.tId + ".png");
   if (this.tType == "void") {
     this.tId = 0;
-    this.img.remove();
   }
 
   this.remove = function() {
     this.tId = 0;
+	this.tType = "void";
     canvas.removeChild(this.img);
   }
 }
