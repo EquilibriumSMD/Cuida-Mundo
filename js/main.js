@@ -15,6 +15,8 @@ var holdOnload;
 createjs.Ticker.addEventListener("tick", draw);
 
 function setup() {
+  document.getElementById("defaultCanvas0").width = screen.width;
+  document.getElementById("defaultCanvas0").height = screen.height;
   canvas =  new createjs.Stage("defaultCanvas0");
   for (x = 0; x < 24; x++) {
     tiles[x] = [];
