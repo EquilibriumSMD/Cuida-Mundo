@@ -27,34 +27,34 @@ var spritePersonagem = new createjs.SpriteSheet({
       "parado": { frames: [ 1 ], frequency: 8 }
     }
 });
-bonequinho = new createjs.Sprite(spritePersonagem, "down");
-bonequinho.framerate = 30;
-    
-  
+
+  this.tile.img = new createjs.Sprite(spritePersonagem, "down");
+  this.tile.img.framerate = 30;
+     
 
   this.up = function() {
     if (this.y > 0 && tiles[this.x][this.y-1][this.z-1].tType == "test" && tiles[this.x][this.y-1][this.z].tType != "wall")
       this.y--;
 	  this.tile.img.x = treesholdX(this.x, this.y);
-	  this.tile.img.y = treesholdY(this.x, this.y, this.z+2);
+	  this.tile.img.y = treesholdY(this.x, this.y, this.z);
   }
   this.down = function() {
     if (this.y < 23 && tiles[this.x][this.y+1][this.z-1].tType == "test" && tiles[this.x][this.y+1][this.z].tType != "wall")
       this.y++;
 	  this.tile.img.x = treesholdX(this.x, this.y);
-	  this.tile.img.y = treesholdY(this.x, this.y, this.z+2);
+	  this.tile.img.y = treesholdY(this.x, this.y, this.z);
   }
   this.left = function() {
     if (this.x > 0 && tiles[this.x-1][this.y][this.z-1].tType == "test" && tiles[this.x-1][this.y][this.z].tType != "wall")
       this.x--;
 	  this.tile.img.x = treesholdX(this.x, this.y);
-	  this.tile.img.y = treesholdY(this.x, this.y, this.z+2);
+	  this.tile.img.y = treesholdY(this.x, this.y, this.z);
   }
   this.right = function() {
     if (this.x < 23 && tiles[this.x+1][this.y][this.z-1].tType == "test" && tiles[this.x+1][this.y][this.z].tType != "wall")
       this.x++;
 	  this.tile.img.x = treesholdX(this.x, this.y);
-	  this.tile.img.y = treesholdY(this.x, this.y, this.z+2);
+	  this.tile.img.y = treesholdY(this.x, this.y, this.z);
   }
   this.action = function() {
     if (tiles[this.x][this.y][this.z].tType == "lixo") {
@@ -116,6 +116,6 @@ function Tile(type, id) {
   this.remove = function() {
     this.tId = 0;
 	this.tType = "void";
-    canvas.removeChild(this.img);
+    stage.removeChild(this.img);
   }
 }
