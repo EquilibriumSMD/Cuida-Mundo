@@ -40,27 +40,23 @@ var spritePersonagem = new createjs.SpriteSheet({
 
   this.up = function() {
     if (this.y > 0 && tiles[this.x][this.y-1][this.z-1].tType == "floor" && tiles[this.x][this.y-1][this.z].tType != "wall")
-      //this.y--;
-	  this.tile.img.x = treesholdX(this.x, this.y);
-	  this.tile.img.y = treesholdY(this.x, this.y, this.z+0.7);
+      this.y--;
+      createjs.Tween.get(this.tile.img, { loop: false }).to({ x: treesholdX(this.x, this.y), y: treesholdY(this.x, this.y, this.z+0.7) }, 100, createjs.Ease.getPowInOut(4));
   }
   this.down = function() {
     if (this.y < 23 && tiles[this.x][this.y+1][this.z-1].tType == "floor" && tiles[this.x][this.y+1][this.z].tType != "wall")
-      //this.y++;
-	  this.tile.img.x = treesholdX(this.x, this.y);
-	  this.tile.img.y = treesholdY(this.x, this.y, this.z+0.7);
+      this.y++;
+      createjs.Tween.get(this.tile.img, { loop: false }).to({ x: treesholdX(this.x, this.y), y: treesholdY(this.x, this.y, this.z+0.7) }, 100, createjs.Ease.getPowInOut(4));
   }
   this.left = function() {
     if (this.x > 0 && tiles[this.x-1][this.y][this.z-1].tType == "floor" && tiles[this.x-1][this.y][this.z].tType != "wall")
-      //this.x--;
-	  this.tile.img.x = treesholdX(this.x, this.y);
-	  this.tile.img.y = treesholdY(this.x, this.y, this.z+0.7);
+      this.x--;
+      createjs.Tween.get(this.tile.img, { loop: false }).to({ x: treesholdX(this.x, this.y), y: treesholdY(this.x, this.y, this.z+0.7) }, 100, createjs.Ease.getPowInOut(4));
   }
   this.right = function() {
     if (this.x < 23 && tiles[this.x+1][this.y][this.z-1].tType == "floor" && tiles[this.x+1][this.y][this.z].tType != "wall")
-      //this.x++;
-	  this.tile.img.x = treesholdX(this.x, this.y);
-	  this.tile.img.y = treesholdY(this.x, this.y, this.z+0.7);
+      this.x++;
+      createjs.Tween.get(this.tile.img, { loop: false }).to({ x: treesholdX(this.x, this.y), y: treesholdY(this.x, this.y, this.z+0.7) }, 100, createjs.Ease.getPowInOut(4));
   }
   this.action = function() {
     if (tiles[this.x][this.y][this.z].tType == "lixo") {
