@@ -26,7 +26,7 @@ function setup() {
       if (Math.floor(Math.random()*4) === 0) {
         tiles[x][y][0] = new Tile("void", 0);
       } else {
-        tiles[x][y][0] = new Tile("test", Math.floor(Math.random()*3+1));
+        tiles[x][y][0] = new Tile("floor", 0);
       }
       stage.addChild(tiles[x][y][0].img);
 		tiles[x][y][0].img.x = treesholdX(x, y);
@@ -43,31 +43,6 @@ function setup() {
 		tiles[x][y][1].img.y = treesholdY(x, y, 1);
         stage.addChild(tiles[x][y][1].img);
       }
-    }
-  }
-  if (tiles[0][0][0].tType != "void") {
-    tiles[0][0][1].remove();
-    tiles[0][0][1] = new Tile("wall", 8);
-	tiles[0][0][1].img.x = treesholdX(0, 0);
-	tiles[0][0][1].img.y = treesholdY(0, 0, 1);
-	stage.addChild(tiles[0][0][1].img);
-  }
-  for (x = 1; x < 24; x++) {
-    if (tiles[x][0][0].tType != "void") {
-      tiles[x][0][1].remove();
-      tiles[x][0][1] = new Tile("wall", 3);
-	  tiles[x][0][1].img.x = treesholdX(x, 0);
-	  tiles[x][0][1].img.y = treesholdY(x, 0, 1);
-	  stage.addChild(tiles[x][0][1].img);
-    }
-  }
-  for (y = 1; y < 24; y++) {
-    if (tiles[0][y][0].tType != "void") {
-      tiles[0][y][1].remove();
-      tiles[0][y][1] = new Tile("wall", 2);
-	  tiles[0][y][1].img.x = treesholdX(0, y);
-	  tiles[0][y][1].img.y = treesholdY(0, y, 1);
-	  stage.addChild(tiles[0][y][1].img);
     }
   }
   holdOnload = true;

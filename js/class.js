@@ -33,25 +33,25 @@ var spritePersonagem = new createjs.SpriteSheet({
      
 
   this.up = function() {
-    if (this.y > 0 && tiles[this.x][this.y-1][this.z-1].tType == "test" && tiles[this.x][this.y-1][this.z].tType != "wall")
+    if (this.y > 0 && tiles[this.x][this.y-1][this.z-1].tType == "floor" && tiles[this.x][this.y-1][this.z].tType != "wall")
       this.y--;
 	  this.tile.img.x = treesholdX(this.x, this.y);
 	  this.tile.img.y = treesholdY(this.x, this.y, this.z);
   }
   this.down = function() {
-    if (this.y < 23 && tiles[this.x][this.y+1][this.z-1].tType == "test" && tiles[this.x][this.y+1][this.z].tType != "wall")
+    if (this.y < 23 && tiles[this.x][this.y+1][this.z-1].tType == "floor" && tiles[this.x][this.y+1][this.z].tType != "wall")
       this.y++;
 	  this.tile.img.x = treesholdX(this.x, this.y);
 	  this.tile.img.y = treesholdY(this.x, this.y, this.z);
   }
   this.left = function() {
-    if (this.x > 0 && tiles[this.x-1][this.y][this.z-1].tType == "test" && tiles[this.x-1][this.y][this.z].tType != "wall")
+    if (this.x > 0 && tiles[this.x-1][this.y][this.z-1].tType == "floor" && tiles[this.x-1][this.y][this.z].tType != "wall")
       this.x--;
 	  this.tile.img.x = treesholdX(this.x, this.y);
 	  this.tile.img.y = treesholdY(this.x, this.y, this.z);
   }
   this.right = function() {
-    if (this.x < 23 && tiles[this.x+1][this.y][this.z-1].tType == "test" && tiles[this.x+1][this.y][this.z].tType != "wall")
+    if (this.x < 23 && tiles[this.x+1][this.y][this.z-1].tType == "floor" && tiles[this.x+1][this.y][this.z].tType != "wall")
       this.x++;
 	  this.tile.img.x = treesholdX(this.x, this.y);
 	  this.tile.img.y = treesholdY(this.x, this.y, this.z);
@@ -92,7 +92,7 @@ function ButtonHandler() {
   }
   this.down = function() {
     bonequinho.down();
-    bonequinho.gotoAndPlay("down");
+    bonequinho.tile.img.gotoAndPlay("down");
   }
   this.left = function() {
     bonequinho.left();
@@ -117,5 +117,10 @@ function Tile(type, id) {
     this.tId = 0;
 	this.tType = "void";
     stage.removeChild(this.img);
+  }
+  
+  this.scale = function() {
+    this.img.scaleX = tSize / this.img.image.width;
+    this.img.scaleY = tSize / this.img.image.height;
   }
 }
