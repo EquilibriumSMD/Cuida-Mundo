@@ -1,5 +1,5 @@
 function treesholdX(y, x) {
-  return Math.floor(screen.width / 2 - tSize / 2 * x + tSize / 2 * y);
+  return Math.floor(window.innerWidth / 2 - tSize / 2 * x + tSize / 2 * y);
 }
 
 function treesholdY(y, x, z) {
