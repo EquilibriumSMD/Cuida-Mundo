@@ -21,14 +21,14 @@ function Boneco() {
 //animacao    
 var spritePersonagem = new createjs.SpriteSheet({
     images: [ "img/sprite-down.png" ],
-    frames: { width: 30.666666666666668, height: 33 },
+    frames: { width: 59.666666666666668, height: 64 },
     animations: {
-      "down": { frames: [ 0, 1, 2 ], frequency: 8 },
-      "parado": { frames: [ 1 ], frequency: 8 }
+				"idle": [0, 0, "run", 1.5],
+				"down": [0, 2, "idle"]
     }
 });
 
-  this.tile.img = new createjs.Sprite(spritePersonagem, "down");
+  this.tile.img = new createjs.Sprite(spritePersonagem, "idle");
   this.tile.img.framerate = 30;
      
 
@@ -117,10 +117,5 @@ function Tile(type, id) {
     this.tId = 0;
 	this.tType = "void";
     stage.removeChild(this.img);
-  }
-  
-  this.scale = function() {
-    this.img.scaleX = tSize / this.img.image.width;
-    this.img.scaleY = tSize / this.img.image.height;
   }
 }
