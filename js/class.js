@@ -17,6 +17,20 @@ function Boneco() {
   this.lixoC = 0;
   this.total = 0;
   this.tile = new Tile("player", 0);
+    
+//animacao    
+var spritePersonagem = new createjs.SpriteSheet({
+    images: [ "img/sprite-down.png" ],
+    frames: { width: 30.666666666666668, height: 33 },
+    animations: {
+      "down": { frames: [ 0, 1, 2 ], frequency: 8 },
+      "parado": { frames: [ 1 ], frequency: 8 }
+    }
+});
+bonequinho = new createjs.Sprite(spritePersonagem, "down");
+bonequinho.framerate = 30;
+    
+  
 
   this.up = function() {
     if (this.y > 0 && tiles[this.x][this.y-1][this.z-1].tType == "test" && tiles[this.x][this.y-1][this.z].tType != "wall")
@@ -78,6 +92,7 @@ function ButtonHandler() {
   }
   this.down = function() {
     bonequinho.down();
+    bonequinho.gotoAndPlay("down");
   }
   this.left = function() {
     bonequinho.left();

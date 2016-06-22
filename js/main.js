@@ -11,6 +11,7 @@ var buttonAction
 var lixoC, lixoT;
 var total = 0;
 var holdOnload;
+var personagem;
 
 createjs.Ticker.addEventListener("tick", draw);
 
