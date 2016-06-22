@@ -77,7 +77,7 @@ window.onload = function() {
     }
     bonequinho.score();
 	bonequinho.tile.img.x = treesholdX(12, 12);
-	bonequinho.tile.img.y = treesholdY(12, 12, 1);
+	bonequinho.tile.img.y = treesholdY(12, 12, 1.7);
     stage.addChild(bonequinho.tile.img);
   }
 }
