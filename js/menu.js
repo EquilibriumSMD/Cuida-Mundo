@@ -44,7 +44,7 @@ function setupMenu() {
     opMenu();
 }
 
-function btVoltar(){
+function btVoltarAdd(){
     btVoltar = new createjs.Bitmap("img/btVoltar.png");
     btVoltar.addEventListener("click", setupMenu);
     btVoltar.x = 800;
@@ -56,9 +56,13 @@ function play(){
     bgPlay = new createjs.Bitmap("img/bgPlay.jpg");
     bgPlay.x=0;
     bgPlay.y=0;
-    
+	  var n = new Notification("Archievement Get!",{
+		  body: "First Step +50G\nSeu espírito de catador é forte, mas o jogo ainda não está pronto ☹",
+		  icon: "img/lixo5.png"
+	  });
     stage.addChild(bgPlay);
-    btVoltar();
+	mainGame();
+    btVoltarAdd();
 }
 
 function mais(){
@@ -67,7 +71,7 @@ function mais(){
     bgMais.y=0;
     
     stage.addChild(bgMais);
-    btVoltar();
+    btVoltarAdd();
 }
 
 function eco(){
@@ -76,5 +80,5 @@ function eco(){
     bgEco.y=0;
     
     stage.addChild(bgEco);
-    btVoltar();
+    btVoltarAdd();
 }

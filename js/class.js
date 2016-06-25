@@ -5,6 +5,17 @@ window.onload = function() {
     main();
 	//menu
     setupMenu();
+	//jogo
+    tSize = 64;
+    equi = new Boneco();
+	buttonUp = document.getElementById("bt-Top");
+	buttonDown = document.getElementById("bt-Bottom");
+	buttonLeft = document.getElementById("bt-Left");
+	buttonRight = document.getElementById("bt-Right");
+	buttonAction = document.getElementById("bt-Coletar");
+	lixoC = document.getElementById("bt-lixo1").getElementsByTagName("strong")[0];
+	lixoT = document.getElementById("bt-lixo1").getElementsByTagName("span")[0];
+	//mainGame();
 }
 function main() {
     stage = new createjs.Stage("defaultCanvas0");
@@ -19,12 +30,16 @@ function draw() {
 }
 
 // Usado pro jogo
+var equi;
+var tSize;
+var tiles = [];
+
 function treesholdX(y, x) {
-    return Math.floor(640 - tSize / 2 * (x + equi.y) + tSize / 2 * (y + equi.x));
+    return Math.floor(640 - tSize / 2 * x + tSize / 2 * y);
 }
 
 function treesholdY(y, x, z) {
-    return Math.floor(400 + tSize / 4 * (x + equi.y) + tSize / 4 * (y + equi.x) - z * tSize / 2.4);
+    return Math.floor(tSize + tSize / 4 * x + tSize / 4 * y - z * tSize / 2.4);
 }
 
 function Boneco() {
@@ -158,4 +173,27 @@ function Tile(type, id, x, y, z) {
         this.tType = "void";
         stage.removeChild(this.img);
     }
+}
+
+function Fase(fase, create) {
+	if(!create){
+		//Cria a Matriz de espaços vazios
+		for (x = 0; x < 24; x++) {
+			tiles[x] = [];
+			for (y = 0; y < 24; y++) {
+				tiles[x][y] = [];
+				for (z = 0; z < 7; z++) {
+					tiles[x][y][z] = new Tile("void", 0, x, y, z);
+				}
+			}
+		}
+		if (fase == "quadrado"){
+			//tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 5 + 1), x, y, z);
+			for (x = 10; x < 20; x++) {
+				for (y = 10; y < 20; y++) {
+					tiles[x][y][0] = new Tile("floor", 0, x, y, z);
+				}
+			}
+	}
+	}
 }
