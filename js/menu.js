@@ -2,56 +2,58 @@ var menu;
 var tela;
 var btMenu;
 var btHome;
-var btJogar;
-var btInstrucoes;
-var btCreditos;
-var btEcopontos;
+var btnPlay;
+var btnMais;
+var btnEco;
+var btVoltar;
 var stage;
 
 createjs.Ticker.addEventListener("tick", draw);
 
 function opMenu(){
     
-//    document.getElementById("bt-home").onclick = home;
-//    document.getElementById("bt-play").onclick = play;
-//    document.getElementById("bt-instrucoes").onclick = instrucoes;
-//    document.getElementById("bt-creditos").onclick = creditos;
-//    document.getElementById("bt-ecopontos").onclick = ecopontos;
-    
-    tela = document.getElementsByTagName("body");
-    console.log(tela);
-    
-    
-    btJogar = new createjs.Bitmap("img/btJogar.png");
-    btInstrucoes = new createjs.Bitmap("img/btInstrucoes.png");
-    btCreditos = new createjs.Bitmap("img/btCreditos.png");
+    btnEco = new createjs.Bitmap("img/btnEco.png");
+    btnPlay = new createjs.Bitmap("img/btnPlay.png");
+    btnMais = new createjs.Bitmap("img/btnMais.png");
     
     //jogando as funções de cada botão
-    btJogar.addEventListener("click", play);
-    btInstrucoes.addEventListener("click", instrucoes );
-    btCreditos.addEventListener("click", creditos);
+    btnPlay.addEventListener("click", play);
+    btnMais.addEventListener("click", mais );
+    btnEco.addEventListener("click", eco);
     
     //posicionamento dos botoes
-    btJogar.x = 300;
-    btJogar.y = 600;
-    btInstrucoes.x = 500;
-    btInstrucoes.y = 600;
-    btCreditos.x = 700;
-    btCreditos.y = 600;
+    btnEco.x = 680;
+    btnEco.y = 370;
+    btnPlay.x = 790;
+    btnPlay.y = 330;
+    btnMais.x = 980;
+    btnMais.y = 370;
     
     //adicionando os botões
-    stage.addChild(btJogar);
-    stage.addChild(btInstrucoes);
-    stage.addChild(btCreditos);
+    stage.addChild(btnEco);
+    stage.addChild(btnPlay);
+    stage.addChild(btnMais);
     
 }
 
 function setupMenu() {  
     stage = new createjs.Stage("defaultCanvas0");
-	stage.canvas.width = window.innerWidth;
-	stage.canvas.height = window.innerHeight;
+	stage.canvas.width = 1280;
+	stage.canvas.height = 800;
+    menuBG = new createjs.Bitmap("img/menuBG.jpg");
+    menuBG.x=0;
+    menuBG.y=0;
+    stage.addChild(menuBG);
     
     opMenu();
+}
+
+function btVoltar(){
+    btVoltar = new createjs.Bitmap("img/btVoltar.png");
+    btVoltar.addEventListener("click", setupMenu);
+    btVoltar.x = 800;
+    btVoltar.y = 600;
+    stage.addChild(btVoltar);  
 }
 
 window.onload = function() {
@@ -65,16 +67,28 @@ function draw() {
 }
 
 function play(){
-    bgPlay = new createjs.Bitmap("img/bgPlay.png");
+    bgPlay = new createjs.Bitmap("img/bgPlay.jpg");
+    bgPlay.x=0;
+    bgPlay.y=0;
+    
     stage.addChild(bgPlay);
+    btVoltar();
 }
 
-function instrucoes(){
-    bgInstrucoes = new createjs.Bitmap("img/bgInstrucoes.png");
-    stage.addChild(bgInstrucoes);
+function mais(){
+    bgMais = new createjs.Bitmap("img/bgMais.jpg");
+    bgMais.x=0;
+    bgMais.y=0;
+    
+    stage.addChild(bgMais);
+    btVoltar();
 }
 
-function creditos(){
-    bgCreditos = new createjs.Bitmap("img/bgCreditos.png");
-    stage.addChild(bgCreditos);
+function eco(){
+    bgEco = new createjs.Bitmap("img/bgEco.jpg");
+    bgEco.x=0;
+    bgEco.y=0;
+    
+    stage.addChild(bgEco);
+    btVoltar();
 }
