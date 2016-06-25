@@ -1,9 +1,9 @@
 function treesholdX(y, x) {
-    return Math.floor(window.innerWidth / 2 - tSize / 2 * x + tSize / 2 * y);
+    return Math.floor(640 - tSize / 2 * (x + equi.y) + tSize / 2 * (y + equi.x));
 }
 
 function treesholdY(y, x, z) {
-    return Math.floor(tSize + tSize / 4 * x + tSize / 4 * y - z * tSize / 2.4);
+    return Math.floor(400 + tSize / 4 * (x + equi.y) + tSize / 4 * (y + equi.x) - z * tSize / 2.4);
 }
 
 function Boneco() {
