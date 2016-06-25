@@ -6,7 +6,6 @@ var btnPlay;
 var btnMais;
 var btnEco;
 var btVoltar;
-var stage;
 
 createjs.Ticker.addEventListener("tick", draw);
 
@@ -36,10 +35,7 @@ function opMenu(){
     
 }
 
-function setupMenu() {  
-    stage = new createjs.Stage("defaultCanvas0");
-	stage.canvas.width = 1280;
-	stage.canvas.height = 800;
+function setupMenu() {
     menuBG = new createjs.Bitmap("img/menuBG.jpg");
     menuBG.x=0;
     menuBG.y=0;
@@ -53,17 +49,7 @@ function btVoltar(){
     btVoltar.addEventListener("click", setupMenu);
     btVoltar.x = 800;
     btVoltar.y = 600;
-    stage.addChild(btVoltar);  
-}
-
-window.onload = function() {
-    setupMenu();
-}
-
-
-
-function draw() {
-    stage.update();
+    stage.addChild(btVoltar);
 }
 
 function play(){

@@ -1,3 +1,24 @@
+// Comum ao jogo e ao menu:
+var stage = new createjs.Stage("defaultCanvas0");
+
+window.onload = function() {
+    main();
+	//menu
+    setupMenu();
+}
+function main() {
+    stage = new createjs.Stage("defaultCanvas0");
+	stage.canvas.width = 1280; 
+	stage.canvas.height = 800;
+	stage.canvas.x = window.innerWidth/2 - 640;
+	stage.canvas.y = window.innerHeight/2 - 400;
+}
+createjs.Ticker.addEventListener("tick", draw);
+function draw() {
+    stage.update();
+}
+
+// Usado pro jogo
 function treesholdX(y, x) {
     return Math.floor(640 - tSize / 2 * (x + equi.y) + tSize / 2 * (y + equi.x));
 }

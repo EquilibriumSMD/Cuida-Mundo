@@ -70,10 +70,7 @@ body{width: 100%; overflow: hidden; margin: 0;}
 }
 
 #defaultCanvas0{
-/*
-    width: 100%!important;
-    height: auto!important;
-*/
+	margin:auto;
 }
 
 /*menus*/

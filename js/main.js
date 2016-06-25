@@ -1,4 +1,3 @@
-var stage;
 var tiles = [];
 var equi;
 var tSize;
@@ -16,11 +15,6 @@ var personagem;
 createjs.Ticker.addEventListener("tick", draw);
 
 function setup() {
-    stage = new createjs.Stage("defaultCanvas0");
-	stage.canvas.width = 1280; 
-	stage.canvas.height = 800;
-	stage.canvas.x = window.innerWidth/2 - 640;
-	stage.canvas.y = window.innerHeight/2 - 400;
 	//Cria a Matriz de espaços vazios
     for (x = 0; x < 24; x++) {
         tiles[x] = [];
@@ -72,10 +66,6 @@ window.onload = function() {
         equi.sprite.y = treesholdY(12, 12, 2.5);
         stage.addChild(equi.sprite);
     }
-}
-
-function draw() {
-    stage.update();
 }
 
 document.addEventListener('keydown', keyPressed);
