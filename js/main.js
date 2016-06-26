@@ -9,26 +9,26 @@ var total = 0;
 var personagem;
 
 mainGame = function() {
-	faseAtual = new Fase("quadrado");
-	lixoT.innerHTML = "/" + total;
-	handler = new ButtonHandler();
-	if ("true" === undefined) {
-		buttonUp.remove();
-		buttonDown.remove();
-		buttonLeft.remove();
-		buttonRight.remove();
-		buttonAction.remove();
-	} else {
-		buttonUp.onclick = handler.up;
-		buttonDown.onclick = handler.down;
-		buttonLeft.onclick = handler.left;
-		buttonRight.onclick = handler.right;
-		buttonAction.onclick = handler.action;
-	}
-	equi.score();
-	equi.sprite.x = treesholdX(12, 12);
-	equi.sprite.y = treesholdY(12, 12, 2.5);
-	stage.addChild(equi.sprite);
+    faseAtual = new Fase("quadrado");
+    lixoT.innerHTML = "/" + total;
+    handler = new ButtonHandler();
+    if ("true" === undefined) {
+        buttonUp.remove();
+        buttonDown.remove();
+        buttonLeft.remove();
+        buttonRight.remove();
+        buttonAction.remove();
+    } else {
+        buttonUp.onclick = handler.up;
+        buttonDown.onclick = handler.down;
+        buttonLeft.onclick = handler.left;
+        buttonRight.onclick = handler.right;
+        buttonAction.onclick = handler.action;
+    }
+    equi.score();
+    equi.sprite.x = treesholdX(equi.x, equi.y);
+    equi.sprite.y = treesholdY(equi.x, equi.y, equi.z + 1.5);
+    stage.addChild(equi.sprite);
 }
 
 document.addEventListener('keydown', keyPressed);

@@ -3,28 +3,28 @@ var stage = new createjs.Stage("defaultCanvas0");
 
 window.onload = function() {
     main();
-	//menu
+    //menu
     setupMenu();
-	//jogo
+    //jogo
     tSize = 64;
     equi = new Boneco();
-	buttonUp = document.getElementById("bt-Top");
-	buttonDown = document.getElementById("bt-Bottom");
-	buttonLeft = document.getElementById("bt-Left");
-	buttonRight = document.getElementById("bt-Right");
-	buttonAction = document.getElementById("bt-Coletar");
-	lixoC = document.getElementById("bt-lixo1").getElementsByTagName("strong")[0];
-	lixoT = document.getElementById("bt-lixo1").getElementsByTagName("span")[0];
-	//mainGame();
+    buttonUp = document.getElementById("bt-Top");
+    buttonDown = document.getElementById("bt-Bottom");
+    buttonLeft = document.getElementById("bt-Left");
+    buttonRight = document.getElementById("bt-Right");
+    buttonAction = document.getElementById("bt-Coletar");
+    lixoC = document.getElementById("bt-lixo1").getElementsByTagName("strong")[0];
+    lixoT = document.getElementById("bt-lixo1").getElementsByTagName("span")[0];
+    //mainGame();
 }
+
 function main() {
     stage = new createjs.Stage("defaultCanvas0");
-	stage.canvas.width = 1280; 
-	stage.canvas.height = 800;
-	stage.canvas.x = window.innerWidth/2 - 640;
-	stage.canvas.y = window.innerHeight/2 - 400;
+    stage.canvas.width = 1280;
+    stage.canvas.height = 800;
 }
 createjs.Ticker.addEventListener("tick", draw);
+
 function draw() {
     stage.update();
 }
@@ -79,31 +79,31 @@ function Boneco() {
     this.up = function() {
         if (this.y > 0 && tiles[this.x][this.y - 1][this.z - 1].tType == "floor" && tiles[this.x][this.y - 1][this.z].tType != "wall")
             this.y--;
-		    this.tween();
+        this.tween();
     }
     this.down = function() {
         if (this.y < 23 && tiles[this.x][this.y + 1][this.z - 1].tType == "floor" && tiles[this.x][this.y + 1][this.z].tType != "wall")
             this.y++;
-		    this.tween();
+        this.tween();
     }
     this.left = function() {
         if (this.x > 0 && tiles[this.x - 1][this.y][this.z - 1].tType == "floor" && tiles[this.x - 1][this.y][this.z].tType != "wall")
             this.x--;
-		    this.tween();
+        this.tween();
     }
     this.right = function() {
         if (this.x < 23 && tiles[this.x + 1][this.y][this.z - 1].tType == "floor" && tiles[this.x + 1][this.y][this.z].tType != "wall")
             this.x++;
-		    this.tween();
+        this.tween();
     }
-	this.tween = function() {
+    this.tween = function() {
         createjs.Tween.get(this.sprite, {
             loop: false
         }).to({
             x: treesholdX(this.x, this.y),
             y: treesholdY(this.x, this.y, this.z + 1.5)
         }, 100, createjs.Ease.getPowInOut(2));
-	}
+    }
     this.action = function() {
         if (tiles[this.x][this.y][this.z].tType == "lixo") {
             switch (tiles[this.x][this.y][this.z].tId) {
@@ -162,11 +162,11 @@ function Tile(type, id, x, y, z) {
     if (this.tType == "void") {
         this.tId = 0;
     } else {
-		this.img = new createjs.Bitmap("img/" + this.tType + this.tId + ".png");
+        this.img = new createjs.Bitmap("img/" + this.tType + this.tId + ".png");
         this.img.x = treesholdX(x, y);
         this.img.y = treesholdY(x, y, 1);
         stage.addChild(this.img);
-	}
+    }
 
     this.remove = function() {
         this.tId = 0;
@@ -176,24 +176,24 @@ function Tile(type, id, x, y, z) {
 }
 
 function Fase(fase, create) {
-	if(!create){
-		//Cria a Matriz de espaços vazios
-		for (x = 0; x < 24; x++) {
-			tiles[x] = [];
-			for (y = 0; y < 24; y++) {
-				tiles[x][y] = [];
-				for (z = 0; z < 7; z++) {
-					tiles[x][y][z] = new Tile("void", 0, x, y, z);
-				}
-			}
-		}
-		if (fase == "quadrado"){
-			//tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 5 + 1), x, y, z);
-			for (x = 10; x < 20; x++) {
-				for (y = 10; y < 20; y++) {
-					tiles[x][y][0] = new Tile("floor", 0, x, y, z);
-				}
-			}
-	}
-	}
+    if (!create) {
+        //Cria a Matriz de espaços vazios
+        for (x = 0; x < 24; x++) {
+            tiles[x] = [];
+            for (y = 0; y < 24; y++) {
+                tiles[x][y] = [];
+                for (z = 0; z < 7; z++) {
+                    tiles[x][y][z] = new Tile("void", 0, x, y, z);
+                }
+            }
+        }
+        if (fase == "quadrado") {
+            //tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 5 + 1), x, y, z);
+            for (x = 10; x < 20; x++) {
+                for (y = 10; y < 20; y++) {
+                    tiles[x][y][0] = new Tile("floor", 0, x, y, z);
+                }
+            }
+        }
+    }
 }
