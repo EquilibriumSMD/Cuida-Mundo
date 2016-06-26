@@ -16,11 +16,6 @@ function opMenu() {
     btnPlay = new createjs.Bitmap("img/btnPlay.png");
     btnMais = new createjs.Bitmap("img/btnMais.png");
 
-    //jogando as funções de cada botão
-    btnPlay.addEventListener("click", play);
-    btnMais.addEventListener("click", mais);
-    btnEco.addEventListener("click", eco);
-
     //posicionamento dos botoes
     btnEco.x = 680;
     btnEco.y = 370;

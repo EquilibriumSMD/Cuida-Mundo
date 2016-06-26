@@ -3,6 +3,22 @@ var stage = new createjs.Stage("defaultCanvas0");
 
 window.onload = function() {
     main();
+
+    //jogando as funções de cada botão
+	stage.canvas.addEventListener("click", function(e){
+        var canvasX = document.getElementById("defaultCanvas0").offsetLeft;
+        var canvasY = document.getElementById("defaultCanvas0").offsetTop;
+        var clickX = e.clientX - canvasX;
+        var clickY = e.clientY - canvasY;
+		
+        if (dist(clickX, clickY, btnEco.x + 32, btnEco.y +32) < 32) {
+			eco();
+        } else if (dist(clickX, clickY, btnMais.x + 32, btnMais.y +32) < 32) {
+			mais();
+        } else if (dist(clickX, clickY, btnPlay.x + 67, btnPlay.y +67) < 67) {
+			play();
+        }
+    });
     //menu
     setupMenu();
     //jogo
@@ -27,6 +43,10 @@ createjs.Ticker.addEventListener("tick", draw);
 
 function draw() {
     stage.update();
+}
+
+function dist(x1,y1, x2, y2) {
+  return Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
 }
 
 // Usado pro jogo
@@ -170,8 +190,13 @@ function Tile(type, id, x, y, z) {
 			this.img.scaleX = 64/300;
 			this.img.scaleY = 64/300;
 		}
-        stage.addChild(this.img);
     }
+	this.show = function() {
+        stage.addChild(this.img);
+	}
+	this.hide = function() {
+        stage.removeChild(this.img);
+	}
 }
 
 function Fase(fase, create) {
@@ -187,7 +212,10 @@ function Fase(fase, create) {
                 }
             }
         }
-        if (fase == "quadrado") {
+        switch (fase) {
+			case "casa":
+			break;
+			default:
 			equi.x = 15;
 			equi.y = 15;
             for (x = 10; x < 20; x++) {
@@ -203,6 +231,7 @@ function Fase(fase, create) {
 					}
                 }
             }
+			break;
         }
     }
 	this.load = function(){

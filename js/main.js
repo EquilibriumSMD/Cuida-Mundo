@@ -12,6 +12,7 @@ var faseAtual;
 mainGame = function() {
 	if( faseAtual === undefined ) {
 		faseAtual = new Fase("quadrado");
+		faseAtual.load();
 	} else {
 		faseAtual.load();
 	}
