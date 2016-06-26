@@ -166,7 +166,7 @@ function Tile(type, id, x, y, z) {
         this.img = new createjs.Bitmap("img/" + this.tType + this.tId + ".png");
         this.img.x = treesholdX(x, y);
         this.img.y = treesholdY(x, y, z);
-		if (this.tType == "floor") {
+		if (this.tType == "floor" || this.tType == "wall" ) {
 			this.img.scaleX = 64/300;
 			this.img.scaleY = 64/300;
 		}
@@ -194,8 +194,12 @@ function Fase(fase, create) {
                 for (y = 10; y < 20; y++) {
 					if (x != 16 || y != 16){
 						tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
-						tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 5 + 1), x, y, 1);
-						total++;
+					    if (y != 12 || x == 15){
+							tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 5 + 1), x, y, 1);
+							total++;
+						} else {
+							tiles[x][y][1] = new Tile("wall", 0, x, y, 1);
+						}
 					}
                 }
             }
