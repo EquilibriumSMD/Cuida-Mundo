@@ -6,7 +6,7 @@ var btnPlay;
 var btnMais;
 var btnEco;
 var btVoltar;
-var archivement;
+var archivement = false;
 
 createjs.Ticker.addEventListener("tick", draw);
 
@@ -59,7 +59,7 @@ function play() {
     bgPlay.y = 0;
     if (!archivement) {
         var n = new Notification("Archievement Get!", {
-            body: "First Step +50G\nSeu espírito de catador é forte, mas o jogo ainda não está pronto ☹",
+            body: "First Step +50G\nSeu espírito de protetor ambiental é forte, mas o jogo ainda não está pronto ☹",
             icon: "img/lixo5.png"
         });
         archivement = true;

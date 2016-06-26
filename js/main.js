@@ -7,9 +7,14 @@ var buttonAction
 var lixoC, lixoT;
 var total = 0;
 var personagem;
+var faseAtual;
 
 mainGame = function() {
-    faseAtual = new Fase("quadrado");
+	if( faseAtual === undefined ) {
+		faseAtual = new Fase("quadrado");
+	} else {
+		faseAtual.load();
+	}
     lixoT.innerHTML = "/" + total;
     handler = new ButtonHandler();
     if ("true" === undefined) {
@@ -27,7 +32,7 @@ mainGame = function() {
     }
     equi.score();
     equi.sprite.x = treesholdX(equi.x, equi.y);
-    equi.sprite.y = treesholdY(equi.x, equi.y, equi.z + 1.5);
+    equi.sprite.y = treesholdY(equi.x, equi.y, equi.z + 0.5);
     stage.addChild(equi.sprite);
 }
 

@@ -101,7 +101,7 @@ function Boneco() {
             loop: false
         }).to({
             x: treesholdX(this.x, this.y),
-            y: treesholdY(this.x, this.y, this.z + 1.5)
+            y: treesholdY(this.x, this.y, this.z + 0.5)
         }, 100, createjs.Ease.getPowInOut(2));
     }
     this.action = function() {
@@ -123,7 +123,8 @@ function Boneco() {
                     this.lixoC++;
                     break;
             }
-            tiles[this.x][this.y][this.z].remove();
+			stage.removeChild(tiles[this.x][this.y][this.z].img);
+            tiles[this.x][this.y][this.z] = new Tile("void", 0, x, y, z);
             this.total++;
             this.score();
         }
@@ -164,18 +165,13 @@ function Tile(type, id, x, y, z) {
     } else {
         this.img = new createjs.Bitmap("img/" + this.tType + this.tId + ".png");
         this.img.x = treesholdX(x, y);
-        this.img.y = treesholdY(x, y, 1);
+        this.img.y = treesholdY(x, y, z);
         stage.addChild(this.img);
-    }
-
-    this.remove = function() {
-        this.tId = 0;
-        this.tType = "void";
-        stage.removeChild(this.img);
     }
 }
 
 function Fase(fase, create) {
+	//this.dojo = [];
     if (!create) {
         //Cria a Matriz de espaços vazios
         for (x = 0; x < 24; x++) {
@@ -188,12 +184,23 @@ function Fase(fase, create) {
             }
         }
         if (fase == "quadrado") {
-            //tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 5 + 1), x, y, z);
+			//equi.x = 15;
+			//equi.y = 15;
             for (x = 10; x < 20; x++) {
                 for (y = 10; y < 20; y++) {
-                    tiles[x][y][0] = new Tile("floor", 0, x, y, z);
+                    tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
+					tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 5 + 1), x, y, 1);
                 }
             }
         }
     }
+	this.load = function(){
+		for (x = 0; x < 24; x++) {
+            for (y = 0; y < 24; y++) {
+                for (z = 0; z < 7; z++) {
+					stage.addChild(tiles[x][y][z].img);
+                }
+            }
+        }
+	}
 }
