@@ -1,5 +1,7 @@
 // Comum ao jogo e ao menu:
 var stage = new createjs.Stage("defaultCanvas0");
+var inGame = false;
+var inMenu = true;
 
 window.onload = function() {
     main();
@@ -11,13 +13,15 @@ window.onload = function() {
         var clickX = e.clientX - canvasX;
         var clickY = e.clientY - canvasY;
 		
-        if (dist(clickX, clickY, btnEco.x + 32, btnEco.y +32) < 32) {
-			eco();
-        } else if (dist(clickX, clickY, btnMais.x + 32, btnMais.y +32) < 32) {
-			mais();
-        } else if (dist(clickX, clickY, btnPlay.x + 67, btnPlay.y +67) < 67) {
-			play();
-        }
+		if(inMenu){
+			if (dist(clickX, clickY, btnEco.x + 32, btnEco.y +32) < 32) {
+				eco();
+			} else if (dist(clickX, clickY, btnMais.x + 32, btnMais.y +32) < 32) {
+				mais();
+			} else if (dist(clickX, clickY, btnPlay.x + 67, btnPlay.y +67) < 67) {
+				play();
+			}
+		}
     });
     //menu
     setupMenu();
@@ -42,6 +46,9 @@ function main() {
 createjs.Ticker.addEventListener("tick", draw);
 
 function draw() {
+	if( faseAtual !== undefined && inGame) {
+		faseAtual.load();
+	}
     stage.update();
 }
 
@@ -302,12 +309,14 @@ function Fase(fase, create) {
 			break;
         }
     }
-	
 	this.load = function(){
 		for (x = 0; x < 24; x++) {
             for (y = 0; y < 24; y++) {
                 for (z = 0; z < 7; z++) {
 					stage.addChild(tiles[x][y][z].img);
+					if(equi.x == x && equi.y == y){
+						stage.addChild(equi.sprite);
+					}
                 }
             }
         }

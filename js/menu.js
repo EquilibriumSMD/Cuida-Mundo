@@ -36,7 +36,8 @@ function setupMenu() {
     menuBG.x = 0;
     menuBG.y = 0;
     stage.addChild(menuBG);
-
+    inGame = false;
+    inMenu = true;
     opMenu();
 }
 
@@ -59,6 +60,8 @@ function play() {
         });
         archivement = true;
     }
+    inGame = true;
+    inMenu = false;
     stage.addChild(bgPlay);
     mainGame();
     btVoltarAdd();
@@ -68,6 +71,7 @@ function mais() {
     bgMais = new createjs.Bitmap("img/bgMais.jpg");
     bgMais.x = 0;
     bgMais.y = 0;
+    inMenu = false;
 
     stage.addChild(bgMais);
     btVoltarAdd();
@@ -77,6 +81,7 @@ function eco() {
     bgEco = new createjs.Bitmap("img/bgEco.jpg");
     bgEco.x = 0;
     bgEco.y = 0;
+    inMenu = false;
 
     stage.addChild(bgEco);
     btVoltarAdd();
