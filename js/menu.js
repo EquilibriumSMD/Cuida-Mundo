@@ -60,7 +60,7 @@ function play() {
     if (!archivement) {
         var n = new Notification("Archievement Get!", {
             body: "First Step +50G\nSeu espírito de protetor ambiental é forte, mas o jogo ainda não está pronto ☹",
-            icon: "img/lixo5.png"
+            icon: "img/icon-lixo1.png"
         });
         archivement = true;
     }

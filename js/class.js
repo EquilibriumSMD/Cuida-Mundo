@@ -166,6 +166,10 @@ function Tile(type, id, x, y, z) {
         this.img = new createjs.Bitmap("img/" + this.tType + this.tId + ".png");
         this.img.x = treesholdX(x, y);
         this.img.y = treesholdY(x, y, z);
+		if (this.tType == "floor") {
+			this.img.scaleX = 64/300;
+			this.img.scaleY = 64/300;
+		}
         stage.addChild(this.img);
     }
 }
@@ -184,12 +188,15 @@ function Fase(fase, create) {
             }
         }
         if (fase == "quadrado") {
-			//equi.x = 15;
-			//equi.y = 15;
+			equi.x = 15;
+			equi.y = 15;
             for (x = 10; x < 20; x++) {
                 for (y = 10; y < 20; y++) {
-                    tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
-					tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 5 + 1), x, y, 1);
+					if (x != 16 || y != 16){
+						tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
+						tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 5 + 1), x, y, 1);
+						total++;
+					}
                 }
             }
         }
