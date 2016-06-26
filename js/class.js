@@ -59,7 +59,7 @@ function treesholdX(y, x) {
 }
 
 function treesholdY(y, x, z) {
-    return Math.floor(tSize + tSize / 4 * x + tSize / 4 * y - z * tSize / 2.4);
+    return Math.floor(tSize + tSize / 4 * x + tSize / 4 * y - z * tSize / 2);
 }
 
 function Boneco() {
@@ -187,8 +187,8 @@ function Tile(type, id, x, y, z) {
         this.img.x = treesholdX(x, y);
         this.img.y = treesholdY(x, y, z);
 		if (this.tType == "floor" || this.tType == "wall" ) {
-			this.img.scaleX = 64/300;
-			this.img.scaleY = 64/300;
+			this.img.scaleX = 64/267;
+			this.img.scaleY = 64/267;
 		}
     }
 	this.show = function() {
@@ -213,8 +213,76 @@ function Fase(fase, create) {
             }
         }
         switch (fase) {
+			//Fase da casa
 			case "casa":
+			equi.x = 15;
+			equi.y = 15;
+            for (x = 0; x < 10; x++) {
+                for (y = 3; y < 13; y++) {
+					tiles[x][y][3] = new Tile("floor", 0, x, y, 3);
+                }
+            }
+			for (x = 0; x < 5; x++) {
+				tiles[x][5][4] = new Tile("wall", 0, x, 5, 4);
+				tiles[x][5][5] = new Tile("wall", 0, x, 5, 5);
+            }
+			for (x = 5; x < 10; x++) {
+				tiles[x][3][4] = new Tile("wall", 0, x, 3, 4);
+				tiles[x][3][5] = new Tile("wall", 0, x, 3, 5);
+            }
+			for (y = 7; y < 13; y++) {
+				tiles[9][y][3] = new Tile("void", 0, 9, y, 3);
+            }
+			for (x = 0; x < 3; x++) {
+                for (y = 9; y < 13; y++) {
+					tiles[x][y][3] = new Tile("void", 0, x, y, 3);
+                }
+            }
+			for (x = 0; x < 5; x++) {
+                for (y = 3; y < 5; y++) {
+					tiles[x][y][3] = new Tile("void", 0, x, y, 3);
+                }
+            }
+			for (x = 11; x < 21; x++) {
+                for (y = 1; y < 19; y++) {
+					tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
+                }
+            }
+			for (x = 11; x < 16; x++) {
+				tiles[x][3][1] = new Tile("wall", 0, x, 3, 1);
+				tiles[x][3][2] = new Tile("wall", 0, x, 3, 2);
+            }
+			for (x = 16; x < 21; x++) {
+				tiles[x][0][0] = new Tile("wall", 0, x, 0, 0);
+				tiles[x][0][1] = new Tile("wall", 0, x, 0, 1);
+				tiles[x][0][2] = new Tile("wall", 0, x, 0, 2);
+            }
+			for (x = 11; x < 16; x++) {
+				tiles[x][13][1] = new Tile("wall", 0, x, 13, 1);
+				tiles[x][13][2] = new Tile("wall", 0, x, 13, 2);
+            }
+			for (x = 16; x < 20; x++) {
+				tiles[x][11][1] = new Tile("wall", 0, x, 11, 1);
+				tiles[x][11][2] = new Tile("wall", 0, x, 11, 2);
+            }
+			for (x = 11; x < 16; x++) {
+                for (y = 1; y < 3; y++) {
+					tiles[x][y][0] = new Tile("void", 0, x, y, 0);
+                }
+            }
+			for (y = 5; y < 19; y++) {
+				tiles[20][y][0] = new Tile("void", 0, 20, y, 0);
+			}
+			for (y = 14; y < 19; y++) {
+				tiles[19][y][0] = new Tile("void", 0, 19, y, 0);
+			}
+			for (x = 11; x < 13; x++) {
+                for (y = 17; y < 21; y++) {
+					tiles[x][y][0] = new Tile("void", 0, x, y, 0);
+                }
+            }
 			break;
+			//Fase quadradinha de teste
 			default:
 			equi.x = 15;
 			equi.y = 15;
@@ -234,6 +302,7 @@ function Fase(fase, create) {
 			break;
         }
     }
+	
 	this.load = function(){
 		for (x = 0; x < 24; x++) {
             for (y = 0; y < 24; y++) {
