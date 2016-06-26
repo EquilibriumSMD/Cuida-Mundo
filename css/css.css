@@ -1,17 +1,17 @@
+html,body{ margin: 0; width: 100%;}
+
 body {
-    width: 100 % ;overflow: hidden;margin: 0;
+    overflow: hidden;
+    margin: 0;
 }
 
 
 .container {
     margin: 0;
     background: #71f4a9;
-    background:linear-gradient(to bottom, # cffce2 50 % ,
-    #71f4a9 );
-    background:-moz-linear-gradient(to bottom, # cffce2 50 % ,
-    #71f4a9 );
-    background:-webkit-linear-gradient(to bottom, # cffce2 50 % ,
-    #71f4a9 );
+    background:linear-gradient(to bottom, #cffce2 50%, #71f4a9 );
+    background:-moz-linear-gradient(to bottom, #cffce2 50%, #71f4a9 );
+    background:-webkit-linear-gradient(to bottom, #cffce2 50%, #71f4a9 );
 }
 
 .scores{
@@ -42,172 +42,39 @@ body {
     text-indent: -9999px;
     list-style: none;
 }
-# bt - Top {
-        background - image: url('../img/bt-top.png');
-        left: 50 % ;
-        top: 0;
-        margin - left: -25 px;
-    }#
-    bt - Bottom {
-        background - image: url('../img/bt-bottom.png');
-        left: 50 % ;
-        bottom: 0;
-        margin - left: -25 px;
-    }#
-    bt - Left {
-        background - image: url('../img/bt-left.png');
-        left: 0;
-        top: 50 % ;
-        margin - top: -25 px;
-    }#
-    bt - Right {
-        background - image: url('../img/bt-right.png');
-        right: 0;
-        top: 50 % ;
-        margin - top: -25 px;
-    }#
-    bt - Coletar {
-        background - image: url('../img/bt-coletar.png');
-        left: 50 % ;
-        margin - left: -25 px;
-        top: 50 % ;
-        margin - top: -25 px;
-    }
-
-    #
-    defaultCanvas0 {
-        margin: auto;
-    }
-
-    /*menus*/
-    .menu {
-        background: #7ed5f3;
-    background:linear-gradient(to bottom, # 7e d5f3 50 % ,
-        #2480af );
-    background:-moz-linear-gradient(to bottom, # 7e d5f3 50 % ,
-        #2480af );
-    background:-webkit-linear-gradient(to bottom, # 7e d5f3 50 % ,
-        #2480af );
+#bt-Top {
+    background-image: url('../img/bt-top.png');
+    left: 50%;
+    top: 0;
+    margin-left: -25px;
+}
+#bt-Bottom {
+    background-image: url('../img/bt-bottom.png');
+    left: 50% ;
+    bottom: 0;
+    margin-left: -25px;
+}
+#bt-Left {
+    background-image: url('../img/bt-left.png');
+    left: 0;
+    top: 50% ;
+    margin-top: -25px;
+}
+#bt-Right {
+    background-image: url('../img/bt-right.png');
+    right: 0;
+    top: 50% ;
+    margin-top: -25px;
+}
+#bt-Coletar {
+    background-image: url('../img/bt-coletar.png');
+    left: 50% ;
+    margin-left: -25px;
+    top: 50% ;
+    margin-top: -25px;
 }
 
-.home{
-    background: # 44E967;
-        background: linear - gradient(to bottom, #44E967 50%, # 44e967);
-        background: -moz - linear - gradient(to bottom, #44E967 50%, # 44e967);
-        background: -webkit - linear - gradient(to bottom, #44E967 50%, # 44e967);
-    }
-    .cenario - play {
-        background: #c0c;
-    }
-    .cenario - instrucoes {
-        background: #2d93d1;
-    background:linear-gradient(to bottom, # 2 d93d1 50 % ,
-        #2480af );
-    background:-moz-linear-gradient(to bottom, # 2 d93d1 50 % ,
-        #2480af );
-    background:-webkit-linear-gradient(to bottom, # 2 d93d1 50 % ,
-        #2480af );
+#defaultCanvas0 {
+    display: table;
+    margin: 0 auto;
 }
-.cenario-creditos{
-    background: # 7e d5f3;
-        background: linear - gradient(to bottom, #7ed5f3 50%, # 55 afc9);
-        background: -moz - linear - gradient(to bottom, #7ed5f3 50%, # 55 afc9);
-        background: -webkit - linear - gradient(to bottom, #7ed5f3 50%, # 55 afc9);
-    }
-    .cenario - ecopontos {
-        background: #d6f3f1;
-        background: linear - gradient(to bottom, #d6f3f1 50 % , #b7f2ee);
-        background: -moz - linear - gradient(to bottom, #d6f3f1 50 % , #b7f2ee);
-        background: -webkit - linear - gradient(to bottom, #d6f3f1 50 % , #b7f2ee);
-    }
-
-
-    /*sprites movimentação*/
-    .personagem {
-        width: 30 px;
-        height: 33 px;
-        position: absolute;
-        left: 0;
-        z - index: 5;
-    }
-    .up {
-        top: 400 px;
-        background - image: url("../img/sprite-up.png"); -
-        webkit - animation: play .8 s steps(3) infinite; -
-        moz - animation: play .8 s steps(3) infinite; -
-        ms - animation: play .8 s steps(3) infinite; -
-        o - animation: play .8 s steps(3) infinite;
-        animation: play .8 s steps(3) infinite;
-    }
-    .down {
-        top: 440 px;
-        background - image: url("../img/sprite-down.png"); -
-        webkit - animation: play .8 s steps(3) infinite; -
-        moz - animation: play .8 s steps(3) infinite; -
-        ms - animation: play .8 s steps(3) infinite; -
-        o - animation: play .8 s steps(3) infinite;
-        animation: play .8 s steps(3) infinite;
-    }
-    .left {
-        top: 480 px;
-        background - image: url("../img/sprite-left.png"); -
-        webkit - animation: play .8 s steps(3) infinite; -
-        moz - animation: play .8 s steps(3) infinite; -
-        ms - animation: play .8 s steps(3) infinite; -
-        o - animation: play .8 s steps(3) infinite;
-        animation: play .8 s steps(3) infinite;
-    }
-    .right {
-        top: 520 px;
-        background - image: url("../img/sprite-right.png"); -
-        webkit - animation: play .8 s steps(3) infinite; -
-        moz - animation: play .8 s steps(3) infinite; -
-        ms - animation: play .8 s steps(3) infinite; -
-        o - animation: play .8 s steps(3) infinite;
-        animation: play .8 s steps(3) infinite;
-    }
-
-    @ - webkit - keyframes play {
-        from {
-            background - position: 0 px;
-        }
-        to {
-            background - position: -92 px;
-        }
-    }
-
-    @ - moz - keyframes play {
-        from {
-            background - position: 0 px;
-        }
-        to {
-            background - position: -92 px;
-        }
-    }
-
-    @ - ms - keyframes play {
-        from {
-            background - position: 0 px;
-        }
-        to {
-            background - position: -92 px;
-        }
-    }
-
-    @ - o - keyframes play {
-        from {
-            background - position: 0 px;
-        }
-        to {
-            background - position: -92 px;
-        }
-    }
-
-    @keyframes play {
-        from {
-            background - position: 0 px;
-        }
-        to {
-            background - position: -92 px;
-        }
-    }
