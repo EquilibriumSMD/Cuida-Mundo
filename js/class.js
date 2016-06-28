@@ -224,32 +224,20 @@ function Fase(fase, create) {
 			case "casa":
 			equi.x = 15;
 			equi.y = 15;
-            for (x = 0; x < 10; x++) {
+            for (x = 0; x < 3; x++) {
+                for (y = 5; y < 9; y++) {
+					tiles[x][y][4] = new Tile("floor", 0, x, y, 4);
+                }
+            }
+			for (y = 5; y < 13; y++) {
+				tiles[3][y][4] = new Tile("floor", 0, 3, y, 4);
+			}
+            for (x = 4; x < 7; x++) {
                 for (y = 3; y < 13; y++) {
-					tiles[x][y][3] = new Tile("floor", 0, x, y, 3);
+					tiles[x][y][4] = new Tile("floor", 0, x, y, 4);
                 }
             }
-			for (x = 0; x < 5; x++) {
-				tiles[x][5][4] = new Tile("wall", 0, x, 5, 4);
-				tiles[x][5][5] = new Tile("wall", 0, x, 5, 5);
-            }
-			for (x = 5; x < 10; x++) {
-				tiles[x][3][4] = new Tile("wall", 0, x, 3, 4);
-				tiles[x][3][5] = new Tile("wall", 0, x, 3, 5);
-            }
-			for (y = 7; y < 13; y++) {
-				tiles[9][y][3] = new Tile("void", 0, 9, y, 3);
-            }
-			for (x = 0; x < 3; x++) {
-                for (y = 9; y < 13; y++) {
-					tiles[x][y][3] = new Tile("void", 0, x, y, 3);
-                }
-            }
-			for (x = 0; x < 5; x++) {
-                for (y = 3; y < 5; y++) {
-					tiles[x][y][3] = new Tile("void", 0, x, y, 3);
-                }
-            }
+			tiles[7][7][4] = new Tile("stair", "s", 7, 7, 4);
 			for (x = 11; x < 21; x++) {
                 for (y = 1; y < 19; y++) {
 					tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
