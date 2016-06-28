@@ -84,18 +84,18 @@ function Boneco() {
     var spritePersonagem = new createjs.SpriteSheet({
         images: ["img/sprite-down.png", "img/sprite-left.png", "img/sprite-right.png", "img/sprite-up.png"],
         frames: {
-            width: 59,
-            height: 64
+            width: 64,
+            height: 97
         },
         animations: {
-            "idleD": 1,
-            "down": [0, 2, "idleD", 3],
-            "idleL": 4,
-            "left": [3, 5, "idleL", 3],
-            "idleR": 7,
-            "right": [6, 8, "idleR", 3],
-            "idleU": 10,
-            "up": [9, 11, "idleU", 3]
+            "idleD": 0,
+            "down": [1, 4, "idleD", 1],
+            "idleL": 5,
+            "left": [6, 9, "idleL", 1],
+            "idleR": 10,
+            "right": [11, 14, "idleR", 1],
+            "idleU": 15,
+            "up": [16, 19, "idleU", 1]
         }
     });
 
@@ -128,8 +128,8 @@ function Boneco() {
             loop: false
         }).to({
             x: treesholdX(this.x, this.y),
-            y: treesholdY(this.x, this.y, this.z + 0.5)
-        }, 100, createjs.Ease.getPowInOut(2));
+            y: treesholdY(this.x, this.y, this.z + 1.5)
+        }, 150, createjs.Ease.getPowInOut(2));
     }
     this.action = function() {
         if (tiles[this.x][this.y][this.z].tType == "lixo") {

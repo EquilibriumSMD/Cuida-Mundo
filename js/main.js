@@ -33,7 +33,7 @@ mainGame = function() {
     }
     equi.score();
     equi.sprite.x = treesholdX(equi.x, equi.y);
-    equi.sprite.y = treesholdY(equi.x, equi.y, equi.z + 0.5);
+    equi.sprite.y = treesholdY(equi.x, equi.y, equi.z + 1.5);
 }
 
 document.addEventListener('keydown', keyPressed);
