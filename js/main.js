@@ -10,12 +10,12 @@ var personagem;
 var faseAtual;
 
 mainGame = function() {
-	if( faseAtual === undefined ) {
-		faseAtual = new Fase("casa");
-		faseAtual.load();
-	} else {
-		faseAtual.load();
-	}
+    if (faseAtual === undefined) {
+        faseAtual = new Fase("casa");
+        faseAtual.load();
+    } else {
+        faseAtual.load();
+    }
     lixoT.innerHTML = "/" + total;
     handler = new ButtonHandler();
     if ("true" === undefined) {

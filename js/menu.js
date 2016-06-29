@@ -32,6 +32,8 @@ function opMenu() {
 }
 
 function setupMenu() {
+    tSize = 64;
+    equi = new Boneco();
     menuBG = new createjs.Bitmap(sonGoqueue.getResult("menuBG"));
     menuBG.x = 0;
     menuBG.y = 0;
