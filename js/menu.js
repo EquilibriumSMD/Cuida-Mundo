@@ -12,9 +12,9 @@ createjs.Ticker.addEventListener("tick", draw);
 
 function opMenu() {
 
-    btnEco = new createjs.Bitmap("img/btnEco.png");
-    btnPlay = new createjs.Bitmap("img/btnPlay.png");
-    btnMais = new createjs.Bitmap("img/btnMais.png");
+    btnEco = new createjs.Bitmap(sonGoqueue.getResult("btnEco"));
+    btnPlay = new createjs.Bitmap(sonGoqueue.getResult("btnPlay"));
+    btnMais = new createjs.Bitmap(sonGoqueue.getResult("btnMais"));
 
     //posicionamento dos botoes
     btnEco.x = 680;
@@ -32,7 +32,7 @@ function opMenu() {
 }
 
 function setupMenu() {
-    menuBG = new createjs.Bitmap("img/menuBG.jpg");
+    menuBG = new createjs.Bitmap(sonGoqueue.getResult("menuBG"));
     menuBG.x = 0;
     menuBG.y = 0;
     stage.addChild(menuBG);
@@ -42,7 +42,7 @@ function setupMenu() {
 }
 
 function btVoltarAdd() {
-    btVoltar = new createjs.Bitmap("img/btVoltar.png");
+    btVoltar = new createjs.Bitmap(sonGoqueue.getResult("btVoltar"));
     btVoltar.addEventListener("click", setupMenu);
     btVoltar.x = 800;
     btVoltar.y = 600;
@@ -50,7 +50,7 @@ function btVoltarAdd() {
 }
 
 function play() {
-    bgPlay = new createjs.Bitmap("img/bgPlay.jpg");
+    bgPlay = new createjs.Bitmap(sonGoqueue.getResult("bgPlay"));
     bgPlay.x = 0;
     bgPlay.y = 0;
     if (!archivement) {
@@ -68,7 +68,7 @@ function play() {
 }
 
 function mais() {
-    bgMais = new createjs.Bitmap("img/bgMais.jpg");
+    bgMais = new createjs.Bitmap(sonGoqueue.getResult("bgMais"));
     bgMais.x = 0;
     bgMais.y = 0;
     inMenu = false;
@@ -78,7 +78,7 @@ function mais() {
 }
 
 function eco() {
-    bgEco = new createjs.Bitmap("img/bgEco.jpg");
+    bgEco = new createjs.Bitmap(sonGoqueue.getResult("bgEco"));
     bgEco.x = 0;
     bgEco.y = 0;
     inMenu = false;

@@ -1,5 +1,6 @@
 // Comum ao jogo e ao menu:
 var stage = new createjs.Stage("defaultCanvas0");
+var sonGoqueue = new createjs.LoadQueue(false);   
 var inGame = false;
 var inMenu = true;
 
@@ -23,8 +24,6 @@ window.onload = function() {
 			}
 		}
     });
-    //menu
-    setupMenu();
     //jogo
     tSize = 64;
     equi = new Boneco();
@@ -42,13 +41,24 @@ function main() {
     stage = new createjs.Stage("defaultCanvas0");
     stage.canvas.width = 1280;
     stage.canvas.height = 800;
+	
+// Preload     
+	sonGoqueue.on("complete", setupMenu, this);     
+	sonGoqueue.loadManifest([
+		{id: "btnEco", src:"img/btnEco.png"},
+		{id: "btnPlay", src:"img/btnPlay.png"},
+		{id: "btnMais", src:"img/btnMais.png"},
+		{id: "menuBG", src:"img/menuBG.jpg"},
+		{id: "bgPlay", src:"img/bgPlay.jpg"},
+		{id: "bgMais", src:"img/bgMais.jpg"},
+		{id: "bgEco", src:"img/bgEco.jpg"},
+		{id: "btVoltar", src:"img/btVoltar.png"},
+		{id: "sprite", src:"img/sprite.png"}
+	]);
 }
 createjs.Ticker.addEventListener("tick", draw);
 
 function draw() {
-	if( faseAtual !== undefined && inGame) {
-		faseAtual.load();
-	}
     stage.update();
 }
 
@@ -82,7 +92,7 @@ function Boneco() {
 
     //animacao    
     var spritePersonagem = new createjs.SpriteSheet({
-        images: ["img/sprite-down.png", "img/sprite-left.png", "img/sprite-right.png", "img/sprite-up.png"],
+        images: ["img/sprite.png"],
         frames: {
             width: 64,
             height: 97
@@ -100,8 +110,6 @@ function Boneco() {
     });
 
     this.sprite = new createjs.Sprite(spritePersonagem, "idleD");
-    this.sprite.framerate = 30;
-
 
     this.up = function() {
         if (this.y > 0 && tiles[this.x][this.y - 1][this.z - 1].tType == "floor" && tiles[this.x][this.y - 1][this.z].tType != "wall")
@@ -129,7 +137,7 @@ function Boneco() {
         }).to({
             x: treesholdX(this.x, this.y),
             y: treesholdY(this.x, this.y, this.z + 1.5)
-        }, 150, createjs.Ease.getPowInOut(2));
+        }, 150, createjs.Ease.getPowInOut(2)).call(faseAtual.load);
     }
     this.action = function() {
         if (tiles[this.x][this.y][this.z].tType == "lixo") {
