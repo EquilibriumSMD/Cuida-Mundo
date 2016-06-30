@@ -24,11 +24,11 @@ window.onload = function() {
             }
         }
         if (dist(clickX, clickY, btnSobre.x + 32, btnSobre.y + 32) < 32) {
-            eco();
+            conheca();
         } else if (dist(clickX, clickY, btnParticipar.x + 32, btnParticipar.y + 32) < 32) {
-            mais();
+            participe();
         } else if (dist(clickX, clickY, btnCreditos.x + 67, btnCreditos.y + 67) < 67) {
-            play();
+            vantagens();
         }
         
     });
