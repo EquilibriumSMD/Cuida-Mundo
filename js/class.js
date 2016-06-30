@@ -69,6 +69,9 @@ function main() {
         id: "sprite",
         src: "img/sprite.png"
     }, {
+        id: "lixo0",
+        src: "img/lixo0.png"
+    }, {
         id: "lixo1",
         src: "img/lixo1.png"
     }, {
@@ -83,6 +86,30 @@ function main() {
     }, {
         id: "lixo5",
         src: "img/lixo5.png"
+    }, {
+        id: "lixo6",
+        src: "img/lixo6.png"
+    }, {
+        id: "lixo7",
+        src: "img/lixo7.png"
+    }, {
+        id: "lixo8",
+        src: "img/lixo8.png"
+    }, {
+        id: "lixo9",
+        src: "img/lixo9.png"
+    }, {
+        id: "lixo10",
+        src: "img/lixo10.png"
+    }, {
+        id: "lixo11",
+        src: "img/lixo11.png"
+    }, {
+        id: "lixo12",
+        src: "img/lixo12.png"
+    }, {
+        id: "lixo13",
+        src: "img/lixo13.png"
     }, {
         id: "floor0",
         src: "img/floor0.png"
@@ -180,20 +207,29 @@ function Boneco() {
     this.action = function() {
         if (tiles[this.x][this.y][this.z].tType == "lixo") {
             switch (tiles[this.x][this.y][this.z].tId) {
+                case 0:
+                    this.lixoC++;
+                    break;
                 case 1:
+                case 2:
+                case 3:
                     this.plast++;
                     break;
-                case 2:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
                     this.vidro++;
                     break;
-                case 3:
-                    this.papel++;
-                    break;
-                case 4:
+                case 8:
+                case 9:
                     this.metal++;
                     break;
-                case 5:
-                    this.lixoC++;
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                    this.papel++;
                     break;
             }
             stage.removeChild(tiles[this.x][this.y][this.z].img);
@@ -331,7 +367,7 @@ function Fase(fase, create) {
                         if (x != 16 || y != 16) {
                             tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
                             if (y != 12 || x == 15) {
-                                tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 5 + 1), x, y, 1);
+                                tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 14), x, y, 1);
                                 total++;
                             } else {
                                 tiles[x][y][1] = new Tile("wall", 0, x, y, 1);
