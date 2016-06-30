@@ -84,8 +84,6 @@ function subMenu() {
     createjs.Tween.get(btnSobre).to({alpha: 1},600);
     createjs.Tween.get(btnParticipar).to({alpha: 1},600);
     createjs.Tween.get(btnCreditos).to({alpha: 1},600);
-    
-    participe();
 
 }
 
@@ -97,9 +95,9 @@ function setupMenu() {
 
 function btVoltarAdd() {
     btVoltar = new createjs.Bitmap(sonGoqueue.getResult("btVoltar"));
-    btVoltar.addEventListener("click", opMenu);
-    btVoltar.x = 800;
-    btVoltar.y = 600;
+    btVoltar.addEventListener("click", setupMenu);
+    btVoltar.x = 20;
+    btVoltar.y = 20;
     stage.addChild(btVoltar);
 }
 
@@ -131,7 +129,16 @@ function mais() {
 
     stage.addChild(bgMais);
     createjs.Tween.get(bgMais).to({alpha: 1},600);
-    subMenu();
+    
+    
+    var showTxt = new createjs.Text("O Projeto Cuida Mundo foi desenvolvido pela Equipe Equilibrium, composta pelos seguintes estudantes do curso de Sistemas e Mídias Digitais da Universidade Federal do Ceará: Jório Matos, Álvaro Carvalho, Isabela Silveira, Alana Martins e Daniel Lima; sob orientação dos professores [...] e sob monitoria de [...]",'20px Josefin Sans','#fff');
+	showTxt.x = 300; showTxt.y = 800;
+    showTxt.lineWidth = 670;
+    showTxt.lineHeight = 22;
+    
+    stage.addChild(showTxt);
+    createjs.Tween.get(showTxt).to({y:355}, 1000);//, createjs.Ease.quadInOut);
+    
     btVoltarAdd();
 }
 
@@ -148,9 +155,21 @@ function eco() {
     btVoltarAdd();
 }
 
+
 function conheca() {
+    bgEco = new createjs.Bitmap(sonGoqueue.getResult("bgEco"));
+    bgEco.x = 0;
+    bgEco.y = 0;
+    bgEco.alpha = 0;
+    inMenu = false;
+
+    stage.addChild(bgEco);
+    createjs.Tween.get(bgEco).to({alpha: 1},600);
     
-    var showTxt = new createjs.Text("Os EcoPontos são contêineres colocados em pontos importantes de cada regional, para que a população possa depositar o lixo, de forma selecionada, contribuindo para o meio ambiente e recebendo, além disso, vantagens sociais, como descontos nas contas de água e luz ou créditos no cartão do transporte público, por exemplo.",'600 20px Josefin Sans','#fff');
+    subMenu();
+    btVoltarAdd();
+    
+    var showTxt = new createjs.Text("Os EcoPontos são contêineres colocados em pontos importantes de cada regional, para que a população possa depositar o lixo, de forma selecionada, contribuindo para o meio ambiente e recebendo, além disso, vantagens sociais, como descontos nas contas de água e luz ou créditos no cartão do transporte público, por exemplo.",'20px Josefin Sans','#fff');
 	showTxt.x = 300; showTxt.y = 800;
     showTxt.lineWidth = 670;
     showTxt.lineHeight = 22;
@@ -161,6 +180,17 @@ function conheca() {
 }
 
 function participe() {
+    bgEco = new createjs.Bitmap(sonGoqueue.getResult("bgEco"));
+    bgEco.x = 0;
+    bgEco.y = 0;
+    bgEco.alpha = 0;
+    inMenu = false;
+
+    stage.addChild(bgEco);
+    createjs.Tween.get(bgEco).to({alpha: 1},600);
+    
+    subMenu();
+    btVoltarAdd();
     
     var showTxt = new createjs.Text('Para adquirir os créditos ou descontos basta que o Fortalezense siga dicas simples: \n'+
         '\n① Procurar o Ecoponto mais próximo, fazer o cadastro e receber o cartão Recicla Fortaleza; \n'+
@@ -176,6 +206,17 @@ function participe() {
 }
 
 function materiais() {
+    bgEco = new createjs.Bitmap(sonGoqueue.getResult("bgEco"));
+    bgEco.x = 0;
+    bgEco.y = 0;
+    bgEco.alpha = 0;
+    inMenu = false;
+
+    stage.addChild(bgEco);
+    createjs.Tween.get(bgEco).to({alpha: 1},600);
+    
+    subMenu();
+    btVoltarAdd();
     
     var showTxt = new createjs.Text('Para adquirir os créditos ou descontos basta que o Fortalezense siga dicas simples: \n'+
         '\n① Procurar o Ecoponto mais próximo, fazer o cadastro e receber o cartão Recicla Fortaleza; \n'+
