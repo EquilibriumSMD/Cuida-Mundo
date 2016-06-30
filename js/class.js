@@ -4,6 +4,8 @@ var sonGoqueue = new createjs.LoadQueue(false);
 var inGame = false;
 var inMenu = true;
 var inSubMenu = true;
+var offsetX = 0;
+var offsetY = 0;
 
 window.onload = function() {
     main();	
@@ -136,11 +138,29 @@ function main() {
         id: "floor0",
         src: "img/floor0.png"
     }, {
+        id: "floor1",
+        src: "img/floor1.png"
+    }, {
         id: "wall0",
         src: "img/wall0.png"
     }, {
+        id: "wall1",
+        src: "img/wall1.png"
+    }, {
+        id: "wall2",
+        src: "img/wall2.png"
+    }, {
+        id: "wall3",
+        src: "img/wall3.png"
+    }, {
+        id: "wall4",
+        src: "img/wall4.png"
+    }, {
         id: "stairs",
         src: "img/stairs.png"
+    },{
+        id: "stair0",
+        src: "img/stair0.png"
     },{
         id: "sprite",
         src: "img/sprite.png"
@@ -162,11 +182,11 @@ var tSize;
 var tiles = [];
 
 function treesholdX(y, x) {
-    return Math.floor(640 - tSize / 2 * x + tSize / 2 * y);
+    return Math.floor(640 - tSize / 2 * x + tSize / 2 * y) + offsetX;
 }
 
 function treesholdY(y, x, z) {
-    return Math.floor(tSize + tSize / 4 * x + tSize / 4 * y - z * tSize / 2);
+    return Math.floor(tSize + tSize / 4 * x + tSize / 4 * y - z * tSize / 2) + offsetY;
 }
 
 function Boneco() {
@@ -202,23 +222,33 @@ function Boneco() {
     this.sprite = new createjs.Sprite(spritePersonagem, "idleD");
 
     this.up = function() {
-        if (this.y > 0 && tiles[this.x][this.y - 1][this.z - 1].tType == "floor" && tiles[this.x][this.y - 1][this.z].tType != "wall")
-            this.y--;
+        if (this.y > 0 && tiles[this.x][this.y - 1][this.z - 1].tType == "floor" && tiles[this.x][this.y - 1][this.z].tType != "wall"){
+			this.y--;
+		}
         this.tween();
     }
     this.down = function() {
-        if (this.y < 23 && tiles[this.x][this.y + 1][this.z - 1].tType == "floor" && tiles[this.x][this.y + 1][this.z].tType != "wall")
-            this.y++;
+        if (this.y < 23 && tiles[this.x][this.y + 1][this.z - 1].tType == "floor" && tiles[this.x][this.y + 1][this.z].tType != "wall"){
+			this.y++;
+		}
         this.tween();
     }
     this.left = function() {
-        if (this.x > 0 && tiles[this.x - 1][this.y][this.z - 1].tType == "floor" && tiles[this.x - 1][this.y][this.z].tType != "wall")
-            this.x--;
+        if (this.x > 0 && tiles[this.x - 1][this.y][this.z - 1].tType == "floor" && tiles[this.x - 1][this.y][this.z].tType != "wall"){
+			this.x--;
+		} else if (tiles[this.x - 1][this.y][this.z].tType == "stair") {
+			this.x--;
+			this.z++;
+		}
         this.tween();
     }
     this.right = function() {
-        if (this.x < 23 && tiles[this.x + 1][this.y][this.z - 1].tType == "floor" && tiles[this.x + 1][this.y][this.z].tType != "wall")
-            this.x++;
+        if (this.x < 23 && tiles[this.x + 1][this.y][this.z - 1].tType == "floor" && tiles[this.x + 1][this.y][this.z].tType != "wall"){
+			this.x++;
+		} else if (tiles[this.x + 1][this.y][this.z - 1].tType == "stair") {
+			this.x++;
+			this.z--;
+		}
         this.tween();
     }
     this.tween = function() {
@@ -293,6 +323,9 @@ function ButtonHandler() {
 }
 
 function Tile(type, id, x, y, z) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
     this.tType = type;
     this.tId = id;
     if (this.tType == "void") {
@@ -301,17 +334,15 @@ function Tile(type, id, x, y, z) {
         this.img = new createjs.Bitmap(sonGoqueue.getResult(this.tType + this.tId));
         this.img.x = treesholdX(x, y);
         this.img.y = treesholdY(x, y, z);
-        if (this.tType == "floor" || this.tType == "wall") {
-            this.img.scaleX = 64 / 267;
-            this.img.scaleY = 64 / 267;
-        }
     }
-    this.show = function() {
-        stage.addChild(this.img);
-    }
-    this.hide = function() {
-        stage.removeChild(this.img);
-    }
+    //this.adjustOffset = function() {
+	//	createjs.Tween.get(this.img, {
+    //        loop: false
+    //    }).to({
+    //        x: treesholdX(this.x, this.y),
+    //        y: treesholdY(this.x, this.y, this.z)
+    //    }, 150, createjs.Ease.getPowInOut(2));
+    //}
 }
 
 function Fase(fase, create) {
@@ -385,7 +416,45 @@ function Fase(fase, create) {
                     }
                 }
                 break;
-                //Fase quadradinha de teste
+			//Fase da Escola!
+			case "escola":
+                equi.x = 15;
+                equi.y = 15;
+				for (x = 0; x < 18; x++) {
+                    for (y = 0; y < 6; y++) {
+                        tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
+                    }
+                }
+				for (x = 3; x < 9; x++) {
+                    for (y = 2; y < 4; y++) {
+                        tiles[x][y][0] = new Tile("floor", 1, x, y, 0);
+                    }
+                }
+				for (x = 10; x < 15; x++) {
+                    for (y = 6; y < 9; y++) {
+                        tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
+                    }
+                }
+				for (x = 8; x < 18; x++) {
+                    for (y = 9; y < 17; y++) {
+                        tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
+                    }
+                }
+				for (x = 9; x < 17; x++) {
+                    for (y = 10; y < 16; y++) {
+                        tiles[x][y][0] = new Tile("floor", 1, x, y, 0);
+                    }
+                }
+				for (x = 0; x < 7; x++) {
+                    for (y = 9; y < 20; y++) {
+                        tiles[x][y][3] = new Tile("floor", 0, x, y, 3);
+                    }
+                }
+				tiles[7][15][1] = new Tile("stair", 0, 7, 15, 3);
+				tiles[6][15][2] = new Tile("stair", 0, 7, 15, 2);
+				tiles[5][15][3] = new Tile("stair", 0, 7, 15, 1);
+				break;
+            //Fase quadradinha de teste
             default:
                 equi.x = 15;
                 equi.y = 15;
@@ -394,10 +463,10 @@ function Fase(fase, create) {
                         if (x != 16 || y != 16) {
                             tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
                             if (y != 12 || x == 15) {
-                                tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 14), x, y, 1);
+                                tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
                                 total++;
                             } else {
-                                tiles[x][y][1] = new Tile("wall", 0, x, y, 1);
+                                tiles[x][y][1] = new Tile("wall", 3, x, y, 1);
                             }
                         }
                     }
@@ -406,15 +475,34 @@ function Fase(fase, create) {
         }
     }
     this.load = function() {
-        for (x = 0; x < 24; x++) {
-            for (y = 0; y < 24; y++) {
-                for (z = 0; z < 7; z++) {
-                    stage.addChild(tiles[x][y][z].img);
+		for (x = 0; x < 24; x++) {
+			for (y = 0; y < 24; y++) {
+				for (z = 0; z < 7; z++) {
                     if (equi.x == x && equi.y == y) {
                         stage.addChild(equi.sprite);
                     }
+                    stage.addChild(tiles[x][y][z].img);
                 }
             }
         }
+		//if (treesholdX(equi.x,equi.y) < 151){
+		//	offsetX += 150;
+		//}
+		//if (treesholdX(equi.x,equi.y) > 1129){
+		//	offsetX -= 150;
+		//}
+		//if (treesholdY(equi.x,equi.y,equi.z) < 151){
+		//	offsetY += 150;
+		//}
+		//if (treesholdY(equi.x,equi.y,equi.z) > 649 ){
+		//	offsetY -= 150;
+		//}
+		//for (x = 0; x < 24; x++) {
+		//	for (y = 0; y < 24; y++) {
+		//		for (z = 0; z < 7; z++) {
+        //            tiles[x][y][z].adjustOffset();
+        //        }
+        //    }
+        //}
     }
 }

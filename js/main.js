@@ -11,7 +11,7 @@ var faseAtual;
 
 mainGame = function() {
     if (faseAtual === undefined) {
-        faseAtual = new Fase("teste");
+        faseAtual = new Fase("escola");
         faseAtual.load();
     } else {
         faseAtual.load();

@@ -15,6 +15,17 @@ var archivement = false;
 createjs.Ticker.addEventListener("tick", draw);
 
 function opMenu() {
+	
+    inGame = false;
+    inMenu = true;
+    inSubMenu = false;
+	
+    menuBG = new createjs.Bitmap(sonGoqueue.getResult("menuBG"));
+    menuBG.x = 0;
+    menuBG.y = 0;
+    menuBG.alpha = 0;
+    stage.addChild(menuBG);
+    createjs.Tween.get(menuBG).to({alpha: 1},600);
 
     btnEco = new createjs.Bitmap(sonGoqueue.getResult("btnEco"));
     btnPlay = new createjs.Bitmap(sonGoqueue.getResult("btnPlay"));
@@ -81,21 +92,12 @@ function subMenu() {
 function setupMenu() {
 	tSize = 64;
 	equi = new Boneco();
-    menuBG = new createjs.Bitmap(sonGoqueue.getResult("menuBG"));
-    menuBG.x = 0;
-    menuBG.y = 0;
-    menuBG.alpha = 0;
-    stage.addChild(menuBG);
-    createjs.Tween.get(menuBG).to({alpha: 1},600);
-    inGame = false;
-    inMenu = true;
-    inSubMenu = false;
     opMenu();
 }
 
 function btVoltarAdd() {
     btVoltar = new createjs.Bitmap(sonGoqueue.getResult("btVoltar"));
-    btVoltar.addEventListener("click", setupMenu);
+    btVoltar.addEventListener("click", opMenu);
     btVoltar.x = 800;
     btVoltar.y = 600;
     stage.addChild(btVoltar);
@@ -116,8 +118,7 @@ function play() {
     inGame = true;
     inMenu = false;
     stage.addChild(bgPlay);
-    createjs.Tween.get(bgPlay).to({alpha: 1},600);
-    mainGame();
+    createjs.Tween.get(bgPlay).to({alpha: 1},600).call(mainGame);
     btVoltarAdd();
 }
 
