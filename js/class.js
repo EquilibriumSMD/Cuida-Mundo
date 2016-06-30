@@ -23,6 +23,14 @@ window.onload = function() {
                 play();
             }
         }
+        if (dist(clickX, clickY, btnSobre.x + 32, btnSobre.y + 32) < 32) {
+            eco();
+        } else if (dist(clickX, clickY, btnParticipar.x + 32, btnParticipar.y + 32) < 32) {
+            mais();
+        } else if (dist(clickX, clickY, btnCreditos.x + 67, btnCreditos.y + 67) < 67) {
+            play();
+        }
+        
     });
     //jogo
     buttonUp = document.getElementById("bt-Top");
@@ -50,6 +58,15 @@ function main() {
     }, {
         id: "btnMais",
         src: "img/btnMais.png"
+    }, {
+        id: "btnSobre",
+        src: "img/opcao-sobre.png"
+    }, {
+        id: "btnParticipar",
+        src: "img/opcao-participar.png"
+    }, {
+        id: "btnCreditos",
+        src: "img/opcao-creditos.png"
     }, {
         id: "menuBG",
         src: "img/menuBG.jpg"

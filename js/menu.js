@@ -5,6 +5,9 @@ var btHome;
 var btnPlay;
 var btnMais;
 var btnEco;
+var btnSobre;
+var btnParticipar;
+var btnCreditos;
 var btVoltar;
 var archivement = false;
 
@@ -37,6 +40,38 @@ function opMenu() {
     createjs.Tween.get(btnEco).to({alpha: 1},600);
     createjs.Tween.get(btnPlay).to({alpha: 1},600);
     createjs.Tween.get(btnMais).to({alpha: 1},600);
+
+}
+
+function subMenu() {
+
+    btnSobre = new createjs.Bitmap(sonGoqueue.getResult("btnSobre"));
+    btnParticipar = new createjs.Bitmap(sonGoqueue.getResult("btnParticipar"));
+    btnCreditos = new createjs.Bitmap(sonGoqueue.getResult("btnCreditos"));
+
+    //posicionamento dos botoes
+    btnSobre.x = 0;
+    btnSobre.y = 185;
+    btnParticipar.x = 429;
+    btnParticipar.y = 185;
+    btnCreditos.x = 855;
+    btnCreditos.y = 185;
+
+    //fadeIn
+    btnSobre.alpha = 0;
+    btnParticipar.alpha = 0;
+    btnCreditos.alpha = 0;
+    
+    //adicionando os botões
+    stage.addChild(btnSobre);
+    stage.addChild(btnParticipar);
+    stage.addChild(btnCreditos);
+    
+    createjs.Tween.get(btnSobre).to({alpha: 1},600);
+    createjs.Tween.get(btnParticipar).to({alpha: 1},600);
+    createjs.Tween.get(btnCreditos).to({alpha: 1},600);
+    
+    sobre();
 
 }
 
@@ -91,6 +126,7 @@ function mais() {
 
     stage.addChild(bgMais);
     createjs.Tween.get(bgMais).to({alpha: 1},600);
+    subMenu();
     btVoltarAdd();
 }
 
@@ -103,5 +139,39 @@ function eco() {
 
     stage.addChild(bgEco);
     createjs.Tween.get(bgEco).to({alpha: 1},600);
+    subMenu();
     btVoltarAdd();
+}
+
+function sobre() {
+    
+    var showTxt = new createjs.Text("Os EcoPontos são contêineres colocados em pontos importantes de cada regional, para que a população possa depositar o lixo, de forma selecionada, contribuindo para o meio ambiente e recebendo, além disso, vantagens sociais, como descontos nas contas de água e luz ou créditos no cartão do transporte público, por exemplo.",'20px Arial','#fff');
+	showTxt.x = 300; showTxt.y = 355;
+    showTxt.lineWidth = 670;
+    showTxt.lineHeight = 22;
+    
+    stage.addChild(showTxt);
+    
+//    var canvasX = document.getElementById("defaultCanvas0").offsetLeft;
+//    
+//    var txt = document.createElement('div');
+//    txt.innerHTML="Os EcoPontos são contêineres colocados em pontos importantes de cada regional, para que a população possa depositar o lixo, de forma selecionada, contribuindo para o meio ambiente e recebendo, além disso, vantagens sociais, como descontos nas contas de água e luz ou créditos no cartão do transporte público, por exemplo.";
+//    txt.style.color = '#fff';
+//    txt.id = 'boxTexto';
+//    txt.style.width = '670px';
+//    txt.style.position = "relative";
+//    txt.style.top = 260;
+//    txt.style.left = 230;
+//
+//    document.body.appendChild(txt);
+//
+//    var boxTxt = new createjs.DOMElement(txt);
+//    boxTxt.x = 260;
+//    boxTxt.y = 800;
+//    stage.addChild(boxTxt);
+//    stage.update();
+//
+//    createjs.Tween.get(boxTxt).to({y:60}, 1000);//, createjs.Ease.quadInOut);
+//    createjs.Ticker.addEventListener("tick", stage);
+    
 }
