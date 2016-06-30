@@ -23,11 +23,11 @@ window.onload = function() {
                 play();
             }
         }
-        if (dist(clickX, clickY, btnSobre.x + 32, btnSobre.y + 32) < 32) {
+        if (clickX > btnSobre.x && clickX < btnSobre.x + btnSobre.width && clickY > btnSobre.y && clickY < btnSobre.y + btnSobre.height) {
             conheca();
-        } else if (dist(clickX, clickY, btnParticipar.x + 32, btnParticipar.y + 32) < 32) {
+        } else if (clickX > btnParticipar.x && clickX < btnParticipar.x + btnParticipar.width && clickY > btnParticipar.y && clickY < btnParticipar.y + btnParticipar.height) {
             participe();
-        } else if (dist(clickX, clickY, btnCreditos.x + 67, btnCreditos.y + 67) < 67) {
+        } else if (clickX > btnCreditos.x && clickX < btnCreditos.x + btnCreditos.width && clickY > btnCreditos.y && clickY < btnCreditos.y + btnCreditos.height) {
             materiais();
         }
         
@@ -87,52 +87,52 @@ function main() {
         src: "img/sprite.png"
     }, {
         id: "lixo0",
-        src: "img/lixo0.png"
+        src: "img/bateria.png"
     }, {
         id: "lixo1",
-        src: "img/lixo1.png"
+        src: "img/Garrafa PET deitada direita.png"
     }, {
         id: "lixo2",
-        src: "img/lixo2.png"
+        src: "img/Garrafa PET deitada esquerda.png"
     }, {
         id: "lixo3",
-        src: "img/lixo3.png"
+        src: "img/Garrafa PET em pé.png"
     }, {
         id: "lixo4",
-        src: "img/lixo4.png"
+        src: "img/Garrafa vidro cinza deitada.png"
     }, {
         id: "lixo5",
-        src: "img/lixo5.png"
+        src: "img/Garrafa cinza verde em pé.png"
     }, {
         id: "lixo6",
-        src: "img/lixo6.png"
+        src: "img/Garrafa vidro verde deitada direita.png"
     }, {
         id: "lixo7",
-        src: "img/lixo7.png"
+        src: "img/Garrafa vidro verde deitada.png"
     }, {
         id: "lixo8",
-        src: "img/lixo8.png"
+        src: "img/Garrafa vidro verde em pé.png"
     }, {
         id: "lixo9",
-        src: "img/lixo9.png"
+        src: "img/Lata deitada para a direita.png"
     }, {
         id: "lixo10",
-        src: "img/lixo10.png"
+        src: "img/Lata deitada.png"
     }, {
         id: "lixo11",
-        src: "img/lixo11.png"
+        src: "img/Lata em pé.png"
     }, {
         id: "lixo12",
-        src: "img/lixo12.png"
+        src: "img/Papel.png"
     }, {
         id: "lixo13",
-        src: "img/lixo13.png"
+        src: "img/Caixa papelão direita.png"
     }, {
         id: "lixo14",
-        src: "img/lixo13.png"
+        src: "img/Caixa papelão esquerda.png"
     }, {
         id: "lixo15",
-        src: "img/lixo13.png"
+        src: "img/Caixa de leite.png"
     }, {
         id: "floor0",
         src: "img/floor0.png"
