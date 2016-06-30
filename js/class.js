@@ -236,7 +236,8 @@ function Boneco() {
     this.left = function() {
         if (this.x > 0 && tiles[this.x - 1][this.y][this.z - 1].tType == "floor" && tiles[this.x - 1][this.y][this.z].tType != "wall"){
 			this.x--;
-		} else if (tiles[this.x - 1][this.y][this.z].tType == "stair") {
+		}
+		if (tiles[this.x - 1][this.y][this.z].tType == "stair") {
 			this.x--;
 			this.z++;
 		}
@@ -245,7 +246,8 @@ function Boneco() {
     this.right = function() {
         if (this.x < 23 && tiles[this.x + 1][this.y][this.z - 1].tType == "floor" && tiles[this.x + 1][this.y][this.z].tType != "wall"){
 			this.x++;
-		} else if (tiles[this.x + 1][this.y][this.z - 1].tType == "stair") {
+		}
+		if (tiles[this.x + 1][this.y][this.z - 1].tType == "stair") {
 			this.x++;
 			this.z--;
 		}
@@ -447,12 +449,10 @@ function Fase(fase, create) {
                 }
 				for (x = 0; x < 7; x++) {
                     for (y = 9; y < 20; y++) {
-                        tiles[x][y][3] = new Tile("floor", 0, x, y, 3);
+                        tiles[x][y][1] = new Tile("floor", 0, x, y, 1);
                     }
                 }
-				tiles[7][15][1] = new Tile("stair", 0, 7, 15, 3);
-				tiles[6][15][2] = new Tile("stair", 0, 7, 15, 2);
-				tiles[5][15][3] = new Tile("stair", 0, 7, 15, 1);
+				tiles[7][15][1] = new Tile("stair", 0, 7, 15, 1);
 				break;
             //Fase quadradinha de teste
             default:
