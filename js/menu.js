@@ -151,6 +151,15 @@ function eco() {
 
     stage.addChild(bgEco);
     createjs.Tween.get(bgEco).to({alpha: 1},600);
+    
+    var showTxt = new createjs.Text("Conheça mais sobre os Ecopontos.",'20px Josefin Sans','#fff');
+	showTxt.x = 300; showTxt.y = 800;
+    showTxt.lineWidth = 670;
+    showTxt.lineHeight = 22;
+    
+    stage.addChild(showTxt);
+    createjs.Tween.get(showTxt).to({y:355}, 1000);//, createjs.Ease.quadInOut);
+    
     subMenu();
     btVoltarAdd();
 }
@@ -218,15 +227,9 @@ function materiais() {
     subMenu();
     btVoltarAdd();
     
-    var showTxt = new createjs.Text('Para adquirir os créditos ou descontos basta que o Fortalezense siga dicas simples: \n'+
-        '\n① Procurar o Ecoponto mais próximo, fazer o cadastro e receber o cartão Recicla Fortaleza; \n'+
-        '\n② Com o cartão pronto, separar os resíduos recicláveis e levá-los até o Ecoponto para serem pesados, lembrando de armazená-los sem sobra de alimentos ou produtos, para que não atraia insetos e gere mal cheiro; \n'+
-        '\n③ No Ecoponto, conferir a tabela de valores dos resíduos recicláveis, pois o crédito será calculado de acordo com  o peso e o tipo de cada material.','20px Josefin Sans','#fff');
-	showTxt.x = 300; showTxt.y = 800;
-    showTxt.lineWidth = 670;
-    showTxt.lineHeight = 22;
-    
-    stage.addChild(showTxt);
-    createjs.Tween.get(showTxt).to({y:355}, 1000);//, createjs.Ease.quadInOut);
+    tabela = new createjs.Bitmap(sonGoqueue.getResult("bg-tabela"));
+    tabela.x = 250; tabela.y = 800;
+    stage.addChild(tabela);
+    createjs.Tween.get(tabela).to({y:355}, 1000);//, createjs.Ease.quadInOut);
     
 }

@@ -78,6 +78,9 @@ function main() {
         id: "bgPlay",
         src: "img/bgPlay.jpg"
     }, {
+        id: "bg-tabela",
+        src: "img/tabela.png"
+    }, {
         id: "bgMais",
         src: "img/bgMais.jpg"
     }, {
