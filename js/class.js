@@ -128,6 +128,12 @@ function main() {
         id: "lixo13",
         src: "img/lixo13.png"
     }, {
+        id: "lixo14",
+        src: "img/lixo13.png"
+    }, {
+        id: "lixo15",
+        src: "img/lixo13.png"
+    }, {
         id: "floor0",
         src: "img/floor0.png"
     }, {
@@ -236,16 +242,18 @@ function Boneco() {
                 case 5:
                 case 6:
                 case 7:
+                case 8:
                     this.vidro++;
                     break;
-                case 8:
                 case 9:
-                    this.metal++;
-                    break;
                 case 10:
                 case 11:
+                    this.metal++;
+                    break;
                 case 12:
                 case 13:
+                case 14:
+                case 15:
                     this.papel++;
                     break;
             }
