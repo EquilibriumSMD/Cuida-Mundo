@@ -3,10 +3,10 @@ var stage = new createjs.Stage("defaultCanvas0");
 var sonGoqueue = new createjs.LoadQueue(false);
 var inGame = false;
 var inMenu = true;
+var inSubMenu = true;
 
 window.onload = function() {
-    main();
-
+    main();	
     //jogando as funções de cada botão
     stage.canvas.addEventListener("click", function(e) {
         var canvasX = document.getElementById("defaultCanvas0").offsetLeft;
@@ -23,13 +23,15 @@ window.onload = function() {
                 play();
             }
         }
-        if (clickX > btnSobre.x && clickX < btnSobre.x + btnSobre.width && clickY > btnSobre.y && clickY < btnSobre.y + btnSobre.height) {
-            conheca();
-        } else if (clickX > btnParticipar.x && clickX < btnParticipar.x + btnParticipar.width && clickY > btnParticipar.y && clickY < btnParticipar.y + btnParticipar.height) {
-            participe();
-        } else if (clickX > btnCreditos.x && clickX < btnCreditos.x + btnCreditos.width && clickY > btnCreditos.y && clickY < btnCreditos.y + btnCreditos.height) {
-            materiais();
-        }
+		if (inSubMenu) {
+			if (clickX > btnSobre.x && clickX < btnSobre.x + btnSobre.width && clickY > btnSobre.y && clickY < btnSobre.y + btnSobre.height) {
+				conheca();
+			} else if (clickX > btnParticipar.x && clickX < btnParticipar.x + btnParticipar.width && clickY > btnParticipar.y && clickY < btnParticipar.y + btnParticipar.height) {
+				participe();
+			} else if (clickX > btnCreditos.x && clickX < btnCreditos.x + btnCreditos.width && clickY > btnCreditos.y && clickY < btnCreditos.y + btnCreditos.height) {
+				materiais();
+			}
+		}
         
     });
     //jogo
@@ -83,9 +85,6 @@ function main() {
         id: "btVoltar",
         src: "img/btVoltar.png"
     }, {
-        id: "sprite",
-        src: "img/sprite.png"
-    }, {
         id: "lixo0",
         src: "img/bateria.png"
     }, {
@@ -132,7 +131,7 @@ function main() {
         src: "img/Caixa papelão esquerda.png"
     }, {
         id: "lixo15",
-        src: "img/Caixa de leite.png"
+        src: "img/Caixa de leites.png"
     }, {
         id: "floor0",
         src: "img/floor0.png"
@@ -142,6 +141,9 @@ function main() {
     }, {
         id: "stairs",
         src: "img/stairs.png"
+    },{
+        id: "sprite",
+        src: "img/sprite.png"
     }]);
 }
 createjs.Ticker.addEventListener("tick", draw);

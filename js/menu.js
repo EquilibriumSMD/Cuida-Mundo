@@ -45,6 +45,8 @@ function opMenu() {
 }
 
 function subMenu() {
+	
+    inSubMenu = true;
 
     btnSobre = new createjs.Bitmap(sonGoqueue.getResult("btnSobre"));
     btnParticipar = new createjs.Bitmap(sonGoqueue.getResult("btnParticipar"));
@@ -77,8 +79,8 @@ function subMenu() {
 }
 
 function setupMenu() {
-    tSize = 64;
-    equi = new Boneco();
+	tSize = 64;
+	equi = new Boneco();
     menuBG = new createjs.Bitmap(sonGoqueue.getResult("menuBG"));
     menuBG.x = 0;
     menuBG.y = 0;
@@ -87,6 +89,7 @@ function setupMenu() {
     createjs.Tween.get(menuBG).to({alpha: 1},600);
     inGame = false;
     inMenu = true;
+    inSubMenu = false;
     opMenu();
 }
 
