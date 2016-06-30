@@ -28,7 +28,7 @@ window.onload = function() {
         } else if (dist(clickX, clickY, btnParticipar.x + 32, btnParticipar.y + 32) < 32) {
             participe();
         } else if (dist(clickX, clickY, btnCreditos.x + 67, btnCreditos.y + 67) < 67) {
-            vantagens();
+            materiais();
         }
         
     });

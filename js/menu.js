@@ -72,7 +72,7 @@ function subMenu() {
     createjs.Tween.get(btnParticipar).to({alpha: 1},600);
     createjs.Tween.get(btnCreditos).to({alpha: 1},600);
     
-    conheca();
+    participe();
 
 }
 
@@ -158,7 +158,25 @@ function conheca() {
 
 function participe() {
     
-    var showTxt = new createjs.Text("Os EcoPontos são contêineres colocados em pontos importantes de cada regional, para que a população possa depositar o lixo, de forma selecionada, contribuindo para o meio ambiente e recebendo, além disso, vantagens sociais, como descontos nas contas de água e luz ou créditos no cartão do transporte público, por exemplo.",'28px Josefin Sans','#fff');
+    var showTxt = new createjs.Text('Para adquirir os créditos ou descontos basta que o Fortalezense siga dicas simples: \n'+
+        '\n① Procurar o Ecoponto mais próximo, fazer o cadastro e receber o cartão Recicla Fortaleza; \n'+
+        '\n② Com o cartão pronto, separar os resíduos recicláveis e levá-los até o Ecoponto para serem pesados, lembrando de armazená-los sem sobra de alimentos ou produtos, para que não atraia insetos e gere mal cheiro; \n'+
+        '\n③ No Ecoponto, conferir a tabela de valores dos resíduos recicláveis, pois o crédito será calculado de acordo com  o peso e o tipo de cada material.','20px Josefin Sans','#fff');
+	showTxt.x = 300; showTxt.y = 800;
+    showTxt.lineWidth = 670;
+    showTxt.lineHeight = 22;
+    
+    stage.addChild(showTxt);
+    createjs.Tween.get(showTxt).to({y:355}, 1000);//, createjs.Ease.quadInOut);
+    
+}
+
+function materiais() {
+    
+    var showTxt = new createjs.Text('Para adquirir os créditos ou descontos basta que o Fortalezense siga dicas simples: \n'+
+        '\n① Procurar o Ecoponto mais próximo, fazer o cadastro e receber o cartão Recicla Fortaleza; \n'+
+        '\n② Com o cartão pronto, separar os resíduos recicláveis e levá-los até o Ecoponto para serem pesados, lembrando de armazená-los sem sobra de alimentos ou produtos, para que não atraia insetos e gere mal cheiro; \n'+
+        '\n③ No Ecoponto, conferir a tabela de valores dos resíduos recicláveis, pois o crédito será calculado de acordo com  o peso e o tipo de cada material.','20px Josefin Sans','#fff');
 	showTxt.x = 300; showTxt.y = 800;
     showTxt.lineWidth = 670;
     showTxt.lineHeight = 22;
