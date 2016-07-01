@@ -19,17 +19,17 @@ mainGame = function() {
     lixoT.innerHTML = "/" + total;
     handler = new ButtonHandler();
     if ("true" === undefined) {
-        buttonUp.remove();
-        buttonDown.remove();
-        buttonLeft.remove();
-        buttonRight.remove();
-        buttonAction.remove();
+		$("#bt-Top").remove();
+		$("#bt-Bottom").remove();
+		$("#bt-Left").remove();
+		$("#bt-Right").remove();
+		$("#bt-Coletar").remove();
     } else {
-        buttonUp.onclick = handler.up;
-        buttonDown.onclick = handler.down;
-        buttonLeft.onclick = handler.left;
-        buttonRight.onclick = handler.right;
-        buttonAction.onclick = handler.action;
+        $("#bt-Top").onclick = handler.up;
+        $("#bt-Bottom").onclick = handler.down;
+        $("#bt-Left").onclick = handler.left;
+        $("#bt-Right").onclick = handler.right;
+        $("#bt-Coletar").onclick = handler.action;
     }
     equi.score();
     equi.sprite.x = treesholdX(equi.x, equi.y);
@@ -39,21 +39,23 @@ mainGame = function() {
 document.addEventListener('keydown', keyPressed);
 
 function keyPressed(event) {
-    switch (event.keyCode) {
-        case 40:
-            handler.down();
-            break;
-        case 38:
-            handler.up();
-            break;
-        case 37:
-            handler.left();
-            break;
-        case 39:
-            handler.right();
-            break;
-    }
-    if (event.key == " ") {
-        handler.action();
-    }
+	if(inGame){
+		switch (event.keyCode) {
+			case 40:
+				handler.down();
+				break;
+			case 38:
+				handler.up();
+				break;
+			case 37:
+				handler.left();
+				break;
+			case 39:
+				handler.right();
+				break;
+		}
+		if (event.key == " ") {
+			handler.action();
+		}
+	}
 }

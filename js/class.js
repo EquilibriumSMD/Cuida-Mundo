@@ -37,11 +37,11 @@ window.onload = function() {
         
     });
     //jogo
-    buttonUp = document.getElementById("bt-Top");
-    buttonDown = document.getElementById("bt-Bottom");
-    buttonLeft = document.getElementById("bt-Left");
-    buttonRight = document.getElementById("bt-Right");
-    buttonAction = document.getElementById("bt-Coletar");
+    $("#bt-Top").hide();
+    $("#bt-Bottom").hide();
+    $("#bt-Left").hide();
+    $("#bt-Right").hide();
+    $("#bt-Coletar").hide();
     lixoC = document.getElementById("bt-lixo1").getElementsByTagName("strong")[0];
     lixoT = document.getElementById("bt-lixo1").getElementsByTagName("span")[0];
 }
@@ -76,7 +76,7 @@ function main() {
         src: "img/menuBG.jpg"
     }, {
         id: "bgPlay",
-        src: "img/bgPlay.jpg"
+        src: "img/bgPlay.png"
     }, {
         id: "bgMais",
         src: "img/bgMais.jpg"
@@ -133,7 +133,7 @@ function main() {
         src: "img/Caixa papelão esquerda.png"
     }, {
         id: "lixo15",
-        src: "img/Caixa de leites.png"
+        src: "img/Caixa de leite.png"
     }, {
         id: "floor0",
         src: "img/floor0.png"
@@ -347,8 +347,13 @@ function Tile(type, id, x, y, z) {
     //}
 }
 
-function Fase(fase, create) {
+function Fase(fase, create, ratio) {
     //this.dojo = [];
+	if (ratio === undefined) {
+		this.ratio = 0.5;
+    } else {
+		this.ratio = ratio;
+    }
     if (!create) {
         //Cria a Matriz de espaços vazios
         for (x = 0; x < 24; x++) {
@@ -452,7 +457,47 @@ function Fase(fase, create) {
                         tiles[x][y][1] = new Tile("floor", 0, x, y, 1);
                     }
                 }
+				for (y = 9; y < 20; y++) {
+					tiles[0][y][2] = new Tile("wall", 1, 0, y, 2);
+					tiles[0][y][3] = new Tile("wall", 1, 0, y, 3);
+				}
+				tiles[0][12][3] = new Tile("wall", 4, 0, 12, 3);
+				tiles[0][14][3] = new Tile("wall", 4, 0, 14, 3);
+				tiles[0][16][3] = new Tile("wall", 4, 0, 16, 3);
 				tiles[7][15][1] = new Tile("stair", 0, 7, 15, 1);
+				// Lixos
+				for (x = 0; x < 18; x++) {
+                    for (y = 0; y < 6; y++) {
+						if(Math.random() < this.ratio){
+							tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
+							total++;
+						}
+                    }
+                }
+				for (x = 8; x < 18; x++) {
+                    for (y = 9; y < 17; y++) {
+						if(Math.random() < this.ratio){
+							tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
+							total++;
+						}
+                    }
+                }
+				for (x = 10; x < 15; x++) {
+                    for (y = 6; y < 9; y++) {
+						if(Math.random() < this.ratio){
+							tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
+							total++;
+						}
+                    }
+                }
+				for (x = 1; x < 7; x++) {
+                    for (y = 9; y < 20; y++) {
+						if(Math.random() < this.ratio){
+							tiles[x][y][2] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 2);
+							total++;
+						}
+                    }
+                }
 				break;
             //Fase quadradinha de teste
             default:

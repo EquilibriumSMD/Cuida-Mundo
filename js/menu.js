@@ -11,7 +11,6 @@ var btnCreditos;
 var btVoltar;
 var archivement = false;
 
-
 createjs.Ticker.addEventListener("tick", draw);
 
 function opMenu() {
