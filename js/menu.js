@@ -14,6 +14,8 @@ var archivement = false;
 createjs.Ticker.addEventListener("tick", draw);
 
 function opMenu() {
+    $(".scores").hide();
+    $(".navegacao").hide();
 	
     inGame = false;
     inMenu = true;
@@ -115,6 +117,8 @@ function play() {
         archivement = true;
     }
     inGame = true;
+    $(".scores").show();
+    $(".navegacao").show();
     inMenu = false;
     stage.addChild(bgPlay);
     createjs.Tween.get(bgPlay).to({alpha: 1},600).call(mainGame);

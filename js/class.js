@@ -37,13 +37,19 @@ window.onload = function() {
         
     });
     //jogo
-    $("#bt-Top").hide();
-    $("#bt-Bottom").hide();
-    $("#bt-Left").hide();
-    $("#bt-Right").hide();
-    $("#bt-Coletar").hide();
+    $(".scores").hide();
+    $(".navegacao").hide();
     lixoC = document.getElementById("bt-lixo1").getElementsByTagName("strong")[0];
     lixoT = document.getElementById("bt-lixo1").getElementsByTagName("span")[0];
+}
+
+function loading(e) {
+	var circle = new createjs.Shape();
+	circle.graphics.beginFill("#00FF7F").drawCircle(0, 0, 755 * e.progress);
+	circle.x = 640;
+	circle.y = 400;
+	stage.addChild(circle);
+	stage.update();
 }
 
 function main() {
@@ -53,6 +59,7 @@ function main() {
 
     // Preload     
     sonGoqueue.on("complete", setupMenu, this);
+    sonGoqueue.on("progress", loading, this);
     sonGoqueue.loadManifest([{
         id: "btnEco",
         src: "img/btnEco.png"
