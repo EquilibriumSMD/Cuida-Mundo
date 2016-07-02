@@ -26,12 +26,12 @@ window.onload = function() {
             }
         }
 		if (inSubMenu) {
-			if (clickX > btnSobre.x && clickX < btnSobre.x + btnSobre.width && clickY > btnSobre.y && clickY < btnSobre.y + btnSobre.height) {
-				conheca();
-			} else if (clickX > btnParticipar.x && clickX < btnParticipar.x + btnParticipar.width && clickY > btnParticipar.y && clickY < btnParticipar.y + btnParticipar.height) {
+			if (clickX > btnSobre.x && clickX < btnSobre.x + btnSobre.getBounds().width && clickY > btnSobre.y && clickY < btnSobre.y + btnSobre.getBounds().height) {
+				conheca(); 
+			} else if (clickX > btnParticipar.x && clickX < btnParticipar.x + btnParticipar.getBounds().width && clickY > btnParticipar.y && clickY < btnParticipar.y + btnParticipar.getBounds().height) {
 				participe();
-			} else if (clickX > btnCreditos.x && clickX < btnCreditos.x + btnCreditos.width && clickY > btnCreditos.y && clickY < btnCreditos.y + btnCreditos.height) {
-				materiais();
+			} else if (clickX > btnCreditos.x && clickX < btnCreditos.x + btnCreditos.getBounds().width && clickY > btnCreditos.y && clickY < btnCreditos.y + btnCreditos.getBounds().height) {
+                materiais();
 			}
 		}
         
@@ -84,6 +84,9 @@ function main() {
     }, {
         id: "bgPlay",
         src: "img/bgPlay.png"
+    }, {
+        id: "bg-tabela",
+        src: "img/tabela.png"
     }, {
         id: "bgMais",
         src: "img/bgMais.jpg"
