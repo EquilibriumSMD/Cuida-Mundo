@@ -37,25 +37,57 @@ mainGame = function() {
 }
 
 document.addEventListener('keydown', keyPressed);
+document.addEventListener('keyup', keyReleased);
 
-function keyPressed(event) {
-	if(inGame){
-		switch (event.keyCode) {
-			case 40:
-				handler.down();
-				break;
-			case 38:
-				handler.up();
-				break;
-			case 37:
-				handler.left();
-				break;
-			case 39:
-				handler.right();
-				break;
+
+var key;
+
+function keyPressed(evento) {
+	if(key === undefined){
+		if (inGame) {
+			switch (evento.keyCode) {
+				case 40:
+					handler.down();
+					break;
+				case 38:
+					handler.up();
+					break;
+				case 37:
+					handler.left();
+					break;
+				case 39:
+					handler.right();
+					break;
+			}
+			if (event.key == " ") {
+				handler.action();
+			}
 		}
-		if (event.key == " ") {
-			handler.action();
-		}
+		key = setInterval(function() {
+			if (inGame) {
+				switch (evento.keyCode) {
+					case 40:
+						handler.down();
+						break;
+					case 38:
+						handler.up();
+						break;
+					case 37:
+						handler.left();
+						break;
+					case 39:
+						handler.right();
+						break;
+				}
+				if (event.key == " ") {
+					handler.action();
+				}
+			}
+		}, 150);
 	}
+}
+
+function keyReleased() {
+    clearInterval(key);
+	key = undefined;
 }

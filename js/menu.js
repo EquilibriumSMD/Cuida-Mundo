@@ -92,7 +92,9 @@ function subMenu() {
 
 function setupMenu() {
 	tSize = 64;
-	equi = new Boneco();
+	if (equi === undefined) {
+        equi = new Boneco();
+    }
     opMenu();
 }
 
