@@ -203,12 +203,7 @@ function Boneco() {
     this.x = 12;
     this.y = 12;
     this.z = 1;
-    this.plast = 0;
-    this.vidro = 0;
-    this.papel = 0;
-    this.metal = 0;
-    this.lixoC = 0;
-    this.total = 0;
+    this.lixo = [];
 
     //animacao    
     var spritePersonagem = new createjs.SpriteSheet({
@@ -273,42 +268,16 @@ function Boneco() {
     }
     this.action = function() {
         if (tiles[this.x][this.y][this.z].tType == "lixo") {
-            switch (tiles[this.x][this.y][this.z].tId) {
-                case 0:
-                    this.lixoC++;
-                    break;
-                case 1:
-                case 2:
-                case 3:
-                    this.plast++;
-                    break;
-                case 4:
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                    this.vidro++;
-                    break;
-                case 9:
-                case 10:
-                case 11:
-                    this.metal++;
-                    break;
-                case 12:
-                case 13:
-                case 14:
-                case 15:
-                    this.papel++;
-                    break;
-            }
+            this.lixo.push(tiles[this.x][this.y][this.z].tId);
             stage.removeChild(tiles[this.x][this.y][this.z].img);
             tiles[this.x][this.y][this.z] = new Tile("void", 0, x, y, z);
-            this.total++;
             this.score();
         }
     }
     this.score = function() {
-        lixoC.innerHTML = this.total;
+        lixoC.innerHTML = this.lixo.length;
+		if(this.lixo.length == total)
+			Separar();
     }
 }
 
