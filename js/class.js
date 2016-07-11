@@ -147,6 +147,9 @@ function main() {
         id: "floor1",
         src: "img/floor1.png"
     }, {
+        id: "floor-casa",
+        src: "img/floor-casa.png"
+    }, {
         id: "wall0",
         src: "img/wall0.png"
     }, {
@@ -161,6 +164,18 @@ function main() {
     }, {
         id: "wall4",
         src: "img/wall4.png"
+    }, {
+        id: "wall-casa",
+        src: "img/wall-casa.png"
+    }, {
+        id: "wall-casa2",
+        src: "img/wall-casa2.png"
+    }, {
+        id: "wall-casa3",
+        src: "img/wall-casa3.png"
+    }, {
+        id: "wall-balcao",
+        src: "img/wall-balcao.png"
     }, {
         id: "stairs",
         src: "img/stairs.png"
@@ -308,18 +323,10 @@ function Tile(type, id, x, y, z) {
         this.img.x = treesholdX(x, y);
         this.img.y = treesholdY(x, y, z);
     }
-    //this.adjustOffset = function() {
-    //	createjs.Tween.get(this.img, {
-    //        loop: false
-    //    }).to({
-    //        x: treesholdX(this.x, this.y),
-    //        y: treesholdY(this.x, this.y, this.z)
-    //    }, 150, createjs.Ease.getPowInOut(2));
-    //}
 }
 
 function Fase(fase, create, ratio) {
-    //this.dojo = [];
+    this.dojo = [];
     if (ratio === undefined) {
         this.ratio = 0.5;
     } else {
@@ -343,39 +350,72 @@ function Fase(fase, create, ratio) {
                 equi.y = 15;
                 for (x = 0; x < 3; x++) {
                     for (y = 5; y < 9; y++) {
-                        tiles[x][y][4] = new Tile("floor", 0, x, y, 4);
+                        tiles[x][y][4] = new Tile("floor", "-casa", x, y, 4);
                     }
                 }
+				for (x = 0; x < 3; x++) {
+                    for (y = 5; y < 9; y++) {
+						if (Math.random() < this.ratio) {
+                            tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
+                            total++;
+                        }                    }
+                }
                 for (y = 5; y < 13; y++) {
-                    tiles[3][y][4] = new Tile("floor", 0, 3, y, 4);
+                    tiles[3][y][4] = new Tile("floor", "-casa", 3, y, 4);
                 }
                 for (x = 4; x < 7; x++) {
                     for (y = 3; y < 13; y++) {
-                        tiles[x][y][4] = new Tile("floor", 0, x, y, 4);
+                        tiles[x][y][4] = new Tile("floor", "-casa", x, y, 4);
                     }
                 }
                 tiles[7][7][4] = new Tile("stair", "s", 7, 7, 4);
                 for (x = 11; x < 21; x++) {
                     for (y = 1; y < 19; y++) {
-                        tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
+                        tiles[x][y][0] = new Tile("floor", "-casa", x, y, 0);
                     }
                 }
                 for (x = 11; x < 16; x++) {
-                    tiles[x][3][1] = new Tile("wall", 0, x, 3, 1);
-                    tiles[x][3][2] = new Tile("wall", 0, x, 3, 2);
+                    tiles[x][3][1] = new Tile("wall", "-casa", x, 3, 1);
+                    tiles[x][3][2] = new Tile("wall", "-casa", x, 3, 2);
                 }
                 for (x = 16; x < 21; x++) {
-                    tiles[x][0][0] = new Tile("wall", 0, x, 0, 0);
-                    tiles[x][0][1] = new Tile("wall", 0, x, 0, 1);
-                    tiles[x][0][2] = new Tile("wall", 0, x, 0, 2);
+                    tiles[x][0][0] = new Tile("wall", "-casa", x, 0, 0);
+                    tiles[x][0][1] = new Tile("wall", "-casa", x, 0, 1);
+                    tiles[x][0][2] = new Tile("wall", "-casa", x, 0, 2);
                 }
-                for (x = 11; x < 16; x++) {
-                    tiles[x][13][1] = new Tile("wall", 0, x, 13, 1);
-                    tiles[x][13][2] = new Tile("wall", 0, x, 13, 2);
+                for (x = 11; x < 15; x++) {
+                    tiles[x][12][1] = new Tile("wall", "-casa", x, 12 - 0.18, 1);
+                    tiles[x][12][2] = new Tile("wall", "-casa", x, 12 - 0.18, 2);
                 }
-                for (x = 16; x < 20; x++) {
-                    tiles[x][11][1] = new Tile("wall", 0, x, 11, 1);
-                    tiles[x][11][2] = new Tile("wall", 0, x, 11, 2);
+                for (x = 15; x < 20; x++) {
+                    tiles[x][10][1] = new Tile("wall", "-casa", x, 10 - 0.18, 1);
+                    tiles[x][10][2] = new Tile("wall", "-casa", x, 10 - 0.18, 2);
+                }
+                //para consertar
+                for (y = 1; y < 4; y++) {
+                    tiles[16][y][1] = new Tile("wall", "-casa2", 16, y, 1);
+                    tiles[16][y][2] = new Tile("wall", "-casa2", 16, y, 2);
+                }
+                for (y = 10; y < 12; y++) {
+                    tiles[14][y][1] = new Tile("wall", "-casa3", 14 + 0.28, y + 0.09, 1);
+                    tiles[14][y][2] = new Tile("wall", "-casa3", 14 + 0.28, y + 0.09, 2);
+                }
+                for (y = 11; y < 13; y++) {
+                    tiles[17][y][1] = new Tile("wall", "-casa2", 17, y - 0.4, 1);
+                    tiles[17][y][2] = new Tile("wall", "-casa2", 17, y - 0.4, 2);
+                }
+                //area balcao
+                for (y = 18; y < 19; y++) {
+                    tiles[13][y][1] = new Tile("wall", "-casa2", 13 - 0.25, y, 1);
+                    tiles[13][y][2] = new Tile("wall", "-casa2", 13 - 0.25, y, 2);
+                }
+                for (y = 17; y < 18; y++) {
+                    tiles[12][y][1] = new Tile("wall", "-casa3", 12 + 0.28, y, 1);
+                    tiles[12][y][2] = new Tile("wall", "-casa3", 12 + 0.28, y, 2);
+                }
+                for (y = 18; y < 19; y++) {
+                    tiles[14][y][1] = new Tile("wall", "-balcao", 14, y, 1);
+                    tiles[14][y][2] = new Tile("wall", "-balcao", 14, y, 2);
                 }
                 for (x = 11; x < 16; x++) {
                     for (y = 1; y < 3; y++) {
@@ -491,6 +531,7 @@ function Fase(fase, create, ratio) {
         }
     }
     this.load = function() {
+		tiles = this.dojo.slice(0);
         for (x = 0; x < 24; x++) {
             for (y = 0; y < 24; y++) {
                 for (z = 0; z < 7; z++) {
@@ -501,26 +542,11 @@ function Fase(fase, create, ratio) {
                 }
             }
         }
-        //if (treesholdX(equi.x,equi.y) < 151){
-        //	offsetX += 150;
-        //}
-        //if (treesholdX(equi.x,equi.y) > 1129){
-        //	offsetX -= 150;
-        //}
-        //if (treesholdY(equi.x,equi.y,equi.z) < 151){
-        //	offsetY += 150;
-        //}
-        //if (treesholdY(equi.x,equi.y,equi.z) > 649 ){
-        //	offsetY -= 150;
-        //}
-        //for (x = 0; x < 24; x++) {
-        //	for (y = 0; y < 24; y++) {
-        //		for (z = 0; z < 7; z++) {
-        //            tiles[x][y][z].adjustOffset();
-        //        }
-        //    }
-        //}
     }
+	
+	this.close = function() {
+		this.dojo = tiles.slice(0);
+		}
 }
 
 function Sep(id) {
