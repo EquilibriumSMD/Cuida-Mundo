@@ -6,16 +6,14 @@ var inMenu = true;
 var inSubMenu = true;
 var offsetX = 0;
 var offsetY = 0;
-
 window.onload = function() {
-    main();	
+    main();
     //jogando as funções de cada botão
     stage.canvas.addEventListener("click", function(e) {
         var canvasX = document.getElementById("defaultCanvas0").offsetLeft;
         var canvasY = document.getElementById("defaultCanvas0").offsetTop;
         var clickX = e.clientX - canvasX;
         var clickY = e.clientY - canvasY;
-
         if (inMenu) {
             if (dist(clickX, clickY, btnEco.x + 32, btnEco.y + 32) < 32) {
                 eco();
@@ -25,16 +23,15 @@ window.onload = function() {
                 play();
             }
         }
-		if (inSubMenu) {
-			if (clickX > btnSobre.x && clickX < btnSobre.x + btnSobre.getBounds().width && clickY > btnSobre.y && clickY < btnSobre.y + btnSobre.getBounds().height) {
-				conheca(); 
-			} else if (clickX > btnParticipar.x && clickX < btnParticipar.x + btnParticipar.getBounds().width && clickY > btnParticipar.y && clickY < btnParticipar.y + btnParticipar.getBounds().height) {
-				participe();
-			} else if (clickX > btnCreditos.x && clickX < btnCreditos.x + btnCreditos.getBounds().width && clickY > btnCreditos.y && clickY < btnCreditos.y + btnCreditos.getBounds().height) {
+        if (inSubMenu) {
+            if (clickX > btnSobre.x && clickX < btnSobre.x + btnSobre.getBounds().width && clickY > btnSobre.y && clickY < btnSobre.y + btnSobre.getBounds().height) {
+                conheca();
+            } else if (clickX > btnParticipar.x && clickX < btnParticipar.x + btnParticipar.getBounds().width && clickY > btnParticipar.y && clickY < btnParticipar.y + btnParticipar.getBounds().height) {
+                participe();
+            } else if (clickX > btnCreditos.x && clickX < btnCreditos.x + btnCreditos.getBounds().width && clickY > btnCreditos.y && clickY < btnCreditos.y + btnCreditos.getBounds().height) {
                 materiais();
-			}
-		}
-        
+            }
+        }
     });
     //jogo
     $(".scores").hide();
@@ -44,19 +41,18 @@ window.onload = function() {
 }
 
 function loading(e) {
-	var circle = new createjs.Shape();
-	circle.graphics.beginFill("#00FF7F").drawCircle(0, 0, 755 * e.progress);
-	circle.x = 640;
-	circle.y = 400;
-	stage.addChild(circle);
-	stage.update();
+    var circle = new createjs.Shape();
+    circle.graphics.beginFill("#00FF7F").drawCircle(0, 0, 755 * e.progress);
+    circle.x = 640;
+    circle.y = 400;
+    stage.addChild(circle);
+    stage.update();
 }
 
 function main() {
     stage = new createjs.Stage("defaultCanvas0");
     stage.canvas.width = 1280;
     stage.canvas.height = 800;
-
     // Preload     
     sonGoqueue.on("complete", setupMenu, this);
     sonGoqueue.on("progress", loading, this);
@@ -168,10 +164,10 @@ function main() {
     }, {
         id: "stairs",
         src: "img/stairs.png"
-    },{
+    }, {
         id: "stair0",
         src: "img/stair0.png"
-    },{
+    }, {
         id: "sprite",
         src: "img/sprite.png"
     }]);
@@ -185,7 +181,6 @@ function draw() {
 function dist(x1, y1, x2, y2) {
     return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 }
-
 // Usado pro jogo
 var equi;
 var tSize;
@@ -204,7 +199,6 @@ function Boneco() {
     this.y = 12;
     this.z = 1;
     this.lixo = [];
-
     //animacao    
     var spritePersonagem = new createjs.SpriteSheet({
         images: [sonGoqueue.getResult("sprite")],
@@ -223,39 +217,37 @@ function Boneco() {
             "up": [16, 19, "idleU", 1]
         }
     });
-
     this.sprite = new createjs.Sprite(spritePersonagem, "idleD");
-
     this.up = function() {
-        if (this.y > 0 && tiles[this.x][this.y - 1][this.z - 1].tType == "floor" && tiles[this.x][this.y - 1][this.z].tType != "wall"){
-			this.y--;
-		}
+        if (this.y > 0 && tiles[this.x][this.y - 1][this.z - 1].tType == "floor" && tiles[this.x][this.y - 1][this.z].tType != "wall") {
+            this.y--;
+        }
         this.tween();
     }
     this.down = function() {
-        if (this.y < 23 && tiles[this.x][this.y + 1][this.z - 1].tType == "floor" && tiles[this.x][this.y + 1][this.z].tType != "wall"){
-			this.y++;
-		}
+        if (this.y < 23 && tiles[this.x][this.y + 1][this.z - 1].tType == "floor" && tiles[this.x][this.y + 1][this.z].tType != "wall") {
+            this.y++;
+        }
         this.tween();
     }
     this.left = function() {
-        if (this.x > 0 && tiles[this.x - 1][this.y][this.z - 1].tType == "floor" && tiles[this.x - 1][this.y][this.z].tType != "wall"){
-			this.x--;
-		}
-		if (tiles[this.x - 1][this.y][this.z].tType == "stair") {
-			this.x--;
-			this.z++;
-		}
+        if (this.x > 0 && tiles[this.x - 1][this.y][this.z - 1].tType == "floor" && tiles[this.x - 1][this.y][this.z].tType != "wall") {
+            this.x--;
+        }
+        if (tiles[this.x - 1][this.y][this.z].tType == "stair") {
+            this.x--;
+            this.z++;
+        }
         this.tween();
     }
     this.right = function() {
-        if (this.x < 23 && tiles[this.x + 1][this.y][this.z - 1].tType == "floor" && tiles[this.x + 1][this.y][this.z].tType != "wall"){
-			this.x++;
-		}
-		if (tiles[this.x + 1][this.y][this.z - 1].tType == "stair") {
-			this.x++;
-			this.z--;
-		}
+        if (this.x < 23 && tiles[this.x + 1][this.y][this.z - 1].tType == "floor" && tiles[this.x + 1][this.y][this.z].tType != "wall") {
+            this.x++;
+        }
+        if (tiles[this.x + 1][this.y][this.z - 1].tType == "stair") {
+            this.x++;
+            this.z--;
+        }
         this.tween();
     }
     this.tween = function() {
@@ -276,8 +268,8 @@ function Boneco() {
     }
     this.score = function() {
         lixoC.innerHTML = this.lixo.length;
-		if(this.lixo.length == total)
-			Separar();
+        if (this.lixo.length == total)
+            Separar();
     }
 }
 
@@ -317,7 +309,7 @@ function Tile(type, id, x, y, z) {
         this.img.y = treesholdY(x, y, z);
     }
     //this.adjustOffset = function() {
-	//	createjs.Tween.get(this.img, {
+    //	createjs.Tween.get(this.img, {
     //        loop: false
     //    }).to({
     //        x: treesholdX(this.x, this.y),
@@ -328,10 +320,10 @@ function Tile(type, id, x, y, z) {
 
 function Fase(fase, create, ratio) {
     //this.dojo = [];
-	if (ratio === undefined) {
-		this.ratio = 0.5;
+    if (ratio === undefined) {
+        this.ratio = 0.5;
     } else {
-		this.ratio = ratio;
+        this.ratio = ratio;
     }
     if (!create) {
         //Cria a Matriz de espaços vazios
@@ -402,83 +394,83 @@ function Fase(fase, create, ratio) {
                     }
                 }
                 break;
-			//Fase da Escola!
-			case "escola":
+                //Fase da Escola!
+            case "escola":
                 equi.x = 15;
                 equi.y = 15;
-				for (x = 0; x < 18; x++) {
+                for (x = 0; x < 18; x++) {
                     for (y = 0; y < 6; y++) {
                         tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
                     }
                 }
-				for (x = 3; x < 9; x++) {
+                for (x = 3; x < 9; x++) {
                     for (y = 2; y < 4; y++) {
                         tiles[x][y][0] = new Tile("floor", 1, x, y, 0);
                     }
                 }
-				for (x = 10; x < 15; x++) {
+                for (x = 10; x < 15; x++) {
                     for (y = 6; y < 9; y++) {
                         tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
                     }
                 }
-				for (x = 8; x < 18; x++) {
+                for (x = 8; x < 18; x++) {
                     for (y = 9; y < 17; y++) {
                         tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
                     }
                 }
-				for (x = 9; x < 17; x++) {
+                for (x = 9; x < 17; x++) {
                     for (y = 10; y < 16; y++) {
                         tiles[x][y][0] = new Tile("floor", 1, x, y, 0);
                     }
                 }
-				for (x = 0; x < 7; x++) {
+                for (x = 0; x < 7; x++) {
                     for (y = 9; y < 20; y++) {
                         tiles[x][y][1] = new Tile("floor", 0, x, y, 1);
                     }
                 }
-				for (y = 9; y < 20; y++) {
-					tiles[0][y][2] = new Tile("wall", 1, 0, y, 2);
-					tiles[0][y][3] = new Tile("wall", 1, 0, y, 3);
-				}
-				tiles[0][12][3] = new Tile("wall", 4, 0, 12, 3);
-				tiles[0][14][3] = new Tile("wall", 4, 0, 14, 3);
-				tiles[0][16][3] = new Tile("wall", 4, 0, 16, 3);
-				tiles[7][15][1] = new Tile("stair", 0, 7, 15, 1);
-				// Lixos
-				for (x = 0; x < 18; x++) {
+                for (y = 9; y < 20; y++) {
+                    tiles[0][y][2] = new Tile("wall", 1, 0, y, 2);
+                    tiles[0][y][3] = new Tile("wall", 1, 0, y, 3);
+                }
+                tiles[0][12][3] = new Tile("wall", 4, 0, 12, 3);
+                tiles[0][14][3] = new Tile("wall", 4, 0, 14, 3);
+                tiles[0][16][3] = new Tile("wall", 4, 0, 16, 3);
+                tiles[7][15][1] = new Tile("stair", 0, 7, 15, 1);
+                // Lixos
+                for (x = 0; x < 18; x++) {
                     for (y = 0; y < 6; y++) {
-						if(Math.random() < this.ratio){
-							tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
-							total++;
-						}
+                        if (Math.random() < this.ratio) {
+                            tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
+                            total++;
+                        }
                     }
                 }
-				for (x = 8; x < 18; x++) {
+                for (x = 8; x < 18; x++) {
                     for (y = 9; y < 17; y++) {
-						if(Math.random() < this.ratio){
-							tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
-							total++;
-						}
+                        if (Math.random() < this.ratio) {
+                            tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
+                            total++;
+                        }
                     }
                 }
-				for (x = 10; x < 15; x++) {
+                for (x = 10; x < 15; x++) {
                     for (y = 6; y < 9; y++) {
-						if(Math.random() < this.ratio){
-							tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
-							total++;
-						}
+                        if (Math.random() < this.ratio) {
+                            tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
+                            total++;
+                        }
                     }
                 }
-				for (x = 1; x < 7; x++) {
+                for (x = 1; x < 7; x++) {
                     for (y = 9; y < 20; y++) {
-						if(Math.random() < this.ratio){
-							tiles[x][y][2] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 2);
-							total++;
-						}
+                        if (Math.random() < this.ratio) {
+                            tiles[x][y][2] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 2);
+                            total++;
+                        }
                     }
                 }
-				break;
-            //Fase quadradinha de teste
+                break;
+                //Fase quadradinha de teste
             default:
                 equi.x = 15;
                 equi.y = 15;
@@ -499,9 +491,9 @@ function Fase(fase, create, ratio) {
         }
     }
     this.load = function() {
-		for (x = 0; x < 24; x++) {
-			for (y = 0; y < 24; y++) {
-				for (z = 0; z < 7; z++) {
+        for (x = 0; x < 24; x++) {
+            for (y = 0; y < 24; y++) {
+                for (z = 0; z < 7; z++) {
                     if (equi.x == x && equi.y == y) {
                         stage.addChild(equi.sprite);
                     }
@@ -509,24 +501,69 @@ function Fase(fase, create, ratio) {
                 }
             }
         }
-		//if (treesholdX(equi.x,equi.y) < 151){
-		//	offsetX += 150;
-		//}
-		//if (treesholdX(equi.x,equi.y) > 1129){
-		//	offsetX -= 150;
-		//}
-		//if (treesholdY(equi.x,equi.y,equi.z) < 151){
-		//	offsetY += 150;
-		//}
-		//if (treesholdY(equi.x,equi.y,equi.z) > 649 ){
-		//	offsetY -= 150;
-		//}
-		//for (x = 0; x < 24; x++) {
-		//	for (y = 0; y < 24; y++) {
-		//		for (z = 0; z < 7; z++) {
+        //if (treesholdX(equi.x,equi.y) < 151){
+        //	offsetX += 150;
+        //}
+        //if (treesholdX(equi.x,equi.y) > 1129){
+        //	offsetX -= 150;
+        //}
+        //if (treesholdY(equi.x,equi.y,equi.z) < 151){
+        //	offsetY += 150;
+        //}
+        //if (treesholdY(equi.x,equi.y,equi.z) > 649 ){
+        //	offsetY -= 150;
+        //}
+        //for (x = 0; x < 24; x++) {
+        //	for (y = 0; y < 24; y++) {
+        //		for (z = 0; z < 7; z++) {
         //            tiles[x][y][z].adjustOffset();
         //        }
         //    }
         //}
     }
+}
+
+function Sep(id) {
+    this.sId = id;
+    switch (this.sId) {
+        case 0:
+            this.sType = "Bateria";
+            break;
+        case 1:
+        case 2:
+        case 3:
+            this.sType = "Plastico";
+            break;
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+            this.sType = "Vidro";
+            break;
+        case 9:
+        case 10:
+        case 11:
+            this.sType = "Metal";
+            break;
+        case 12:
+        case 13:
+        case 14:
+            this.sType = "Papel";
+            break;
+        case 15:
+            this.sType = "Tetrapak";
+            break;
+    }
+    this.img = new createjs.Bitmap(sonGoqueue.getResult("lixo" + this.sId));
+    this.img.scaleX = 2;
+    this.img.scaleY = 2;
+    stage.addChild(this.img);
+    this.img.x = Math.random() * 1000 + 140;
+    this.img.y = Math.random() * 700;
+    this.img.on("pressmove", function(evt) {
+        evt.target.x = evt.stageX - tSize;
+        evt.target.y = evt.stageY - tSize;
+    });
+    this.img.on("pressup", checkSeparar)
 }
