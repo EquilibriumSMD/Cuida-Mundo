@@ -17,6 +17,7 @@ mainGame = function() {
         faseAtual[1] = new Fase("escola", null, 0.1);
         faseAtual[2] = new Fase("praia", null, 0.1);
 		//faseIndex = Math.floor(Math.random() * 3);
+		faseIndex = 0;
         faseAtual[faseIndex].load();
     } else {
 		faseIndex = Math.floor(Math.random() * 3);
