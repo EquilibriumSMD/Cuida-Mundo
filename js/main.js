@@ -7,15 +7,17 @@ var buttonAction
 var lixoC, lixoT;
 var total = 0;
 var personagem;
-var faseAtual;
+var faseAtual = [];
 var GreenScore = 0;
 var GoldScore = 0;
 mainGame = function() {
-    if (faseAtual === undefined) {
-        faseAtual = new Fase("praia", null, 0.1);
-        faseAtual.load();
+    if (faseAtual !== []) {
+        faseAtual[0] = new Fase("casa", null, 0.1);
+        faseAtual[1] = new Fase("escola", null, 0.1);
+        faseAtual[2] = new Fase("praia", null, 0.1);
+        faseAtual[Math.floor(Math.random() * 3)].load();
     } else {
-        faseAtual.load();
+        faseAtual[Math.floor(Math.random() * 3)].load();
     }
     lixoT.innerHTML = "/" + total;
     handler = new ButtonHandler();
