@@ -12,7 +12,7 @@ var GreenScore = 0;
 var GoldScore = 0;
 mainGame = function() {
     if (faseAtual === undefined) {
-        faseAtual = new Fase("casa", null, 0.1);
+        faseAtual = new Fase("praia", null, 0.1);
         faseAtual.load();
     } else {
         faseAtual.load();

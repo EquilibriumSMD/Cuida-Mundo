@@ -9,8 +9,22 @@ var btnSobre;
 var btnParticipar;
 var btnCreditos;
 var btVoltar;
+var tabela;
 var archivement = false;
 createjs.Ticker.addEventListener("tick", draw);
+
+
+function hideTabela(){
+    tabela.visible = false;
+}
+function showTabela(){
+    tabela.visible = true;
+    tabela.x = 250 + telaOffset;
+    tabela.y = 800;
+    createjs.Tween.get(tabela).to({
+        y: 355
+    }, 1000); //, createjs.Ease.quadInOut);
+}
 
 function opMenu() {
     $(".scores").hide();
@@ -186,6 +200,8 @@ function conheca() {
     btnSobre.y = 185;
     stage.addChild(btnSobre);
     
+    hideTabela();
+    
     btVoltarAdd();
     var showTxt = new createjs.Text("Os EcoPontos são contêineres colocados em pontos importantes de cada regional, para que a população possa depositar o lixo, de forma selecionada, contribuindo para o meio ambiente e recebendo, além disso, vantagens sociais, como descontos nas contas de água e luz ou créditos no cartão do transporte público, por exemplo.", '20px Josefin Sans', '#fff');
     showTxt.x = 300;
@@ -213,6 +229,7 @@ function participe() {
     btnParticipar.x = 429;
     btnParticipar.y = 185;
     stage.addChild(btnParticipar);
+    hideTabela();
     
     btVoltarAdd();
     var showTxt = new createjs.Text('Para adquirir os créditos ou descontos basta que o Fortalezense siga dicas simples: \n' +
@@ -246,11 +263,5 @@ function materiais() {
     stage.addChild(btnCreditos);
     
     btVoltarAdd();
-    tabela = new createjs.Bitmap(sonGoqueue.getResult("bg-tabela"));
-    tabela.x = 250;
-    tabela.y = 800;
-    stage.addChild(tabela);
-    createjs.Tween.get(tabela).to({
-        y: 355
-    }, 1000); //, createjs.Ease.quadInOut);
+    showTabela(); 
 }

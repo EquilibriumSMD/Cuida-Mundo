@@ -88,6 +88,58 @@ body {
     margin: 0 auto;
 }
 
+#tabela{ 
+    width: 800px; 
+    height: 286px;
+}
+.tab-tit{
+    height: 46px;
+    line-height: 46px;
+    float: left;
+    display: inline;
+    width: 100%;
+    text-align: center;
+    color: #008451;
+    font-family: 'Josefin Sans';
+    font-weight: normal;
+    font-size: 18px;
+    background: url('../img/tab-tit.png') repeat;
+    margin-bottom: 5px;
+}
+.tab-subtit{
+    height: 46px;
+    line-height: 46px;
+    margin: 0 5px 5px 0;
+    float: left;
+    display: inline;
+    width: 174px;
+    text-align: center;
+    color: #008451;
+    font-family: 'Josefin Sans';
+    font-weight: normal;
+    font-size: 16px;
+    background: url('../img/tab-tit.png') repeat;
+}
+.tab-content{
+    height: 46px;
+    float: left;
+    display: inline-table;
+    width: 621px;
+    margin-bottom: 5px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    color: #008451;
+    font-family: 'Josefin Sans';
+    font-weight: normal;
+    font-size: 16px;
+    background: url('../img/tab-content.png') repeat;
+}
+.tab-content p{
+    display: table-cell;
+    vertical-align: middle;
+}
+    
+
 @media (max-width: 768px) {
     #defaultCanvas0{
         position: relative;
