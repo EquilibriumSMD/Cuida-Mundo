@@ -6,12 +6,19 @@ var inMenu = true;
 var inSubMenu = true;
 var offsetX = 0;
 var offsetY = 0;
+var telaOffset;
+
 window.onload = function() {
+    telaOffset = document.getElementById("defaultCanvas0").offsetLeft;
+    console.log("Offset da Tela: ",telaOffset);
+    
     main();
     //jogando as funções de cada botão
     stage.canvas.addEventListener("click", function(e) {
         var canvasX = document.getElementById("defaultCanvas0").offsetLeft;
         var canvasY = document.getElementById("defaultCanvas0").offsetTop;
+        
+        
         var clickX = e.clientX - canvasX;
         var clickY = e.clientY - canvasY;
         if (inMenu) {
@@ -53,6 +60,11 @@ function main() {
     stage = new createjs.Stage("defaultCanvas0");
     stage.canvas.width = 1280;
     stage.canvas.height = 800;
+    
+    tabela = new createjs.DOMElement(document.getElementById("tabela"));
+    tabela.visible = false;
+    stage.addChild(tabela);
+    
     // Preload     
     sonGoqueue.on("complete", setupMenu, this);
     sonGoqueue.on("progress", loading, this);
