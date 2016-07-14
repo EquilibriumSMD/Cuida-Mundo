@@ -8,9 +8,24 @@ var offsetX = 0;
 var offsetY = 0;
 var telaOffset;
 
+var soundMenu;
+var soundFase;
+
+function loadSound() {
+    createjs.Sound.registerSound("sons/som-menu.mp3", "guitar");
+    createjs.Sound.registerSound("sons/som-fase.mp3", "piano");
+    
+    var configs = new createjs.PlayPropsConfig().set({interrupt: createjs.Sound.INTERRUPT_ANY, loop: -1, volume: 0.5});
+    
+    soundMenu = createjs.Sound.play("guitar", configs);
+    soundFase = createjs.Sound.play("piano", configs);
+}
+
 window.onload = function() {
     
     main();
+    loadSound();
+    
     //jogando as funções de cada botão
     stage.canvas.addEventListener("click", function(e) {
         var canvasX = document.getElementById("defaultCanvas0").offsetLeft;

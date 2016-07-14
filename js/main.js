@@ -15,7 +15,7 @@ mainGame = function() {
         faseAtual[0] = new Fase("casa", null, 0.1);
         faseAtual[1] = new Fase("escola", null, 0.1);
         faseAtual[2] = new Fase("praia", null, 0.1);
-        faseAtual[Math.floor(Math.random() * 3)].load();
+        faseAtual[0].load();
     } else {
         faseAtual[Math.floor(Math.random() * 3)].load();
     }

@@ -107,6 +107,8 @@ function setupMenu() {
         equi = new Boneco();
     }
     opMenu();
+    soundMenu.play();
+    soundFase.stop();
 }
 
 function btVoltarAdd() {
@@ -138,6 +140,9 @@ function play() {
         alpha: 1
     }, 600).call(mainGame);
     btVoltarAdd();
+    
+    soundMenu.stop();
+    soundFase.play();
 }
 
 function mais() {
