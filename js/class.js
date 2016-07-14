@@ -448,6 +448,30 @@ function Fase(fase, create, ratio) {
                 }
             }
             
+            //para consertar do topo
+            for (y = 4; y < 7; y++) {
+                this.tiles[0][y][5] = new Tile("wall", "-casa2", 0-0.2, y, 5);
+                this.tiles[0][y][6] = new Tile("wall", "-casa2", 0-0.2, y, 6);
+            }    
+            for (x = 0; x < 4; x++) {
+                this.tiles[x][4][5] = new Tile("wall", "-casa", x, 4+0.25, 5);
+                this.tiles[x][4][6] = new Tile("wall", "-casa", x, 4+0.25, 6);
+            }
+            for (y = 3; y < 5; y++) {
+                this.tiles[4][y][5] = new Tile("wall", "-casa2", 4-0.3, y, 5);
+                this.tiles[4][y][6] = new Tile("wall", "-casa2", 4-0.3, y, 6);
+            }
+            for (x = 4; x < 7; x++) {
+                this.tiles[x][2][4] = new Tile("wall", "-casa", x, 2+0.25, 4);
+                this.tiles[x][2][5] = new Tile("wall", "-casa", x, 2+0.25, 5);
+                this.tiles[x][2][6] = new Tile("wall", "-casa", x, 2+0.25, 6);
+            }
+            for (y = 9; y < 13; y++) {
+                this.tiles[3][y][5] = new Tile("wall", "-casa2", 3-0.25, y, 5);
+                this.tiles[3][y][6] = new Tile("wall", "-casa2", 3-0.25, y, 6);
+            }
+                
+            
             //para consertar
             for (x = 11; x < 16; x++) {
                 this.tiles[x][2][1] = new Tile("wall", "-casa", x, 2+0.25, 1);
@@ -463,15 +487,14 @@ function Fase(fase, create, ratio) {
                 this.tiles[x][0][2] = new Tile("wall", "-casa", x-0.24, 0, 2);
             }
 
-            //parede do meio
-                
+            //parede do meio   
             for (y = 10; y < 13; y++) {
-                this.tiles[14][y][1] = new Tile("wall", "-casa3", 14 + 0.28, y-0.75, 1);
-                this.tiles[14][y][2] = new Tile("wall", "-casa3", 14 + 0.28, y-0.75, 2);
+                this.tiles[14][y][1] = new Tile("wall", "-casa3", 14 + 0.28, y, 1);
+                this.tiles[14][y][2] = new Tile("wall", "-casa3", 14 + 0.28, y, 2);
             }
             for (x = 11; x < 15; x++) {
-                this.tiles[x][12][1] = new Tile("wall", "-casa", x, 12+0.2, 1);
-                this.tiles[x][12][2] = new Tile("wall", "-casa", x, 12+0.2, 2);
+                this.tiles[x][12][1] = new Tile("wall", "-casa", x, 12-0.3, 1);
+                this.tiles[x][12][2] = new Tile("wall", "-casa", x, 12-0.3, 2);
             }    
             for (x = 16; x < 20; x++) {
                 this.tiles[x][10][1] = new Tile("wall", "-casa", x, 10-0.5, 1);
