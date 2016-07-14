@@ -214,6 +214,18 @@ function main() {
         id: "stairs",
         src: "img/stairs.png"
     }, {
+        id: "wall-cama",
+        src: "img/tile-cama.png"
+    }, {
+        id: "wall-banco",
+        src: "img/banco.png"
+    }, {
+        id: "wall-sofa",
+        src: "img/sofa.png"
+    }, {
+        id: "wall-mesa",
+        src: "img/mesa.png"
+    }, {
         id: "stair0",
         src: "img/stair0.png"
     }, {
@@ -441,7 +453,7 @@ function Fase(fase, create, ratio) {
                     this.tiles[x][y][4] = new Tile("floor", "-casa", x, y, 4);
                 }
             }
-            this.tiles[7][7][4] = new Tile("stair", "s", 7, 7, 4);
+            this.tiles[7][10][5] = new Tile("stair", "s", 7, 10, 5-0.3);
             for (x = 11; x < 21; x++) {
                 for (y = 1; y < 19; y++) {
                     this.tiles[x][y][0] = new Tile("floor", "-casa", x, y, 0);
@@ -470,7 +482,20 @@ function Fase(fase, create, ratio) {
                 this.tiles[3][y][5] = new Tile("wall", "-casa2", 3-0.25, y, 5);
                 this.tiles[3][y][6] = new Tile("wall", "-casa2", 3-0.25, y, 6);
             }
+            
+            //cama
+//            this.tiles[1][6][6] = new Tile("wall", "-cama", 1, 6, 6);
                 
+            //banco
+//            for(y = 6; y < 7; y++){
+//                this.tiles[12][y][1] = new Tile("wall", "-sofa", 12+0.2, y, 1);
+//            }
+                
+            //mesa
+            this.tiles[18][2][1] = new Tile("wall", "-mesa", 18, 2, 1);
+                
+            //mesa
+            this.tiles[16][16][1] = new Tile("wall", "-mesa", 16, 16, 1);    
             
             //para consertar
             for (x = 11; x < 16; x++) {
@@ -486,15 +511,6 @@ function Fase(fase, create, ratio) {
                 this.tiles[x][0][2] = new Tile("wall", "-casa", x-0.05, 0+0.25, 2);
             }    
                 
-//            for (y = 1; y < 3; y++) {
-//                this.tiles[16][y][1] = new Tile("wall", "-casa2", 16-0.3, y, 1);
-//                this.tiles[16][y][2] = new Tile("wall", "-casa2", 16-0.3, y, 2);
-//            }
-//            for (x = 16; x < 21; x++) {
-//                this.tiles[x][0][0] = new Tile("wall", "-casa", x-0.24, 0, 0);
-//                this.tiles[x][0][1] = new Tile("wall", "-casa", x-0.24, 0, 1);
-//                this.tiles[x][0][2] = new Tile("wall", "-casa", x-0.24, 0, 2);
-//            }
 
             //parede do meio   
             for (y = 10; y < 13; y++) {
@@ -523,9 +539,6 @@ function Fase(fase, create, ratio) {
             for (y = 17; y < 18; y++) {
                 this.tiles[12][y][1] = new Tile("wall", "-casa3", 12 + 0.28, y, 1);
                 this.tiles[12][y][2] = new Tile("wall", "-casa3", 12 + 0.28, y, 2);
-            }
-            for (y = 18; y < 20; y++) {
-                this.tiles[14][y][1] = new Tile("wall", "-balcao", 14, y, 1);
             }
             for (x = 11; x < 16; x++) {
                 for (y = 1; y < 3; y++) {
