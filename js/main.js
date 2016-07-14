@@ -7,7 +7,7 @@ var buttonAction
 var lixoC, lixoT;
 var personagem;
 var faseAtual = [];
-var faseIndex;
+var faseIndex = 0;
 var GreenScore = 0;
 var GoldScore = 0;
 mainGame = function() {
@@ -15,7 +15,7 @@ mainGame = function() {
         faseAtual[0] = new Fase("casa", null, 0.1);
         faseAtual[1] = new Fase("escola", null, 0.1);
         faseAtual[2] = new Fase("praia", null, 0.1);
-		faseIndex = Math.floor(Math.random() * 3);
+		//faseIndex = Math.floor(Math.random() * 3);
         faseAtual[faseIndex].load();
     } else {
 		faseIndex = Math.floor(Math.random() * 3);
