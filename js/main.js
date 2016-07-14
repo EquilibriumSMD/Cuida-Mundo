@@ -10,6 +10,7 @@ var faseAtual = [];
 var faseIndex;
 var GreenScore = 0;
 var GoldScore = 0;
+
 mainGame = function() {
     if (faseAtual[0] === undefined) {
         faseAtual[0] = new Fase("casa", null, 0.1);
@@ -105,8 +106,8 @@ function Separar() {
         alpha: 1
     }, 600);
     btVoltarAdd();
-    for (lixo in equi.lixo) {
-        temp = new Sep(equi.lixo[lixo]);
+    for (lixo in equi.lixo[faseIndex]) {
+        temp = new Sep(equi.lixo[faseIndex][lixo]);
     }
 }
 
