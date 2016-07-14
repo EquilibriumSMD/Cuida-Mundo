@@ -181,6 +181,11 @@ function conheca() {
         alpha: 1
     }, 600);
     subMenu();
+    btnSobre = new createjs.Bitmap(sonGoqueue.getResult("btnSobre2"));
+    btnSobre.x = 0;
+    btnSobre.y = 185;
+    stage.addChild(btnSobre);
+    
     btVoltarAdd();
     var showTxt = new createjs.Text("Os EcoPontos são contêineres colocados em pontos importantes de cada regional, para que a população possa depositar o lixo, de forma selecionada, contribuindo para o meio ambiente e recebendo, além disso, vantagens sociais, como descontos nas contas de água e luz ou créditos no cartão do transporte público, por exemplo.", '20px Josefin Sans', '#fff');
     showTxt.x = 300;
@@ -204,6 +209,11 @@ function participe() {
         alpha: 1
     }, 600);
     subMenu();
+    btnParticipar = new createjs.Bitmap(sonGoqueue.getResult("btnParticipar2"));
+    btnParticipar.x = 429;
+    btnParticipar.y = 185;
+    stage.addChild(btnParticipar);
+    
     btVoltarAdd();
     var showTxt = new createjs.Text('Para adquirir os créditos ou descontos basta que o Fortalezense siga dicas simples: \n' +
         '\n① Procurar o Ecoponto mais próximo, fazer o cadastro e receber o cartão Recicla Fortaleza; \n' +
@@ -230,6 +240,11 @@ function materiais() {
         alpha: 1
     }, 600);
     subMenu();
+    btnCreditos = new createjs.Bitmap(sonGoqueue.getResult("btnCreditos2"));
+    btnCreditos.x = 855;
+    btnCreditos.y = 185;
+    stage.addChild(btnCreditos);
+    
     btVoltarAdd();
     tabela = new createjs.Bitmap(sonGoqueue.getResult("bg-tabela"));
     tabela.x = 250;

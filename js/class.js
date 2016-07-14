@@ -69,11 +69,20 @@ function main() {
         id: "btnSobre",
         src: "img/opcao-sobre.png"
     }, {
+        id: "btnSobre2",
+        src: "img/opcao-sobre2.png"
+    }, {
         id: "btnParticipar",
         src: "img/opcao-participar.png"
     }, {
+        id: "btnParticipar2",
+        src: "img/opcao-participar2.png"
+    }, {
         id: "btnCreditos",
         src: "img/opcao-creditos.png"
+    }, {
+        id: "btnCreditos2",
+        src: "img/opcao-creditos2.png"
     }, {
         id: "menuBG",
         src: "img/menuBG.jpg"
