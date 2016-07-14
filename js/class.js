@@ -9,14 +9,14 @@ var offsetY = 0;
 var telaOffset;
 
 window.onload = function() {
-    telaOffset = document.getElementById("defaultCanvas0").offsetLeft;
-    console.log("Offset da Tela: ",telaOffset);
     
     main();
     //jogando as funções de cada botão
     stage.canvas.addEventListener("click", function(e) {
         var canvasX = document.getElementById("defaultCanvas0").offsetLeft;
         var canvasY = document.getElementById("defaultCanvas0").offsetTop;
+        telaOffset = document.getElementById("defaultCanvas0").offsetLeft;
+        console.log("Offset da Tela: ",telaOffset);
         
         
         var clickX = e.clientX - canvasX;
