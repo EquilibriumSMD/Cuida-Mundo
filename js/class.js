@@ -497,13 +497,20 @@ function Fase(fase, create, ratio) {
                     this.tiles[x][y][4] = new Tile("floor", "-casa", x, y, 4);
                 }
             }
-            this.tiles[7][10][5] = new Tile("stair", "s", 7, 10, 5-0.3);
+//<<<<<<< HEAD
+            this.tiles[7][7][4] = new Tile("stair", "s", 7, 8, 4.7);
+            this.tiles[8][7][3] = new Tile("stair", 7, 8, 7, 3);
+            this.tiles[9][7][2] = new Tile("stair", 7, 9, 7, 2);
+            this.tiles[10][7][1] = new Tile("stair", 7, 10, 7, 1);
+            this.tiles[11][7][0] = new Tile("stair", 7, 11, 7, 0);
+//=======
+            //this.tiles[7][10][5] = new Tile("stair", "s", 7, 10, 5-0.3);
+//>>>>>>> 4dde02451cef62630c40d37d53e305092f39ffa5
             for (x = 11; x < 21; x++) {
                 for (y = 1; y < 19; y++) {
                     this.tiles[x][y][0] = new Tile("floor", "-casa", x, y, 0);
                 }
             }
-            
             //para consertar do topo
             for (y = 5; y < 7; y++) {
                 this.tiles[0][y][5] = new Tile("wall", "-casa2", 0-0.2, y, 5);
