@@ -449,7 +449,7 @@ function Fase(fase, create, ratio) {
             }
             
             //para consertar do topo
-            for (y = 4; y < 7; y++) {
+            for (y = 5; y < 7; y++) {
                 this.tiles[0][y][5] = new Tile("wall", "-casa2", 0-0.2, y, 5);
                 this.tiles[0][y][6] = new Tile("wall", "-casa2", 0-0.2, y, 6);
             }    
@@ -482,10 +482,19 @@ function Fase(fase, create, ratio) {
                 this.tiles[16][y][2] = new Tile("wall", "-casa2", 16-0.3, y, 2);
             }
             for (x = 16; x < 21; x++) {
-                this.tiles[x][0][0] = new Tile("wall", "-casa", x-0.24, 0, 0);
-                this.tiles[x][0][1] = new Tile("wall", "-casa", x-0.24, 0, 1);
-                this.tiles[x][0][2] = new Tile("wall", "-casa", x-0.24, 0, 2);
-            }
+                this.tiles[x][0][1] = new Tile("wall", "-casa", x-0.05, 0+0.25, 1);
+                this.tiles[x][0][2] = new Tile("wall", "-casa", x-0.05, 0+0.25, 2);
+            }    
+                
+//            for (y = 1; y < 3; y++) {
+//                this.tiles[16][y][1] = new Tile("wall", "-casa2", 16-0.3, y, 1);
+//                this.tiles[16][y][2] = new Tile("wall", "-casa2", 16-0.3, y, 2);
+//            }
+//            for (x = 16; x < 21; x++) {
+//                this.tiles[x][0][0] = new Tile("wall", "-casa", x-0.24, 0, 0);
+//                this.tiles[x][0][1] = new Tile("wall", "-casa", x-0.24, 0, 1);
+//                this.tiles[x][0][2] = new Tile("wall", "-casa", x-0.24, 0, 2);
+//            }
 
             //parede do meio   
             for (y = 10; y < 13; y++) {
