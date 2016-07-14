@@ -5,14 +5,13 @@ var buttonLeft
 var buttonRight
 var buttonAction
 var lixoC, lixoT;
-var total = 0;
 var personagem;
 var faseAtual = [];
 var faseIndex;
 var GreenScore = 0;
 var GoldScore = 0;
 mainGame = function() {
-    if (faseAtual !== []) {
+    if (faseAtual[0] === undefined) {
         faseAtual[0] = new Fase("casa", null, 0.1);
         faseAtual[1] = new Fase("escola", null, 0.1);
         faseAtual[2] = new Fase("praia", null, 0.1);
@@ -22,7 +21,7 @@ mainGame = function() {
 		faseIndex = Math.floor(Math.random() * 3);
         faseAtual[faseIndex].load();
     }
-    lixoT.innerHTML = "/" + total;
+    lixoT.innerHTML = "/" + faseAtual[faseIndex].total;
     handler = new ButtonHandler();
     if ("true" === undefined) {
         $("#bt-Top").remove();
@@ -105,6 +104,7 @@ function Separar() {
     createjs.Tween.get(menuBG).to({
         alpha: 1
     }, 600);
+    btVoltarAdd();
     for (lixo in equi.lixo) {
         temp = new Sep(equi.lixo[lixo]);
     }

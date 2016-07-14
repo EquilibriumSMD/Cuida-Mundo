@@ -288,7 +288,7 @@ function Boneco() {
     this.x = 12;
     this.y = 12;
     this.z = 1;
-    this.lixo = [];
+    this.lixo = [[],[],[]];
     //animacao    
     var spritePersonagem = new createjs.SpriteSheet({
         images: [sonGoqueue.getResult("sprite")],
@@ -346,11 +346,11 @@ function Boneco() {
         }).to({
             x: treesholdX(this.x, this.y),
             y: treesholdY(this.x, this.y, this.z + 1.5)
-        }, 150, createjs.Ease.getPowInOut(2)).call(faseAtual[faseIndex].update);
+        }, 150, createjs.Ease.getPowInOut(2)).call(faseAtual[faseIndex].update());
     }
     this.action = function() {
         if (faseAtual[faseIndex].tiles[this.x][this.y][this.z].tType == "lixo") {
-            this.lixo.push(faseAtual[faseIndex].tiles[this.x][this.y][this.z].tId);
+            this.lixo[faseIndex].push(faseAtual[faseIndex].tiles[this.x][this.y][this.z].tId);
             stage.removeChild(faseAtual[faseIndex].tiles[this.x][this.y][this.z].img);
             faseAtual[faseIndex].tiles[this.x][this.y][this.z] = new Tile("void", 0, x, y, z);
             this.score();
@@ -358,7 +358,7 @@ function Boneco() {
     }
     this.score = function() {
         lixoC.innerHTML = this.lixo.length;
-        if (this.lixo.length == total)
+        if (this.lixo[faseIndex].length == faseAtual[faseIndex].total)
             Separar();
     }
 }
@@ -405,6 +405,7 @@ function Fase(fase, create, ratio) {
 	this.equiX;
 	this.equiY;
 	this.equiZ;
+	this.total = 0;
     if (ratio === undefined) {
         this.ratio = 0.5;
     } else {
@@ -487,9 +488,8 @@ function Fase(fase, create, ratio) {
                 this.tiles[12][y][1] = new Tile("wall", "-casa3", 12 + 0.28, y, 1);
                 this.tiles[12][y][2] = new Tile("wall", "-casa3", 12 + 0.28, y, 2);
             }
-            for (y = 18; y < 19; y++) {
+            for (y = 18; y < 20; y++) {
                 this.tiles[14][y][1] = new Tile("wall", "-balcao", 14, y, 1);
-                this.tiles[14][y][2] = new Tile("wall", "-balcao", 14, y, 2);
             }
             for (x = 11; x < 16; x++) {
                 for (y = 1; y < 3; y++) {
@@ -513,7 +513,7 @@ function Fase(fase, create, ratio) {
         //                    for (y = 0; y < 6; y++) {
         //                        if (Math.random() < this.ratio) {
         //                            this.tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
-        //                            total++;
+        //                            this.total++;
         //                        }
         //                    }
         //                }
@@ -521,7 +521,7 @@ function Fase(fase, create, ratio) {
         //                    for (y = 9; y < 17; y++) {
         //                        if (Math.random() < this.ratio) {
         //                            this.tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
-        //                            total++;
+        //                            this.total++;
         //                        }
         //                    }
         //                }
@@ -529,7 +529,7 @@ function Fase(fase, create, ratio) {
         //                    for (y = 6; y < 9; y++) {
         //                        if (Math.random() < this.ratio) {
         //                            this.tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
-        //                            total++;
+        //                            this.total++;
         //                        }
         //                    }
         //                }
@@ -537,7 +537,7 @@ function Fase(fase, create, ratio) {
                 for (y = 9; y < 20; y++) {
                     if (Math.random() < this.ratio) {
                         this.tiles[x][y][2] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 2);
-                        total++;
+                        this.total++;
                     }
                 }
             }
@@ -581,16 +581,16 @@ function Fase(fase, create, ratio) {
                     this.tiles[0][y][2] = new Tile("wall", 1, 0, y, 2);
                     this.tiles[0][y][3] = new Tile("wall", 1, 0, y, 3);
                 }
-                this.tiles[0][12][3] = new Tile("wall", 4, 0, 12, 3);
-                this.tiles[0][14][3] = new Tile("wall", 4, 0, 14, 3);
-                this.tiles[0][16][3] = new Tile("wall", 4, 0, 16, 3);
+                this.tiles[0][12][3] = new Tile("wall", 4, -0.5, 11.8, 3);
+                this.tiles[0][14][3] = new Tile("wall", 4, -0.5, 13.8, 3);
+                this.tiles[0][16][3] = new Tile("wall", 4, -0.5, 15.8, 3);
                 this.tiles[7][15][1] = new Tile("stair", 0, 7, 15, 1);
                 // Lixos
                 for (x = 0; x < 18; x++) {
                     for (y = 0; y < 6; y++) {
                         if (Math.random() < this.ratio) {
                             this.tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
-                            total++;
+                            this.total++;
                         }
                     }
                 }
@@ -598,7 +598,7 @@ function Fase(fase, create, ratio) {
                     for (y = 9; y < 17; y++) {
                         if (Math.random() < this.ratio) {
                             this.tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
-                            total++;
+                            this.total++;
                         }
                     }
                 }
@@ -606,7 +606,7 @@ function Fase(fase, create, ratio) {
                     for (y = 6; y < 9; y++) {
                         if (Math.random() < this.ratio) {
                             this.tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
-                            total++;
+                            this.total++;
                         }
                     }
                 }
@@ -614,7 +614,7 @@ function Fase(fase, create, ratio) {
                     for (y = 9; y < 20; y++) {
                         if (Math.random() < this.ratio) {
                             this.tiles[x][y][2] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 2);
-                            total++;
+                            this.total++;
                         }
                     }
                 }
@@ -623,33 +623,33 @@ function Fase(fase, create, ratio) {
 				case "praia":
                 this.equiX = 15;
                 this.equiY = 15;
-				this.equiZ = 2;
+				this.equiZ = 1;
 				for (x = 0; x < 13; x++) {
 					for (y = 0; y < 18; y++) {
 						for (z = 0; z < 2; z++) {
-							this.tiles[x][y][z] = new Tile("floor", "-areia", x, y, z);
+							this.tiles[x][y][z*5] = new Tile("floor", "-areia", x, y, z-1);
 						}
 					}
 				}
 				for (y = 0; y < 18; y++) {
 					for (z = 0; z < 2; z++) {
-						this.tiles[13][y][z] = new Tile("floor", "-areiaD" + (4 - (y % 4) - 1), 13, y, z);
-						this.tiles[14][y][z] = new Tile("floor", "-areiaE" + (4 - (y % 4) - 1), 14, y, z);
-						this.tiles[15][y][z] = new Tile("floor", "-areiaM" + (4 - (y % 4) - 1), 15, y, z);
+						this.tiles[13][y][z*5] = new Tile("floor", "-areiaD" + (4 - (y % 4) - 1), 13, y, z-1);
+						this.tiles[14][y][z*5] = new Tile("floor", "-areiaE" + (4 - (y % 4) - 1), 14, y, z-1);
+						this.tiles[15][y][z*5] = new Tile("floor", "-areiaM" + (4 - (y % 4) - 1), 15, y, z-1);
 					}
 				}
 				for (x = 16; x < 18; x++) {
 					for (y = 0; y < 18; y++) {
 						for (z = 0; z < 2; z++) {
-							this.tiles[x][y][z] = new Tile("mar", 0, x, y, z);
+							this.tiles[x][y][z*5] = new Tile("mar", 0, x, y, z-1);
 						}
 					}
 				}
 				for (x = 0; x < 13; x++) {
 					for (y = 0; y < 18; y++) {
 						if (Math.random() < this.ratio) {
-							this.tiles[x][y][2] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 2);
-							total++;
+							this.tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
+							this.total++;
 						}
 					}
 				}
@@ -665,7 +665,7 @@ function Fase(fase, create, ratio) {
                             this.tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
                             if (y != 12 || x == 15) {
                                 this.tiles[x][y][1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, 1);
-                                total++;
+                                this.total++;
                             } else {
                                 this.tiles[x][y][1] = new Tile("wall", 3, x, y, 1);
                             }
