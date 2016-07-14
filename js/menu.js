@@ -8,8 +8,14 @@ var btnEco;
 var btnSobre;
 var btnParticipar;
 var btnCreditos;
+var btnDesenvolvedores;
+var btnMonitores;
+var btnOrientadores;
 var btVoltar;
 var tabela;
+var tabelaDevs;
+var tabelaMoni;
+var tabelaOrient;
 var archivement = false;
 createjs.Ticker.addEventListener("tick", draw);
 
@@ -26,12 +32,50 @@ function showTabela(){
     }, 1000); //, createjs.Ease.quadInOut);
 }
 
+function hideTabelaDevs(){
+    tabelaDevs.visible = false;
+}
+function showTabelaDevs(){
+    tabelaDevs.visible = true;
+    tabelaDevs.x = 250 + telaOffset;
+    tabelaDevs.y = 800;
+    createjs.Tween.get(tabelaDevs).to({
+        y: 355
+    }, 1000); //, createjs.Ease.quadInOut);
+}
+
+function hideTabelaMoni(){
+    tabelaMoni.visible = false;
+}
+function showTabelaMoni(){
+    tabelaMoni.visible = true;
+    tabelaMoni.x = 250 + telaOffset;
+    tabelaMoni.y = 800;
+    createjs.Tween.get(tabelaMoni).to({
+        y: 355
+    }, 1000); //, createjs.Ease.quadInOut);
+    console.log("Show monitores");
+} 
+
+function hideTabelaOrient(){
+    tabelaOrient.visible = false;
+}
+function showTabelaOrient(){
+    tabelaOrient.visible = true;
+    tabelaOrient.x = 250 + telaOffset;
+    tabelaOrient.y = 800;
+    createjs.Tween.get(tabelaOrient).to({
+        y: 355
+    }, 1000); //, createjs.Ease.quadInOut);
+}
+
 function opMenu() {
     $(".scores").hide();
     $(".navegacao").hide();
     inGame = false;
     inMenu = true;
     inSubMenu = false;
+    inSubMenu2 = false;
     menuBG = new createjs.Bitmap(sonGoqueue.getResult("menuBG"));
     menuBG.x = 0;
     menuBG.y = 0;
@@ -100,6 +144,37 @@ function subMenu() {
     }, 600);
 }
 
+function subMenu2() {
+    inSubMenu2 = true;
+    btnDesenvolvedores = new createjs.Bitmap(sonGoqueue.getResult("btnDesenvolvedores"));
+    btnOrientadores = new createjs.Bitmap(sonGoqueue.getResult("btnOrientadores"));
+    btnMonitores = new createjs.Bitmap(sonGoqueue.getResult("btnMonitores"));
+    //posicionamento dos botoes
+    btnDesenvolvedores.x = 0;
+    btnDesenvolvedores.y = 185;
+    btnOrientadores.x = 429;
+    btnOrientadores.y = 185;
+    btnMonitores.x = 855;
+    btnMonitores.y = 185;
+    //fadeIn
+    btnDesenvolvedores.alpha = 0;
+    btnOrientadores.alpha = 0;
+    btnMonitores.alpha = 0;
+    //adicionando os botões
+    stage.addChild(btnDesenvolvedores);
+    stage.addChild(btnOrientadores);
+    stage.addChild(btnMonitores);
+    createjs.Tween.get(btnDesenvolvedores).to({
+        alpha: 1
+    }, 600);
+    createjs.Tween.get(btnOrientadores).to({
+        alpha: 1
+    }, 600);
+    createjs.Tween.get(btnMonitores).to({
+        alpha: 1
+    }, 600);
+}
+
 function setupMenu() {
     tSize = 64;
     if (equi === undefined) {
@@ -109,6 +184,9 @@ function setupMenu() {
     soundMenu.play();
     soundFase.stop();
     hideTabela();
+    hideTabelaDevs();
+    hideTabelaMoni();
+    hideTabelaOrient();
 }
 
 function btVoltarAdd() {
@@ -155,7 +233,7 @@ function mais() {
     createjs.Tween.get(bgMais).to({
         alpha: 1
     }, 600);
-    var showTxt = new createjs.Text("O Projeto Cuida Mundo foi desenvolvido pela Equipe Equilibrium, composta pelos seguintes estudantes do curso de Sistemas e Mídias Digitais da Universidade Federal do Ceará: Jório Matos, Álvaro Carvalho, Isabela Silveira, Alana Martins e Daniel Lima; sob orientação dos professores [...] e sob monitoria de [...]", '20px Josefin Sans', '#fff');
+    var showTxt = new createjs.Text("Projeto Cuida Mundo desenvolvido pela Equipe Equilibrium. ",'20px Josefin Sans', '#fff');
     showTxt.x = 300;
     showTxt.y = 800;
     showTxt.lineWidth = 670;
@@ -164,6 +242,7 @@ function mais() {
     createjs.Tween.get(showTxt).to({
         y: 355
     }, 1000); //, createjs.Ease.quadInOut);
+    subMenu2();
     btVoltarAdd();
 }
 
@@ -270,4 +349,72 @@ function materiais() {
     
     btVoltarAdd();
     showTabela(); 
+}
+
+function monitores() {
+    
+    bgEco = new createjs.Bitmap(sonGoqueue.getResult("bgMais"));
+    bgEco.x = 0;
+    bgEco.y = 0;
+    bgEco.alpha = 0;
+    inMenu = false;
+    stage.addChild(bgEco);
+    createjs.Tween.get(bgEco).to({
+        alpha: 1
+    }, 600);
+    subMenu2();
+    btnMonitores = new createjs.Bitmap(sonGoqueue.getResult("btnMonitores2"));
+    btnMonitores.x = 855;
+    btnMonitores.y = 185;
+    stage.addChild(btnMonitores);
+    
+    btVoltarAdd();
+    hideTabelaDevs();
+    showTabelaMoni();
+    hideTabelaOrient();
+}
+
+function orientadores() {
+    bgEco = new createjs.Bitmap(sonGoqueue.getResult("bgMais"));
+    bgEco.x = 0;
+    bgEco.y = 0;
+    bgEco.alpha = 0;
+    inMenu = false;
+    stage.addChild(bgEco);
+    createjs.Tween.get(bgEco).to({
+        alpha: 1
+    }, 600);
+    subMenu2();
+    btnOrientadores = new createjs.Bitmap(sonGoqueue.getResult("btnOrientadores2"));
+    btnOrientadores.x = 429;
+    btnOrientadores.y = 185;
+    stage.addChild(btnOrientadores);
+    hideTabelaDevs();
+    hideTabelaMoni();
+    showTabelaOrient();
+    
+    btVoltarAdd();
+}
+
+function desenvolvedores() {
+    bgEco = new createjs.Bitmap(sonGoqueue.getResult("bgEquipe"));
+    bgEco.x = 0;
+    bgEco.y = 0;
+    bgEco.alpha = 0;
+    inMenu = false;
+    stage.addChild(bgEco);
+    createjs.Tween.get(bgEco).to({
+        alpha: 1
+    }, 600);
+    subMenu2();
+    btnDesenvolvedores = new createjs.Bitmap(sonGoqueue.getResult("btnDesenvolvedores2"));
+    btnDesenvolvedores.x = 0;
+    btnDesenvolvedores.y = 185;
+    stage.addChild(btnDesenvolvedores);
+    
+    showTabelaDevs();
+    hideTabelaMoni();
+    hideTabelaOrient();
+    
+    btVoltarAdd();
 }

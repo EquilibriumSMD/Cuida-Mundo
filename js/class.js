@@ -4,6 +4,7 @@ var sonGoqueue = new createjs.LoadQueue(false);
 var inGame = false;
 var inMenu = true;
 var inSubMenu = true;
+var inSubMenu2 = true;
 var offsetX = 0;
 var offsetY = 0;
 var telaOffset;
@@ -52,6 +53,16 @@ window.onload = function() {
                 materiais();
             }
         }
+        
+        if (inSubMenu2) {
+            if (clickX > btnDesenvolvedores.x && clickX < btnDesenvolvedores.x + btnDesenvolvedores.getBounds().width && clickY > btnDesenvolvedores.y && clickY < btnDesenvolvedores.y + btnDesenvolvedores.getBounds().height) {
+                desenvolvedores();
+            } else if (clickX > btnMonitores.x && clickX < btnMonitores.x + btnMonitores.getBounds().width && clickY > btnMonitores.y && clickY < btnMonitores.y + btnMonitores.getBounds().height) {
+                monitores();
+            } else if (clickX > btnOrientadores.x && clickX < btnOrientadores.x + btnOrientadores.getBounds().width && clickY > btnOrientadores.y && clickY < btnOrientadores.y + btnOrientadores.getBounds().height) {
+                orientadores();
+            }
+        }
     });
     //jogo
     $(".scores").hide();
@@ -77,6 +88,18 @@ function main() {
     tabela = new createjs.DOMElement(document.getElementById("tabela"));
     tabela.visible = false;
     stage.addChild(tabela);
+    
+    tabelaDevs = new createjs.DOMElement(document.getElementById("tabelaDevs"));
+    tabelaDevs.visible = false;
+    stage.addChild(tabelaDevs);
+    
+    tabelaMoni = new createjs.DOMElement(document.getElementById("tabelaMoni"));
+    tabelaMoni.visible = false;
+    stage.addChild(tabelaMoni);
+    
+    tabelaOrient = new createjs.DOMElement(document.getElementById("tabelaOrient"));
+    tabelaOrient.visible = false;
+    stage.addChild(tabelaOrient);
     
     // Preload     
     sonGoqueue.on("complete", setupMenu, this);
@@ -109,6 +132,24 @@ function main() {
         id: "btnCreditos2",
         src: "img/opcao-creditos2.png"
     }, {
+        id: "btnDesenvolvedores",
+        src: "img/opcao-desenvolvedores.png"
+    }, {
+        id: "btnDesenvolvedores2",
+        src: "img/opcao-desenvolvedores.png"
+    }, {
+        id: "btnOrientadores",
+        src: "img/opcao-orientadores.png"
+    }, {
+        id: "btnOrientadores2",
+        src: "img/opcao-orientadores2.png"
+    }, {
+        id: "btnMonitores",
+        src: "img/opcao-monitores.png"
+    }, {
+        id: "btnMonitores2",
+        src: "img/opcao-monitores2.png"
+    }, {
         id: "menuBG",
         src: "img/menuBG.jpg"
     }, {
@@ -123,6 +164,9 @@ function main() {
     }, {
         id: "bgEco",
         src: "img/bgEco.jpg"
+    }, {
+        id: "bgEquipe",
+        src: "img/bgEquipe.jpg"
     }, {
         id: "btVoltar",
         src: "img/btVoltar.png"

@@ -88,9 +88,26 @@ body {
     margin: 0 auto;
 }
 
-#tabela{ 
+#tabela,
+#tabelaDevs,
+#tabelaMoni,
+#tabelaOrient{ 
     width: 800px; 
     height: 286px;
+}
+
+#tabelaDevs .tab-subtit,
+#tabelaMoni .tab-subtit,
+#tabelaOrient .tab-subtit{ 
+    width: 274px; 
+    text-align: center;
+}
+
+#tabelaDevs .tab-content,
+#tabelaMoni .tab-content,
+#tabelaOrient .tab-content{ 
+    width: 521px; 
+    text-align: center;
 }
 .tab-tit{
     height: 46px;
