@@ -296,32 +296,32 @@ function Boneco() {
     });
     this.sprite = new createjs.Sprite(spritePersonagem, "idleD");
     this.up = function() {
-        if (this.y > 0 && this.tiles[this.x][this.y - 1][this.z - 1].tType == "floor" && this.tiles[this.x][this.y - 1][this.z].tType != "wall") {
+        if (this.y > 0 && faseAtual[faseIndex].tiles[this.x][this.y - 1][this.z - 1].tType == "floor" && faseAtual[faseIndex].tiles[this.x][this.y - 1][this.z].tType != "wall") {
             this.y--;
         }
         this.tween();
     }
     this.down = function() {
-        if (this.y < 23 && this.tiles[this.x][this.y + 1][this.z - 1].tType == "floor" && this.tiles[this.x][this.y + 1][this.z].tType != "wall") {
+        if (this.y < 23 && faseAtual[faseIndex].tiles[this.x][this.y + 1][this.z - 1].tType == "floor" && faseAtual[faseIndex].tiles[this.x][this.y + 1][this.z].tType != "wall") {
             this.y++;
         }
         this.tween();
     }
     this.left = function() {
-        if (this.x > 0 && this.tiles[this.x - 1][this.y][this.z - 1].tType == "floor" && this.tiles[this.x - 1][this.y][this.z].tType != "wall") {
+        if (this.x > 0 && faseAtual[faseIndex].tiles[this.x - 1][this.y][this.z - 1].tType == "floor" && faseAtual[faseIndex].tiles[this.x - 1][this.y][this.z].tType != "wall") {
             this.x--;
         }
-        if (this.x > 0 && this.tiles[this.x - 1][this.y][this.z].tType == "stair") {
+        if (this.x > 0 && faseAtual[faseIndex].tiles[this.x - 1][this.y][this.z].tType == "stair") {
             this.x--;
             this.z++;
         }
         this.tween();
     }
     this.right = function() {
-        if (this.x < 23 && this.tiles[this.x + 1][this.y][this.z - 1].tType == "floor" && this.tiles[this.x + 1][this.y][this.z].tType != "wall") {
+        if (this.x < 23 && faseAtual[faseIndex].tiles[this.x + 1][this.y][this.z - 1].tType == "floor" && faseAtual[faseIndex].tiles[this.x + 1][this.y][this.z].tType != "wall") {
             this.x++;
         }
-        if (this.x < 23 && this.tiles[this.x + 1][this.y][this.z - 1].tType == "stair") {
+        if (this.x < 23 && faseAtual[faseIndex].tiles[this.x + 1][this.y][this.z - 1].tType == "stair") {
             this.x++;
             this.z--;
         }
@@ -333,13 +333,13 @@ function Boneco() {
         }).to({
             x: treesholdX(this.x, this.y),
             y: treesholdY(this.x, this.y, this.z + 1.5)
-        }, 150, createjs.Ease.getPowInOut(2)).call(faseAtual.load);
+        }, 150, createjs.Ease.getPowInOut(2)).call(faseAtual[faseIndex].update);
     }
     this.action = function() {
-        if (this.tiles[this.x][this.y][this.z].tType == "lixo") {
-            this.lixo.push(this.tiles[this.x][this.y][this.z].tId);
-            stage.removeChild(this.tiles[this.x][this.y][this.z].img);
-            this.tiles[this.x][this.y][this.z] = new Tile("void", 0, x, y, z);
+        if (faseAtual[faseIndex].tiles[this.x][this.y][this.z].tType == "lixo") {
+            this.lixo.push(faseAtual[faseIndex].tiles[this.x][this.y][this.z].tId);
+            stage.removeChild(faseAtual[faseIndex].tiles[this.x][this.y][this.z].img);
+            faseAtual[faseIndex].tiles[this.x][this.y][this.z] = new Tile("void", 0, x, y, z);
             this.score();
         }
     }
@@ -634,10 +634,12 @@ function Fase(fase, create, ratio) {
         }
     }
     this.load = function() {
-		equi.tiles = this.tiles;
 		equi.x = this.equiX;
 		equi.y = this.equiY;
 		equi.Z = this.equiZ;
+        this.update();
+    }
+	this.update = function() {
         for (x = 0; x < 24; x++) {
             for (y = 0; y < 24; y++) {
                 for (z = 0; z < 7; z++) {
