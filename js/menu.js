@@ -67,6 +67,7 @@ function opMenu() {
     createjs.Tween.get(btnMais).to({
         alpha: 1
     }, 600);
+    hideTabela();
 }
 
 function subMenu() {
