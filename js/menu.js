@@ -67,6 +67,7 @@ function opMenu() {
     createjs.Tween.get(btnMais).to({
         alpha: 1
     }, 600);
+    hideTabela();
 }
 
 function subMenu() {
@@ -106,6 +107,8 @@ function setupMenu() {
         equi = new Boneco();
     }
     opMenu();
+    soundMenu.play();
+    soundFase.stop();
 }
 
 function btVoltarAdd() {
@@ -137,6 +140,9 @@ function play() {
         alpha: 1
     }, 600).call(mainGame);
     btVoltarAdd();
+    
+    soundMenu.stop();
+    soundFase.play();
 }
 
 function mais() {
