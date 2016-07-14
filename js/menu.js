@@ -108,6 +108,7 @@ function setupMenu() {
     opMenu();
     soundMenu.play();
     soundFase.stop();
+    hideTabela();
 }
 
 function btVoltarAdd() {
