@@ -18,7 +18,13 @@ var tabelaMoni;
 var tabelaOrient;
 var archivement = false;
 var btnInstrucoes;
+var instrucoesBg;
 var btnSons;
+var somOn;
+var somOff;
+
+var ativaSom = true;
+
 createjs.Ticker.addEventListener("tick", draw);
 
 var btMapa0;
@@ -82,6 +88,7 @@ function opMenu() {
     inMenu = true;
     inSubMenu = false;
     inSubMenu2 = false;
+    inSubOptions = false;
     menuBG = new createjs.Bitmap(sonGoqueue.getResult("menuBG"));
     menuBG.x = 0;
     menuBG.y = 0;
@@ -167,7 +174,7 @@ function setupMenu() {
         equi = new Boneco();
     }
     opMenu();
-    //soundMenu.play();
+    soundMenu.play();
     soundFase.stop();
     hideTabela();
     hideTabelaDevs();
@@ -352,6 +359,7 @@ function eco() {
     bgEco.y = 0;
     bgEco.alpha = 0;
     inMenu = false;
+    inSubMenu = true;
     stage.addChild(bgEco);
     createjs.Tween.get(bgEco).to({
         alpha: 1
@@ -375,6 +383,7 @@ function conheca() {
     bgEco.y = 0;
     bgEco.alpha = 0;
     inMenu = false;
+    inSubMenu = true;
     stage.addChild(bgEco);
     createjs.Tween.get(bgEco).to({
         alpha: 1
@@ -405,6 +414,7 @@ function participe() {
     bgEco.y = 0;
     bgEco.alpha = 0;
     inMenu = false;
+    inSubMenu = true;
     stage.addChild(bgEco);
     createjs.Tween.get(bgEco).to({
         alpha: 1
@@ -495,3 +505,97 @@ function options() {
     btVoltarAdd();
 }
 
+
+function instrucoes(){
+    bgOpcoes = new createjs.Bitmap(sonGoqueue.getResult("bgOpcoes"));
+    bgOpcoes.x = 0;
+    bgOpcoes.y = 0;
+    bgOpcoes.alpha = 0;
+    inMenu = false;
+    stage.addChild(bgOpcoes);
+    createjs.Tween.get(bgOpcoes).to({
+        alpha: 1
+    }, 600);
+    
+    subMenuOptions();
+    
+    btnInstrucoes = new createjs.Bitmap(sonGoqueue.getResult("btnInstrucoes2"));
+    btnInstrucoes.x = 0;
+    btnInstrucoes.y = 185;
+    btnInstrucoes.alpha = 0;
+    stage.addChild(btnInstrucoes);
+    createjs.Tween.get(btnInstrucoes).to({
+        alpha: 1
+    }, 600);
+    
+    instrucoesBg = new createjs.Bitmap(sonGoqueue.getResult("instrucoesBg"));
+    instrucoesBg.x = 107;
+    instrucoesBg.y = 381;
+    instrucoesBg.alpha = 0;
+    stage.addChild(instrucoesBg);
+    createjs.Tween.get(instrucoesBg).to({
+        alpha: 1
+    }, 600);
+    
+    btVoltarAdd();
+}
+
+function sons(){
+    bgOpcoes = new createjs.Bitmap(sonGoqueue.getResult("bgOpcoes"));
+    bgOpcoes.x = 0;
+    bgOpcoes.y = 0;
+    bgOpcoes.alpha = 0;
+    inMenu = false;
+    stage.addChild(bgOpcoes);
+    createjs.Tween.get(bgOpcoes).to({
+        alpha: 1
+    }, 600);
+    
+    subMenuOptions();
+    btnSons = new createjs.Bitmap(sonGoqueue.getResult("btnSons2"));
+    
+    //posicionamento dos botoes
+    btnSons.x = 643;
+    btnSons.y = 185;
+    
+    //fadeIn
+    btnSons.alpha = 0;
+    
+    //adicionando os botões
+    stage.addChild(btnSons);
+    
+    createjs.Tween.get(btnSons).to({
+        alpha: 1
+    }, 600);
+    
+    //som on
+    somOn = new createjs.Bitmap(sonGoqueue.getResult("som-on"));
+    somOn.x = 429;
+    somOn.y = 399;
+    somOn.alpha = 0;
+    somOff.som = true;
+    somOff.addEventListener("click", verificaSom);
+    stage.addChild(somOn);
+    createjs.Tween.get(somOn).to({
+        alpha: 1
+    }, 600);
+    
+    //som off
+    somOff = new createjs.Bitmap(sonGoqueue.getResult("som-off"));
+    somOff.x = 766;
+    somOff.y = 399;
+    somOff.alpha = 0;
+    somOff.som = false;
+    somOff.addEventListener("click", verificaSom);
+    stage.addChild(somOff);
+    createjs.Tween.get(somOff).to({
+        alpha: 1
+    }, 600);
+    
+    btVoltarAdd();
+}
+
+function verificaSom(e){
+    ativaSom = e.target.valor;
+    console.log("som: ",ativaSom);
+}

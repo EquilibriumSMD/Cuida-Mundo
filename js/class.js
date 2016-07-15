@@ -3,9 +3,9 @@ var stage = new createjs.Stage("defaultCanvas0");
 var sonGoqueue = new createjs.LoadQueue(false);
 var inGame = false;
 var inMenu = true;
-var inSubMenu = true;
-var inSubMenu2 = true;
-var inSubOptions = true;
+var inSubMenu = false;
+var inSubMenu2 = false;
+var inSubOptions = false;
 var offsetX = 0;
 var offsetY = 0;
 var telaOffset;
@@ -67,7 +67,7 @@ window.onload = function() {
             }
         }
         
-        if (subMenuOptions) {
+        if (inSubOptions) {
             if (clickX > btnInstrucoes.x && clickX < btnInstrucoes.x + btnInstrucoes.getBounds().width && clickY > btnInstrucoes.y && clickY < btnInstrucoes.y + btnInstrucoes.getBounds().height) {
                 instrucoes();
             } else if (clickX > btnSons.x && clickX < btnSons.x + btnSons.getBounds().width && clickY > btnSons.y && clickY < btnSons.y + btnSons.getBounds().height) {
@@ -140,11 +140,20 @@ function main() {
         id: "btnInstrucoes2",
         src: "img/opcao-instrucoes2.png"
     }, {
+        id: "instrucoesBg",
+        src: "img/instrucoes-bg.png"
+    }, {
         id: "btnSons",
         src: "img/opcao-sons.png"
     }, {
         id: "btnSons2",
         src: "img/opcao-sons2.png"
+    }, {
+        id: "som-on",
+        src: "img/som-on.png"
+    }, {
+        id: "som-off",
+        src: "img/som-off.png"
     }, {
         id: "btnParticipar",
         src: "img/opcao-participar.png"
