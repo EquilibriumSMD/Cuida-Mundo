@@ -471,8 +471,6 @@ function Boneco() {
     }
     this.score = function() {
         lixoC.innerHTML = this.lixo[faseIndex].length;
-        if (this.lixo[faseIndex].length == faseAtual[faseIndex].total && faseIndex != 2 && faseAtual[faseIndex].total != 0)
-            Separar();
     }
 }
 
@@ -539,6 +537,7 @@ function Fase(fase, create, ratio) {
         switch (fase) {
             //Fase da casa
             case "casa":
+            rushBeach = 900 + dificult * 900;
             this.equiX = 15;
             this.equiY = 15;
             this.equiZ = 1;
@@ -664,6 +663,7 @@ function Fase(fase, create, ratio) {
             break;
                 //Fase da Escola!
             case "escola":
+                rushBeach = 900 + dificult * 900;
                 this.equiX = 13;
                 this.equiY = 13;
 				this.equiZ = 1;
@@ -710,6 +710,7 @@ function Fase(fase, create, ratio) {
                 break;
 				//Praia!
 				case "praia":
+                rushBeach = 600 + dificult * 600;
                 this.equiX = 13;
                 this.equiY = 13;
 				this.equiZ = 1;
@@ -753,6 +754,7 @@ function Fase(fase, create, ratio) {
 				break;
                 //Fase quadradinha de teste
             default:
+                rushBeach = 100 + dificult * 100;
                 this.equiX = 13;
                 this.equiY = 13;
 				this.equiZ = 1;
@@ -783,9 +785,8 @@ function Fase(fase, create, ratio) {
         }
     }
     this.load = function() {
-        if (this.type == "praia" && this.total != 0){
+        if (this.total != 0){
                 stage.removeChild(btVoltar);
-                rushBeach = 600 + dificult * 600;
                 createjs.Ticker.addEventListener("tick", beachRush);
         }
 		equi.x = this.equiX;
@@ -843,48 +844,12 @@ function Sep(id) {
     this.img.scaleX = 2;
     this.img.scaleY = 2;
     stage.addChild(this.img);
-    this.img.x = Math.random() * 400;
-    this.img.y = Math.random() * 200;
+    this.img.x = Math.random() * 100;
+    this.img.y = Math.random() * 700;
     this.img.id = id;
     this.img.on("pressmove", function(evt) {
         evt.target.x = evt.stageX - tSize;
         evt.target.y = evt.stageY - tSize;
     });
     this.img.on("pressup", checkSeparar)
-}
-
-var rushBeach = 0;
-
-function beachRush(e) {
-    rushBeach--;
-	var text = new createjs.Text(Math.round(rushBeach/30), '20px Josefin Sans', '#fff');
-    text.x = 10;
-    text.y = 40;
-    stage.addChild(bgPlay);
-    stage.addChild(text);
-	faseAtual[faseIndex].update();
-	
-	var text = new createjs.Text("🌱"+GreenScore, '20px Josefin Sans', '#0F0');
-    text.x = 10;
-    text.y = 730;
-    stage.addChild(text);
-	var text = new createjs.Text("💰"+GoldScore, '20px Josefin Sans', '#FF0');
-    text.x = 10;
-    text.y = 750;
-    stage.addChild(text);
-	var text = new createjs.Text("lvl:"+dificult/0.05, '20px Josefin Sans', '#FFF');
-    text.x = 10;
-    text.y = 770;
-    stage.addChild(text);
-    
-    if (rushBeach < 1){
-        faseAtual[2] = new Fase("praia", null, 0.1);
-        equi.lixo[2] = [];
-        setupMenu();
-        createjs.Ticker.removeEventListener("tick", beachRush);
-    } else if (equi.lixo[faseIndex].length == faseAtual[faseIndex].total) {
-        createjs.Ticker.removeEventListener("tick", beachRush);
-		Separar();
-		btVoltarAdd()
-    }
 }

@@ -194,6 +194,7 @@ function play() {
             icon: "img/icon-lixo1.png"
         });
         archivement = true;
+		GoldScore += 5;
     }
     inGame = true;
     $(".scores").show();
@@ -220,47 +221,6 @@ function play() {
     text.x = 10;
     text.y = 770;
     stage.addChild(text);
-}
-
-function Mapa(){
-    bgMapa = new createjs.Bitmap(sonGoqueue.getResult("bgMapa"));
-    bgMapa.x = 0;
-    bgMapa.y = 0;
-    bgMapa.alpha = 0;
-    inMenu = false;
-    stage.addChild(bgMapa);
-    createjs.Tween.get(bgMapa).to({
-        alpha: 1
-    }, 600);   
-    
-    btMapa0 = new createjs.Bitmap(sonGoqueue.getResult("btMapa"));
-    btMapa0.x = 920;
-    btMapa0.y = 269;
-    btMapa0.fase = 0;
-    btMapa0.addEventListener("click", verificaFase);
-    stage.addChild(btMapa0);
-    
-    btMapa1 = new createjs.Bitmap(sonGoqueue.getResult("btMapa"));
-    btMapa1.x = 699;
-    btMapa1.y = 346;
-    btMapa1.fase = 1;  
-    btMapa1.addEventListener("click", verificaFase);
-    stage.addChild(btMapa1);
-    
-    
-    btMapa2 = new createjs.Bitmap(sonGoqueue.getResult("btMapa"));
-    btMapa2.x = 917;
-    btMapa2.y = 170;
-    btMapa2.fase = 2;
-    btMapa2.addEventListener("click", verificaFase);
-    stage.addChild(btMapa2);
-    
-    btVoltarAdd();
-}
-
-function verificaFase(e){
-   faseIndex = e.target.fase;
-   play();
 }
 
 /* Equipe e sub itens */
