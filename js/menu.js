@@ -17,6 +17,8 @@ var tabelaDevs;
 var tabelaMoni;
 var tabelaOrient;
 var archivement = false;
+var btnInstrucoes;
+var btnSons;
 createjs.Ticker.addEventListener("tick", draw);
 
 var btMapa0;
@@ -96,7 +98,7 @@ function opMenu() {
     //posicionamento dos botoes
     btnEco.x = 1140;
     btnEco.y = 50;
-    btnPlay.x = 810;
+    btnPlay.x = 785;
     btnPlay.y = 330;
     btnEquipe.x = 780;
     btnEquipe.y = 665;
@@ -487,5 +489,49 @@ function materiais() {
     
     btVoltarAdd();
     showTabela(); 
+}
+
+/* Menu Options e sub itens*/
+function subMenuOptions() {
+    inSubOptions = true;
+    btnInstrucoes = new createjs.Bitmap(sonGoqueue.getResult("btnInstrucoes"));
+    btnSons = new createjs.Bitmap(sonGoqueue.getResult("btnSons"));
+    //posicionamento dos botoes
+    btnInstrucoes.x = 0;
+    btnInstrucoes.y = 185;
+    
+    btnSons.x = 643;
+    btnSons.y = 185;
+    
+    //fadeIn
+    btnInstrucoes.alpha = 0;
+    btnSons.alpha = 0;
+    
+    //adicionando os botões
+    stage.addChild(btnInstrucoes);
+    stage.addChild(btnSons);
+    
+    createjs.Tween.get(btnInstrucoes).to({
+        alpha: 1
+    }, 600);
+    createjs.Tween.get(btnSons).to({
+        alpha: 1
+    }, 600);
+    
+}
+
+function options() {
+    bgOpcoes = new createjs.Bitmap(sonGoqueue.getResult("bgOpcoes"));
+    bgOpcoes.x = 0;
+    bgOpcoes.y = 0;
+    bgOpcoes.alpha = 0;
+    inMenu = false;
+    stage.addChild(bgOpcoes);
+    createjs.Tween.get(bgOpcoes).to({
+        alpha: 1
+    }, 600);
+    
+    subMenuOptions();
+    btVoltarAdd();
 }
 

@@ -5,6 +5,7 @@ var inGame = false;
 var inMenu = true;
 var inSubMenu = true;
 var inSubMenu2 = true;
+var inSubOptions = true;
 var offsetX = 0;
 var offsetY = 0;
 var telaOffset;
@@ -63,6 +64,14 @@ window.onload = function() {
                 monitores();
             } else if (clickX > btnOrientadores.x && clickX < btnOrientadores.x + btnOrientadores.getBounds().width && clickY > btnOrientadores.y && clickY < btnOrientadores.y + btnOrientadores.getBounds().height) {
                 orientadores();
+            }
+        }
+        
+        if (subMenuOptions) {
+            if (clickX > btnInstrucoes.x && clickX < btnInstrucoes.x + btnInstrucoes.getBounds().width && clickY > btnInstrucoes.y && clickY < btnInstrucoes.y + btnInstrucoes.getBounds().height) {
+                instrucoes();
+            } else if (clickX > btnSons.x && clickX < btnSons.x + btnSons.getBounds().width && clickY > btnSons.y && clickY < btnSons.y + btnSons.getBounds().height) {
+                sons();
             }
         }
     });
@@ -125,6 +134,18 @@ function main() {
         id: "btnConheca2",
         src: "img/opcao-conheca2.png"
     }, {
+        id: "btnInstrucoes",
+        src: "img/opcao-instrucoes.png"
+    }, {
+        id: "btnInstrucoes2",
+        src: "img/opcao-instrucoes2.png"
+    }, {
+        id: "btnSons",
+        src: "img/opcao-sons.png"
+    }, {
+        id: "btnSons2",
+        src: "img/opcao-sons2.png"
+    }, {
         id: "btnParticipar",
         src: "img/opcao-participar.png"
     }, {
@@ -181,6 +202,9 @@ function main() {
     }, {
         id: "bgEquipe",
         src: "img/bgEquipe.jpg"
+    }, {
+        id: "bgOpcoes",
+        src: "img/bgOpcoes.jpg"
     }, {
         id: "btVoltar",
         src: "img/btVoltar.png"
