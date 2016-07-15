@@ -97,23 +97,44 @@ function keyReleased() {
 
 function Separar() {
     inGame = false;
-    bgPlay = new createjs.Bitmap(sonGoqueue.getResult("bgPlay"));
-    bgPlay.x = 0;
-    bgPlay.y = 0;
-    bgPlay.alpha = 0;
-    stage.addChild(menuBG);
-    createjs.Tween.get(menuBG).to({
+    eco = new createjs.Bitmap(sonGoqueue.getResult("Ecopontos"));
+    eco.x = 0;
+    eco.y = 0;
+    eco.alpha = 0;
+    stage.addChild(eco);
+    createjs.Tween.get(eco).to({
         alpha: 1
     }, 600);
     btVoltarAdd();
     for (lixo in equi.lixo[faseIndex]) {
         temp = new Sep(equi.lixo[faseIndex][lixo]);
     }
+    equi.lixo[faseIndex] = [];
 }
 
 function checkSeparar(evt) {
-    if (evt.target.x < 140) {
-        stage.removeChild(evt.target);
-        GreenScore += 100;
-    }
+    console.log(evt.target);
+    if (evt.target.id > 11) {
+        if(evt.target.y > 25 && evt.target.y < 200 && evt.target.x > 680 && evt.target.x < 925 ){
+            stage.removeChild(evt.target);
+            GreenScore += 100;
+            Goldscore += 100;
+        }
+    } else if (evt.target.id > 8 || evt.target.id == 0) {
+        if(evt.target.y > 110 && evt.target.y < 300 && evt.target.x > 800 && evt.target.x < 1075 ){
+            stage.removeChild(evt.target);
+            GreenScore += 100;
+            GoldScore +=300;
+        }
+    } else if (evt.target.id > 3) {
+        if(evt.target.y > 225 && evt.target.y < 425 && evt.target.x > 570 && evt.target.x < 900 ){
+            stage.removeChild(evt.target);
+            GreenScore += 100;
+            GoldScore += 150;
+        }
+    } else if(evt.target.y > 140 && evt.target.y < 350 && evt.target.x > 425 && evt.target.x < 725 ){
+            stage.removeChild(evt.target);
+            GreenScore += 100;
+            GoldScore += 225;
+        }
 }

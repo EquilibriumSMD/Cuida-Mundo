@@ -153,6 +153,9 @@ function main() {
         id: "menuBG",
         src: "img/menuBG.jpg"
     }, {
+        id: "Ecopontos",
+        src: "img/Ecopontos  background.png"
+    }, {
         id: "bgPlay",
         src: "img/bgPlay.png"
     }, {
@@ -497,15 +500,11 @@ function Fase(fase, create, ratio) {
                     this.tiles[x][y][4] = new Tile("floor", "-casa", x, y, 4);
                 }
             }
-//<<<<<<< HEAD
-            this.tiles[7][7][4] = new Tile("stair", "s", 7, 8, 4.7);
+            this.tiles[7][7][4] = new Tile("stair", "s", 7, 8.5, 4.7);
             this.tiles[8][7][3] = new Tile("stair", 7, 8, 7, 3);
             this.tiles[9][7][2] = new Tile("stair", 7, 9, 7, 2);
             this.tiles[10][7][1] = new Tile("stair", 7, 10, 7, 1);
             this.tiles[11][7][0] = new Tile("stair", 7, 11, 7, 0);
-//=======
-            //this.tiles[7][10][5] = new Tile("stair", "s", 7, 10, 5-0.3);
-//>>>>>>> 4dde02451cef62630c40d37d53e305092f39ffa5
             for (x = 11; x < 21; x++) {
                 for (y = 1; y < 19; y++) {
                     this.tiles[x][y][0] = new Tile("floor", "-casa", x, y, 0);
@@ -766,8 +765,9 @@ function Sep(id) {
     this.img.scaleX = 2;
     this.img.scaleY = 2;
     stage.addChild(this.img);
-    this.img.x = Math.random() * 1000 + 140;
-    this.img.y = Math.random() * 700;
+    this.img.x = Math.random() * 400;
+    this.img.y = Math.random() * 200;
+    this.img.id = id;
     this.img.on("pressmove", function(evt) {
         evt.target.x = evt.stageX - tSize;
         evt.target.y = evt.stageY - tSize;
