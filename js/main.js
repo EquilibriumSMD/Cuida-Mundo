@@ -10,12 +10,14 @@ var faseAtual = [];
 var faseIndex = 0;
 var GreenScore = 0;
 var GoldScore = 0;
+var dificult = 0.05;
 
 mainGame = function() {
-    if (faseAtual[0] === undefined) {
-        faseAtual[0] = new Fase("casa", null, 0.1);
-        faseAtual[1] = new Fase("escola", null, 0.1);
-        faseAtual[2] = new Fase("praia", null, 0.1);
+    if (faseAtual[0] === undefined || (faseAtual[0].total + faseAtual[1].total + faseAtual[2].total == 0)) {
+		dificult += 0.05;
+        faseAtual[0] = new Fase("casa", null, dificult);
+        faseAtual[1] = new Fase("escola", null, dificult);
+        faseAtual[2] = new Fase("praia", null, dificult);
 		//faseIndex = Math.floor(Math.random() * 3);
 		faseIndex = 2;
         faseAtual[faseIndex].load();
