@@ -29,12 +29,9 @@ var ativaSom = true;
 
 createjs.Ticker.addEventListener("tick", draw);
 
-<<<<<<< HEAD
 var btMapa0;
 var btMapa1;
 var btMapa2;
-=======
->>>>>>> 4d0109b8bdce3d1265ec026953325fdca822787a
 
 function hideTabela(){
     tabela.visible = false;
