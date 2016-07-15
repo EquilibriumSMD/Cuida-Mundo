@@ -158,7 +158,7 @@ function beachRush(e) {
     text.x = 10;
     text.y = 750;
     stage.addChild(text);
-	var text = new createjs.Text("lvl:"+dificult/0.05, '20px Josefin Sans', '#FFF');
+	var text = new createjs.Text("lvl:"+Math.round(dificult/0.05), '20px Josefin Sans', '#FFF');
     text.x = 10;
     text.y = 770;
     stage.addChild(text);
@@ -170,6 +170,7 @@ function beachRush(e) {
         createjs.Ticker.removeEventListener("tick", beachRush);
     } else if (equi.lixo[faseIndex].length == faseAtual[faseIndex].total) {
         createjs.Ticker.removeEventListener("tick", beachRush);
+		stage.removeChild(text);
 		btVoltarAdd()
     }
 }
@@ -221,7 +222,7 @@ function Mapa(){
     text.x = 10;
     text.y = 750;
     stage.addChild(text);
-	var text = new createjs.Text("lvl:"+dificult/0.05, '20px Josefin Sans', '#FFF');
+	var text = new createjs.Text("lvl:"+Math.round(dificult/0.05), '20px Josefin Sans', '#FFF');
     text.x = 10;
     text.y = 770;
     stage.addChild(text);
