@@ -7,6 +7,9 @@ var buttonAction
 var lixoC, lixoT;
 var personagem;
 var faseIndex = 0;
+var btMapa0;
+var btMapa1;
+var btMapa2;
 
 mainGame = function() {
     if (faseAtual[0] === undefined || (faseAtual[0].total + faseAtual[1].total + faseAtual[2].total == 0)) {
@@ -167,7 +170,6 @@ function beachRush(e) {
         createjs.Ticker.removeEventListener("tick", beachRush);
     } else if (equi.lixo[faseIndex].length == faseAtual[faseIndex].total) {
         createjs.Ticker.removeEventListener("tick", beachRush);
-		Separar();
 		btVoltarAdd()
     }
 }
@@ -199,13 +201,19 @@ function Mapa(){
     btMapa1.addEventListener("click", verificaFase);
     stage.addChild(btMapa1);
     
-    
     btMapa2 = new createjs.Bitmap(sonGoqueue.getResult("btMapa"));
     btMapa2.x = 917;
     btMapa2.y = 170;
     btMapa2.fase = 2;
     btMapa2.addEventListener("click", verificaFase);
     stage.addChild(btMapa2);
+	
+    btMapa3 = new createjs.Bitmap(sonGoqueue.getResult("btMapa"));
+    btMapa3.x = 300;
+    btMapa3.y = 374;
+    btMapa3.fase = "ecoponto";
+    btMapa3.addEventListener("click", verificaFase);
+    stage.addChild(btMapa3);
 	
 	var text = new createjs.Text("🌱"+GreenScore, '20px Josefin Sans', '#0F0');
     text.x = 10;
@@ -224,6 +232,10 @@ function Mapa(){
 }
 
 function verificaFase(e){
-   faseIndex = e.target.fase;
-   play();
+	if(e.target.fase != "ecoponto"){
+		faseIndex = e.target.fase;
+		play();
+	} else {
+		Separar();
+	}
 }

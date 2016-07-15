@@ -29,9 +29,12 @@ var ativaSom = true;
 
 createjs.Ticker.addEventListener("tick", draw);
 
+<<<<<<< HEAD
 var btMapa0;
 var btMapa1;
 var btMapa2;
+=======
+>>>>>>> 4d0109b8bdce3d1265ec026953325fdca822787a
 
 function hideTabela(){
     tabela.visible = false;
@@ -226,7 +229,7 @@ function play() {
     text.x = 10;
     text.y = 750;
     stage.addChild(text);
-	var text = new createjs.Text("lvl:"+dificult/0.05, '20px Josefin Sans', '#FFF');
+	var text = new createjs.Text("lvl:"+Math.round(dificult/0.05), '20px Josefin Sans', '#FFF');
     text.x = 10;
     text.y = 770;
     stage.addChild(text);
