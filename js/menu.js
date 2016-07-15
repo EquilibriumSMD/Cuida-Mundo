@@ -18,7 +18,6 @@ var tabela;
 var tabelaDevs;
 var tabelaMoni;
 var tabelaOrient;
-var archivement = false;
 var btnInstrucoes;
 var instrucoesBg;
 var btnSons;
@@ -198,12 +197,12 @@ function play() {
     bgPlay.x = 0;
     bgPlay.y = 0;
     bgPlay.alpha = 0;
-    if (!archivement) {
+    if (!archivement[0]) {
         var n = new Notification("Archievement Get!", {
             body: "First Step +5 💰\nSeu espírito de protetor ambiental é forte",
             icon: "img/icon-lixo1.png"
         });
-        archivement = true;
+        archivement[0] = true;
 		GoldScore += 5;
     }
     inGame = true;

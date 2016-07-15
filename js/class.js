@@ -1,3 +1,23 @@
+//Save:
+var faseAtual = [];
+var GreenScore = 0;
+var GoldScore = 0;
+var dificult = 0.05;
+var archivement = [false];
+var equi;
+var SAVE = {};
+
+function Save() {
+	SAVE.GreenScore = GreenScore;
+	SAVE.GoldScore = GoldScore;
+	SAVE.dificult = dificult;
+	SAVE.archivement = archivement;
+	localStorage.setItem('SAVE', JSON.stringify(SAVE) );
+}
+  function Wipe() {
+  	localStorage.removeItem('SAVE');
+}
+
 // Comum ao jogo e ao menu:
 var stage = new createjs.Stage("defaultCanvas0");
 var sonGoqueue = new createjs.LoadQueue(false);
@@ -24,6 +44,14 @@ function loadSound() {
 }
 
 window.onload = function() {
+	
+	if (localStorage.getItem('SAVE') !== null) {
+		SAVE = JSON.parse(localStorage.getItem('SAVE'));
+		GreenScore = SAVE.GreenScore;
+		GoldScore = SAVE.GoldScore;
+		dificult = SAVE.dificult;
+		archivement = SAVE.archivement;
+    }
     
     main();
     loadSound();
@@ -406,7 +434,6 @@ function dist(x1, y1, x2, y2) {
     return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 }
 // Usado pro jogo
-var equi;
 var tSize;
 
 function treesholdX(y, x) {

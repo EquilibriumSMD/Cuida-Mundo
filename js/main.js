@@ -6,11 +6,7 @@ var buttonRight
 var buttonAction
 var lixoC, lixoT;
 var personagem;
-var faseAtual = [];
 var faseIndex = 0;
-var GreenScore = 0;
-var GoldScore = 0;
-var dificult = 0.05;
 
 mainGame = function() {
     if (faseAtual[0] === undefined || (faseAtual[0].total + faseAtual[1].total + faseAtual[2].total == 0)) {
@@ -19,6 +15,7 @@ mainGame = function() {
         faseAtual[1] = new Fase("escola", null, dificult);
         faseAtual[2] = new Fase("praia", null, dificult);
         faseAtual[faseIndex].load();
+		Save();
     } else {
         faseAtual[faseIndex].load();
     }
