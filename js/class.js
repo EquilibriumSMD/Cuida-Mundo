@@ -465,6 +465,7 @@ function Fase(fase, create, ratio) {
 	this.equiY;
 	this.equiZ;
 	this.total = 0;
+    this.type = fase;
     if (ratio === undefined) {
         this.ratio = 0.5;
     } else {
@@ -710,6 +711,11 @@ function Fase(fase, create, ratio) {
         }
     }
     this.load = function() {
+        if (this.fase == "praia"){
+                stage.removeChild(btVoltar);
+                rushBeach = 2400;
+                createjs.Ticker.addEventListener("tick", beachRush);
+        }
 		equi.x = this.equiX;
 		equi.y = this.equiY;
 		equi.Z = this.equiZ;
@@ -773,4 +779,23 @@ function Sep(id) {
         evt.target.y = evt.stageY - tSize;
     });
     this.img.on("pressup", checkSeparar)
+}
+
+var rushBeach;
+
+function beachRush(e) {
+    rushBeach--;
+    var text = new createjs.Text(Math.round(rushBeach/60), '20px Josefin Sans', '#fff');
+    text.x = 10;
+    text.y = 40;
+    stage.addChild(text);
+    
+    if (faseAtual[faseIndex].timer < 1){
+        faseAtual[2] = new Fase("praia", null, 0.1);
+        equi.lixo[2] = [];
+        opMenu();
+        createjs.Ticker.removeEventListener("tick", beachRush);
+    } else if (equi.lixo[2].lenght == faseAtual[2].total) {
+        createjs.Ticker.removeEventListener("tick", beachRush);
+    }
 }
