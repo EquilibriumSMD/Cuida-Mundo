@@ -43,7 +43,7 @@ window.onload = function() {
             } else if (dist(clickX, clickY, btnOpcoes.x + 32, btnOpcoes.y + 32) < 32) {
                 options();
             } else if (dist(clickX, clickY, btnPlay.x + 67, btnPlay.y + 67) < 67) {
-                play();
+                Mapa();
             }
         }
         if (inSubMenu) {
@@ -156,13 +156,19 @@ function main() {
         src: "img/opcao-monitores2.png"
     }, {
         id: "menuBG",
-        src: "img/menuBG.png"
+        src: "img/menuBG.jpg"
     }, {
         id: "Ecopontos",
         src: "img/Ecopontos  background.png"
     }, {
         id: "bgPlay",
         src: "img/bgPlay.png"
+    }, {
+        id: "bgMapa",
+        src: "img/bgMapa.png"
+    }, {
+        id: "btMapa",
+        src: "img/bt-mapa.png"
     }, {
         id: "bg-tabela",
         src: "img/tabela.png"

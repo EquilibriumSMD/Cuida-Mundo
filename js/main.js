@@ -18,11 +18,8 @@ mainGame = function() {
         faseAtual[0] = new Fase("casa", null, dificult);
         faseAtual[1] = new Fase("escola", null, dificult);
         faseAtual[2] = new Fase("praia", null, dificult);
-		//faseIndex = Math.floor(Math.random() * 3);
-		faseIndex = 1;
         faseAtual[faseIndex].load();
     } else {
-		faseIndex = Math.floor(Math.random() * 3);
         faseAtual[faseIndex].load();
     }
     lixoT.innerHTML = "/" + faseAtual[faseIndex].total;
