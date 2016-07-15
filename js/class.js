@@ -288,28 +288,28 @@ function main() {
         id: "floor-areiaD3",
         src: "img/Tile Areia Escura 4.png"
     }, {
-        id: "floor-areiaE0",
+        id: "mar-areiaE0",
         src: "img/Tile Espuma 1.png"
     }, {
-        id: "floor-areiaE1",
+        id: "mar-areiaE1",
         src: "img/Tile Espuma 2.png"
     }, {
-        id: "floor-areiaE2",
+        id: "mar-areiaE2",
         src: "img/Tile Espuma 3.png"
     }, {
-        id: "floor-areiaE3",
+        id: "mar-areiaE3",
         src: "img/Tile Espuma 4.png"
     }, {
-        id: "floor-areiaM0",
+        id: "mar-areiaM0",
         src: "img/Tile mar 1.png"
     }, {
-        id: "floor-areiaM1",
+        id: "mar-areiaM1",
         src: "img/Tile mar 2.png"
     }, {
-        id: "floor-areiaM2",
+        id: "mar-areiaM2",
         src: "img/Tile mar 3.png"
     }, {
-        id: "floor-areiaM3",
+        id: "mar-areiaM3",
         src: "img/Tile mar 4.png"
     }, {
         id: "floor-areia",
@@ -317,6 +317,15 @@ function main() {
     }, {
         id: "mar0",
         src: "img/Tile mar.png"
+    }, {
+        id: "wall-barraca",
+        src: "img/Tile praia - barraca.png"
+    }, {
+        id: "wall-bPalha",
+        src: "img/Tile praia - barraca de palha.png"
+    }, {
+        id: "wall-cabana",
+        src: "img/Tile praia - cabana.png"
     }, {
         id: "sprite",
         src: "img/sprite.png"
@@ -417,7 +426,7 @@ function Boneco() {
     }
     this.score = function() {
         lixoC.innerHTML = this.lixo[faseIndex].length;
-        if (this.lixo[faseIndex].length == faseAtual[faseIndex].total)
+        if (this.lixo[faseIndex].length == faseAtual[faseIndex].total && faseIndex != 2 && faseAtual[faseIndex].total != 0)
             Separar();
     }
 }
@@ -485,8 +494,8 @@ function Fase(fase, create, ratio) {
         switch (fase) {
             //Fase da casa
             case "casa":
-            this.equiX = 15;
-            this.equiY = 15;
+            this.equiX = 13;
+            this.equiY = 13;
             this.equiZ = 1;
             for (x = 0; x < 3; x++) {
                 for (y = 5; y < 9; y++) {
@@ -610,8 +619,8 @@ function Fase(fase, create, ratio) {
             break;
                 //Fase da Escola!
             case "escola":
-                this.equiX = 15;
-                this.equiY = 15;
+                this.equiX = 13;
+                this.equiY = 13;
 				this.equiZ = 1;
                 for (x = 0; x < 18; x++) {
                     for (y = 0; y < 6; y++) {
@@ -654,35 +663,50 @@ function Fase(fase, create, ratio) {
                 break;
 				//Praia!
 				case "praia":
-                this.equiX = 15;
-                this.equiY = 15;
+                this.equiX = 13;
+                this.equiY = 13;
 				this.equiZ = 1;
 				for (x = 0; x < 13; x++) {
 					for (y = 0; y < 18; y++) {
-						for (z = 0; z < 2; z++) {
-							this.tiles[x][y][z*6] = new Tile("floor", "-areia", x, y, z-1);
-						}
+							this.tiles[x][y][0] = new Tile("floor", "-areia", x, y, 0);
 					}
 				}
 				for (y = 0; y < 18; y++) {
-					for (z = 0; z < 2; z++) {
-						this.tiles[13][y][z*6] = new Tile("floor", "-areiaD" + (4 - (y % 4) - 1), 13, y, z-1);
-						this.tiles[14][y][z*6] = new Tile("floor", "-areiaE" + (4 - (y % 4) - 1), 14, y, z-1);
-						this.tiles[15][y][z*6] = new Tile("floor", "-areiaM" + (4 - (y % 4) - 1), 15, y, z-1);
-					}
+						this.tiles[13][y][0] = new Tile("floor", "-areiaD" + (4 - (y % 4) - 1), 13, y, 0);
+						this.tiles[14][y][0] = new Tile("mar", "-areiaE" + (4 - (y % 4) - 1), 14, y, 0);
+						this.tiles[15][y][0] = new Tile("mar", "-areiaM" + (4 - (y % 4) - 1), 15, y, 0);
 				}
 				for (x = 16; x < 18; x++) {
 					for (y = 0; y < 18; y++) {
-						for (z = 0; z < 2; z++) {
-							this.tiles[x][y][z*6] = new Tile("mar", 0, x, y, z-1);
-						}
+							this.tiles[x][y][0] = new Tile("mar", 0, x, y, 0);
 					}
 				}
+				this.tiles[0][1][1] = new Tile("wall", "-coqueiro", 0, 1, 1);
+				this.tiles[0][3][1] = new Tile("wall", "-coqueiro", 0, 3, 1);
+				this.tiles[0][5][1] = new Tile("wall", "-coqueiro", 0, 5, 1);
+				this.tiles[0][10][1] = new Tile("wall", "-coqueiro", 0, 10, 1);
+				this.tiles[0][12][1] = new Tile("wall", "-coqueiro", 0, 12, 1);
+				this.tiles[0][14][1] = new Tile("wall", "-coqueiro", 0, 14, 1);
+				//this.tiles[18][6][1] = new Tile("wall", "-cabana", 3, 12, 10);
+				//this.tiles[0][6][1] = new Tile("wall", "vazio", 0, 10, 1);
+				//this.tiles[0][9][1] = new Tile("wall", "vazio", 0, 10, 1);
+				this.tiles[3][1][1] = new Tile("wall", "-barraca", 3, 1, 1);
+				this.tiles[3][3][1] = new Tile("wall", "-barraca", 3, 3, 1);
+				this.tiles[3][5][1] = new Tile("wall", "-barraca", 3, 5, 1);
+				this.tiles[3][10][1] = new Tile("wall", "-barraca", 3, 10, 1);
+				this.tiles[3][12][1] = new Tile("wall", "-barraca", 3, 12, 1);
+				this.tiles[3][14][1] = new Tile("wall", "-barraca", 3, 14, 1);
+				this.tiles[6][1][1] = new Tile("wall", "-bPalha", 6, 1, 1);
+				this.tiles[6][3][1] = new Tile("wall", "-bPalha", 6, 3, 1);
+				this.tiles[6][5][1] = new Tile("wall", "-bPalha", 6, 5, 1);
+				this.tiles[6][10][1] = new Tile("wall", "-bPalha", 6, 10, 1);
+				this.tiles[6][12][1] = new Tile("wall", "-bPalha", 6, 12, 1);
+				this.tiles[6][14][1] = new Tile("wall", "-bPalha", 6, 14, 1);
 				break;
                 //Fase quadradinha de teste
             default:
-                this.equiX = 15;
-                this.equiY = 15;
+                this.equiX = 13;
+                this.equiY = 13;
 				this.equiZ = 1;
                 for (x = 10; x < 20; x++) {
                     for (y = 10; y < 20; y++) {
@@ -711,9 +735,9 @@ function Fase(fase, create, ratio) {
         }
     }
     this.load = function() {
-        if (this.fase == "praia"){
+        if (this.type == "praia" && this.total != 0){
                 stage.removeChild(btVoltar);
-                rushBeach = 2400;
+                rushBeach = 600;
                 createjs.Ticker.addEventListener("tick", beachRush);
         }
 		equi.x = this.equiX;
@@ -781,21 +805,25 @@ function Sep(id) {
     this.img.on("pressup", checkSeparar)
 }
 
-var rushBeach;
+var rushBeach = 0;
 
 function beachRush(e) {
     rushBeach--;
-    var text = new createjs.Text(Math.round(rushBeach/60), '20px Josefin Sans', '#fff');
+	var text = new createjs.Text(Math.round(rushBeach/30), '20px Josefin Sans', '#fff');
     text.x = 10;
     text.y = 40;
+    stage.addChild(bgPlay);
     stage.addChild(text);
+	faseAtual[faseIndex].update();
     
-    if (faseAtual[faseIndex].timer < 1){
+    if (rushBeach < 1){
         faseAtual[2] = new Fase("praia", null, 0.1);
         equi.lixo[2] = [];
-        opMenu();
+        setupMenu();
         createjs.Ticker.removeEventListener("tick", beachRush);
-    } else if (equi.lixo[2].lenght == faseAtual[2].total) {
+    } else if (equi.lixo[faseIndex].length == faseAtual[faseIndex].total) {
         createjs.Ticker.removeEventListener("tick", beachRush);
+		Separar();
+		btVoltarAdd()
     }
 }

@@ -16,7 +16,8 @@ mainGame = function() {
         faseAtual[0] = new Fase("casa", null, 0.1);
         faseAtual[1] = new Fase("escola", null, 0.1);
         faseAtual[2] = new Fase("praia", null, 0.1);
-		faseIndex = Math.floor(Math.random() * 3);
+		//faseIndex = Math.floor(Math.random() * 3);
+		faseIndex = 2;
         faseAtual[faseIndex].load();
     } else {
 		faseIndex = Math.floor(Math.random() * 3);
@@ -110,6 +111,7 @@ function Separar() {
         temp = new Sep(equi.lixo[faseIndex][lixo]);
     }
     equi.lixo[faseIndex] = [];
+	faseAtual[faseIndex].total = 0;
 }
 
 function checkSeparar(evt) {
@@ -118,7 +120,7 @@ function checkSeparar(evt) {
         if(evt.target.y > 25 && evt.target.y < 200 && evt.target.x > 680 && evt.target.x < 925 ){
             stage.removeChild(evt.target);
             GreenScore += 100;
-            Goldscore += 100;
+            GoldScore += 100;
         }
     } else if (evt.target.id > 8 || evt.target.id == 0) {
         if(evt.target.y > 110 && evt.target.y < 300 && evt.target.x > 800 && evt.target.x < 1075 ){
