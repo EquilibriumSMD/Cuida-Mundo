@@ -176,6 +176,8 @@ function beachRush(e) {
 }
 
 function Mapa(){
+    introVideo.visible = false;
+    
     bgMapa = new createjs.Bitmap(sonGoqueue.getResult("bgMapa"));
     bgMapa.x = 0;
     bgMapa.y = 0;

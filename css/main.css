@@ -15,7 +15,7 @@ body {
     margin: 0;
 }
 
-
+#video{ z-index: 5;}
 .container {
     margin: 0;
 }

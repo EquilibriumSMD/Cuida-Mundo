@@ -12,6 +12,8 @@ var btnDesenvolvedores;
 var btnMonitores;
 var btnOrientadores;
 var btVoltar;
+var btSkip;
+var introVideo;
 var tabela;
 var tabelaDevs;
 var tabelaMoni;
@@ -22,6 +24,7 @@ var instrucoesBg;
 var btnSons;
 var somOn;
 var somOff;
+var bgOverlay;
 
 var ativaSom = true;
 
@@ -30,7 +33,6 @@ createjs.Ticker.addEventListener("tick", draw);
 var btMapa0;
 var btMapa1;
 var btMapa2;
-
 
 function hideTabela(){
     tabela.visible = false;
@@ -180,6 +182,7 @@ function setupMenu() {
     hideTabelaDevs();
     hideTabelaMoni();
     hideTabelaOrient();
+    introVideo.visible = false;
 }
 
 function btVoltarAdd() {
@@ -596,6 +599,26 @@ function sons(){
 }
 
 function verificaSom(e){
-    ativaSom = e.target.valor;
+    ativaSom = e.target.som;
     console.log("som: ",ativaSom);
+}
+
+function introducao(){
+    bgOverlay = new createjs.Bitmap(sonGoqueue.getResult("bgOverlay"));
+    bgOverlay.x = 0;
+    bgOverlay.y = 0;
+    stage.addChild(bgOverlay);
+    inMenu = false;
+    
+    introVideo.visible = true;
+    introVideo.x = 30+telaOffset;
+    introVideo.y = 80;
+    
+    btSkip = new createjs.Bitmap(sonGoqueue.getResult("btSkip"));
+    btSkip.addEventListener("click", Mapa);
+    btSkip.x = 1130;
+    btSkip.y = 10;
+    stage.addChild(btSkip);
+    
+    console.log("Rodando a introdução");
 }

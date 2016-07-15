@@ -44,7 +44,8 @@ window.onload = function() {
             } else if (dist(clickX, clickY, btnOpcoes.x + 32, btnOpcoes.y + 32) < 32) {
                 options();
             } else if (dist(clickX, clickY, btnPlay.x + 67, btnPlay.y + 67) < 67) {
-                Mapa();
+//                Mapa();
+                introducao();
             }
         }
         if (inSubMenu) {
@@ -96,9 +97,14 @@ function main() {
     stage.canvas.width = 1280;
     stage.canvas.height = 800;
     
+    introVideo = new createjs.DOMElement(document.getElementById("video"));
+    introVideo.visible = false;
+    stage.addChild(introVideo);
+    
     tabela = new createjs.DOMElement(document.getElementById("tabela"));
     tabela.visible = false;
     stage.addChild(tabela);
+    
     
     tabelaDevs = new createjs.DOMElement(document.getElementById("tabelaDevs"));
     tabelaDevs.visible = false;
@@ -197,6 +203,9 @@ function main() {
         id: "bgMapa",
         src: "img/bgMapa.png"
     }, {
+        id: "bgOverlay",
+        src: "img/bg-overlay.png"
+    }, {
         id: "btMapa",
         src: "img/bt-mapa.png"
     }, {
@@ -217,6 +226,9 @@ function main() {
     }, {
         id: "btVoltar",
         src: "img/btVoltar.png"
+    }, {
+        id: "btSkip",
+        src: "img/bt-skip.png"
     }, {
         id: "lixo0",
         src: "img/bateria.png"
