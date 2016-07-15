@@ -3,7 +3,7 @@ var tela;
 var btMenu;
 var btHome;
 var btnPlay;
-var btnMais;
+var btnOpcoes;
 var btnEco;
 var btnSobre;
 var btnParticipar;
@@ -86,60 +86,40 @@ function opMenu() {
     }, 600);
     btnEco = new createjs.Bitmap(sonGoqueue.getResult("btnEco"));
     btnPlay = new createjs.Bitmap(sonGoqueue.getResult("btnPlay"));
-    btnMais = new createjs.Bitmap(sonGoqueue.getResult("btnMais"));
+    btnEquipe = new createjs.Bitmap(sonGoqueue.getResult("btnEquipe"));
+    btnOpcoes = new createjs.Bitmap(sonGoqueue.getResult("btnOpcoes"));
+    
     //posicionamento dos botoes
-    btnEco.x = 680;
-    btnEco.y = 370;
-    btnPlay.x = 790;
+    btnEco.x = 1140;
+    btnEco.y = 50;
+    btnPlay.x = 810;
     btnPlay.y = 330;
-    btnMais.x = 980;
-    btnMais.y = 370;
+    btnEquipe.x = 780;
+    btnEquipe.y = 665;
+    btnOpcoes.x = 890;
+    btnOpcoes.y = 665;
+    
     //fadeIn
     btnEco.alpha = 0;
     btnPlay.alpha = 0;
-    btnMais.alpha = 0;
+    btnEquipe.alpha = 0;
+    btnOpcoes.alpha = 0;
+    
     //adicionando os botões
     stage.addChild(btnEco);
     stage.addChild(btnPlay);
-    stage.addChild(btnMais);
+    stage.addChild(btnEquipe);
+    stage.addChild(btnOpcoes);
     createjs.Tween.get(btnEco).to({
         alpha: 1
     }, 600);
     createjs.Tween.get(btnPlay).to({
         alpha: 1
     }, 600);
-    createjs.Tween.get(btnMais).to({
+    createjs.Tween.get(btnEquipe).to({
         alpha: 1
     }, 600);
-}
-
-function subMenu() {
-    inSubMenu = true;
-    btnSobre = new createjs.Bitmap(sonGoqueue.getResult("btnSobre"));
-    btnParticipar = new createjs.Bitmap(sonGoqueue.getResult("btnParticipar"));
-    btnCreditos = new createjs.Bitmap(sonGoqueue.getResult("btnCreditos"));
-    //posicionamento dos botoes
-    btnSobre.x = 0;
-    btnSobre.y = 185;
-    btnParticipar.x = 429;
-    btnParticipar.y = 185;
-    btnCreditos.x = 855;
-    btnCreditos.y = 185;
-    //fadeIn
-    btnSobre.alpha = 0;
-    btnParticipar.alpha = 0;
-    btnCreditos.alpha = 0;
-    //adicionando os botões
-    stage.addChild(btnSobre);
-    stage.addChild(btnParticipar);
-    stage.addChild(btnCreditos);
-    createjs.Tween.get(btnSobre).to({
-        alpha: 1
-    }, 600);
-    createjs.Tween.get(btnParticipar).to({
-        alpha: 1
-    }, 600);
-    createjs.Tween.get(btnCreditos).to({
+    createjs.Tween.get(btnOpcoes).to({
         alpha: 1
     }, 600);
 }
@@ -181,7 +161,7 @@ function setupMenu() {
         equi = new Boneco();
     }
     opMenu();
-    soundMenu.play();
+    //soundMenu.play();
     soundFase.stop();
     hideTabela();
     hideTabelaDevs();
@@ -236,14 +216,16 @@ function play() {
     stage.addChild(text);
 }
 
-function mais() {
-    bgMais = new createjs.Bitmap(sonGoqueue.getResult("bgMais"));
-    bgMais.x = 0;
-    bgMais.y = 0;
-    bgMais.alpha = 0;
+/* Equipe e sub itens */
+
+function equipe() {
+    bgEquipe = new createjs.Bitmap(sonGoqueue.getResult("bgEquipe"));
+    bgEquipe.x = 0;
+    bgEquipe.y = 0;
+    bgEquipe.alpha = 0;
     inMenu = false;
-    stage.addChild(bgMais);
-    createjs.Tween.get(bgMais).to({
+    stage.addChild(bgEquipe);
+    createjs.Tween.get(bgEquipe).to({
         alpha: 1
     }, 600);
     var showTxt = new createjs.Text("Projeto Cuida Mundo desenvolvido pela Equipe Equilibrium. ",'20px Josefin Sans', '#fff');
@@ -258,7 +240,105 @@ function mais() {
     subMenu2();
     btVoltarAdd();
 }
+function monitores() {
+    
+    bgEquipe = new createjs.Bitmap(sonGoqueue.getResult("bgEquipe"));
+    bgEquipe.x = 0;
+    bgEquipe.y = 0;
+    bgEquipe.alpha = 0;
+    inMenu = false;
+    stage.addChild(bgEquipe);
+    createjs.Tween.get(bgEquipe).to({
+        alpha: 1
+    }, 600);
+    subMenu2();
+    btnMonitores = new createjs.Bitmap(sonGoqueue.getResult("btnMonitores2"));
+    btnMonitores.x = 855;
+    btnMonitores.y = 185;
+    stage.addChild(btnMonitores);
+    
+    btVoltarAdd();
+    hideTabelaDevs();
+    showTabelaMoni();
+    hideTabelaOrient();
+}
 
+function orientadores() {
+    bgEquipe = new createjs.Bitmap(sonGoqueue.getResult("bgEquipe"));
+    bgEquipe.x = 0;
+    bgEquipe.y = 0;
+    bgEquipe.alpha = 0;
+    inMenu = false;
+    stage.addChild(bgEquipe);
+    createjs.Tween.get(bgEquipe).to({
+        alpha: 1
+    }, 600);
+    subMenu2();
+    btnOrientadores = new createjs.Bitmap(sonGoqueue.getResult("btnOrientadores2"));
+    btnOrientadores.x = 429;
+    btnOrientadores.y = 185;
+    stage.addChild(btnOrientadores);
+    hideTabelaDevs();
+    hideTabelaMoni();
+    showTabelaOrient();
+    
+    btVoltarAdd();
+}
+
+function desenvolvedores() {
+    bgEquipe = new createjs.Bitmap(sonGoqueue.getResult("bgEquipe"));
+    bgEquipe.x = 0;
+    bgEquipe.y = 0;
+    bgEquipe.alpha = 0;
+    inMenu = false;
+    stage.addChild(bgEquipe);
+    createjs.Tween.get(bgEquipe).to({
+        alpha: 1
+    }, 600);
+    subMenu2();
+    btnDesenvolvedores = new createjs.Bitmap(sonGoqueue.getResult("btnDesenvolvedores2"));
+    btnDesenvolvedores.x = 0;
+    btnDesenvolvedores.y = 185;
+    stage.addChild(btnDesenvolvedores);
+    
+    showTabelaDevs();
+    hideTabelaMoni();
+    hideTabelaOrient();
+    
+    btVoltarAdd();
+}
+
+/* Ecopontos e sub itens */
+function subMenu() {
+    inSubMenu = true;
+    btnConheca = new createjs.Bitmap(sonGoqueue.getResult("btnConheca"));
+    btnParticipar = new createjs.Bitmap(sonGoqueue.getResult("btnParticipar"));
+    btnCreditos = new createjs.Bitmap(sonGoqueue.getResult("btnCreditos"));
+    //posicionamento dos botoes
+    btnConheca.x = 0;
+    btnConheca.y = 185;
+    btnParticipar.x = 429;
+    btnParticipar.y = 185;
+    btnCreditos.x = 855;
+    btnCreditos.y = 185;
+    //fadeIn
+    btnConheca.alpha = 0;
+    btnParticipar.alpha = 0;
+    btnCreditos.alpha = 0;
+    //adicionando os botões
+    stage.addChild(btnConheca);
+    stage.addChild(btnParticipar);
+    stage.addChild(btnCreditos);
+    createjs.Tween.get(btnConheca).to({
+        alpha: 1
+    }, 600);
+    createjs.Tween.get(btnParticipar).to({
+        alpha: 1
+    }, 600);
+    createjs.Tween.get(btnCreditos).to({
+        alpha: 1
+    }, 600);
+}
 function eco() {
     bgEco = new createjs.Bitmap(sonGoqueue.getResult("bgEco"));
     bgEco.x = 0;
@@ -293,10 +373,10 @@ function conheca() {
         alpha: 1
     }, 600);
     subMenu();
-    btnSobre = new createjs.Bitmap(sonGoqueue.getResult("btnSobre2"));
-    btnSobre.x = 0;
-    btnSobre.y = 185;
-    stage.addChild(btnSobre);
+    btnConheca = new createjs.Bitmap(sonGoqueue.getResult("btnConheca2"));
+    btnConheca.x = 0;
+    btnConheca.y = 185;
+    stage.addChild(btnConheca);
     
     hideTabela();
     
@@ -364,70 +444,3 @@ function materiais() {
     showTabela(); 
 }
 
-function monitores() {
-    
-    bgEco = new createjs.Bitmap(sonGoqueue.getResult("bgMais"));
-    bgEco.x = 0;
-    bgEco.y = 0;
-    bgEco.alpha = 0;
-    inMenu = false;
-    stage.addChild(bgEco);
-    createjs.Tween.get(bgEco).to({
-        alpha: 1
-    }, 600);
-    subMenu2();
-    btnMonitores = new createjs.Bitmap(sonGoqueue.getResult("btnMonitores2"));
-    btnMonitores.x = 855;
-    btnMonitores.y = 185;
-    stage.addChild(btnMonitores);
-    
-    btVoltarAdd();
-    hideTabelaDevs();
-    showTabelaMoni();
-    hideTabelaOrient();
-}
-
-function orientadores() {
-    bgEco = new createjs.Bitmap(sonGoqueue.getResult("bgMais"));
-    bgEco.x = 0;
-    bgEco.y = 0;
-    bgEco.alpha = 0;
-    inMenu = false;
-    stage.addChild(bgEco);
-    createjs.Tween.get(bgEco).to({
-        alpha: 1
-    }, 600);
-    subMenu2();
-    btnOrientadores = new createjs.Bitmap(sonGoqueue.getResult("btnOrientadores2"));
-    btnOrientadores.x = 429;
-    btnOrientadores.y = 185;
-    stage.addChild(btnOrientadores);
-    hideTabelaDevs();
-    hideTabelaMoni();
-    showTabelaOrient();
-    
-    btVoltarAdd();
-}
-
-function desenvolvedores() {
-    bgEco = new createjs.Bitmap(sonGoqueue.getResult("bgEquipe"));
-    bgEco.x = 0;
-    bgEco.y = 0;
-    bgEco.alpha = 0;
-    inMenu = false;
-    stage.addChild(bgEco);
-    createjs.Tween.get(bgEco).to({
-        alpha: 1
-    }, 600);
-    subMenu2();
-    btnDesenvolvedores = new createjs.Bitmap(sonGoqueue.getResult("btnDesenvolvedores2"));
-    btnDesenvolvedores.x = 0;
-    btnDesenvolvedores.y = 185;
-    stage.addChild(btnDesenvolvedores);
-    
-    showTabelaDevs();
-    hideTabelaMoni();
-    hideTabelaOrient();
-    
-    btVoltarAdd();
-}

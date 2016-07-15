@@ -38,14 +38,16 @@ window.onload = function() {
         if (inMenu) {
             if (dist(clickX, clickY, btnEco.x + 32, btnEco.y + 32) < 32) {
                 eco();
-            } else if (dist(clickX, clickY, btnMais.x + 32, btnMais.y + 32) < 32) {
-                mais();
+            } else if (dist(clickX, clickY, btnEquipe.x + 32, btnEquipe.y + 32) < 32) {
+                equipe();
+            } else if (dist(clickX, clickY, btnOpcoes.x + 32, btnOpcoes.y + 32) < 32) {
+                options();
             } else if (dist(clickX, clickY, btnPlay.x + 67, btnPlay.y + 67) < 67) {
                 play();
             }
         }
         if (inSubMenu) {
-            if (clickX > btnSobre.x && clickX < btnSobre.x + btnSobre.getBounds().width && clickY > btnSobre.y && clickY < btnSobre.y + btnSobre.getBounds().height) {
+            if (clickX > btnConheca.x && clickX < btnConheca.x + btnConheca.getBounds().width && clickY > btnConheca.y && clickY < btnConheca.y + btnConheca.getBounds().height) {
                 conheca();
             } else if (clickX > btnParticipar.x && clickX < btnParticipar.x + btnParticipar.getBounds().width && clickY > btnParticipar.y && clickY < btnParticipar.y + btnParticipar.getBounds().height) {
                 participe();
@@ -111,14 +113,17 @@ function main() {
         id: "btnPlay",
         src: "img/btnPlay.png"
     }, {
-        id: "btnMais",
-        src: "img/btnMais.png"
+        id: "btnOpcoes",
+        src: "img/btnOpcoes.png"
     }, {
-        id: "btnSobre",
-        src: "img/opcao-sobre.png"
+        id: "btnEquipe",
+        src: "img/btnEquipe.png"
     }, {
-        id: "btnSobre2",
-        src: "img/opcao-sobre2.png"
+        id: "btnConheca",
+        src: "img/opcao-conheca.png"
+    }, {
+        id: "btnConheca2",
+        src: "img/opcao-conheca2.png"
     }, {
         id: "btnParticipar",
         src: "img/opcao-participar.png"
