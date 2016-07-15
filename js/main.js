@@ -10,15 +10,17 @@ var faseIndex = 0;
 var btMapa0;
 var btMapa1;
 var btMapa2;
+var btMapa3;
 
 mainGame = function() {
     if (faseAtual[0] === undefined || (faseAtual[0].total + faseAtual[1].total + faseAtual[2].total == 0)) {
-		dificult += 0.05;
+        if (faseAtual[0].total + faseAtual[1].total + faseAtual[2].total == 0)
+            dificult += 0.05;
         faseAtual[0] = new Fase("casa", null, dificult);
         faseAtual[1] = new Fase("escola", null, dificult);
         faseAtual[2] = new Fase("praia", null, dificult);
         faseAtual[faseIndex].load();
-		Save();
+        Save();
     } else {
         faseAtual[faseIndex].load();
     }
@@ -110,74 +112,74 @@ function Separar() {
         temp = new Sep(equi.lixo[faseIndex][lixo]);
     }
     equi.lixo[faseIndex] = [];
-	faseAtual[faseIndex].total = 0;
+    faseAtual[faseIndex].total = 0;
 }
 
 function checkSeparar(evt) {
     if (evt.target.id > 11) {
-        if(evt.target.y > 25 && evt.target.y < 200 && evt.target.x > 680 && evt.target.x < 925 ){
+        if (evt.target.y > 25 && evt.target.y < 200 && evt.target.x > 680 && evt.target.x < 925) {
             stage.removeChild(evt.target);
             GreenScore += 100;
             GoldScore += 10;
         }
     } else if (evt.target.id > 8 || evt.target.id == 0) {
-        if(evt.target.y > 110 && evt.target.y < 300 && evt.target.x > 800 && evt.target.x < 1075 ){
+        if (evt.target.y > 110 && evt.target.y < 300 && evt.target.x > 800 && evt.target.x < 1075) {
             stage.removeChild(evt.target);
             GreenScore += 100;
-            GoldScore +=30;
+            GoldScore += 30;
         }
     } else if (evt.target.id > 3) {
-        if(evt.target.y > 225 && evt.target.y < 425 && evt.target.x > 570 && evt.target.x < 900 ){
+        if (evt.target.y > 225 && evt.target.y < 425 && evt.target.x > 570 && evt.target.x < 900) {
             stage.removeChild(evt.target);
             GreenScore += 100;
             GoldScore += 15;
         }
-    } else if(evt.target.y > 140 && evt.target.y < 350 && evt.target.x > 425 && evt.target.x < 725 ){
-            stage.removeChild(evt.target);
-            GreenScore += 100;
-            GoldScore += 25;
-        }
+    } else if (evt.target.y > 140 && evt.target.y < 350 && evt.target.x > 425 && evt.target.x < 725) {
+        stage.removeChild(evt.target);
+        GreenScore += 100;
+        GoldScore += 25;
+    }
 }
 
 var rushBeach = 0;
 
 function beachRush(e) {
     rushBeach--;
-	var text = new createjs.Text(Math.round(rushBeach/30), '20px Josefin Sans', '#fff');
+    var text = new createjs.Text(Math.round(rushBeach / 30), '20px Josefin Sans', '#fff');
     text.x = 10;
     text.y = 40;
     stage.addChild(bgPlay);
     stage.addChild(text);
-	faseAtual[faseIndex].update();
-	
-	var text = new createjs.Text("🌱"+GreenScore, '20px Josefin Sans', '#0F0');
+    faseAtual[faseIndex].update();
+
+    var text = new createjs.Text("🌱" + GreenScore, '20px Josefin Sans', '#0F0');
     text.x = 10;
     text.y = 730;
     stage.addChild(text);
-	var text = new createjs.Text("💰"+GoldScore, '20px Josefin Sans', '#FF0');
+    var text = new createjs.Text("💰" + GoldScore, '20px Josefin Sans', '#FF0');
     text.x = 10;
     text.y = 750;
     stage.addChild(text);
-	var text = new createjs.Text("lvl:"+Math.round(dificult/0.05), '20px Josefin Sans', '#FFF');
+    var text = new createjs.Text("lvl:" + Math.round(dificult / 0.05), '20px Josefin Sans', '#FFF');
     text.x = 10;
     text.y = 770;
     stage.addChild(text);
-    
-    if (rushBeach < 1){
+
+    if (rushBeach < 1) {
         faseAtual[faseIndex] = new Fase(faseAtual[faseIndex].type, null, dificult);
         equi.lixo[faseIndex] = [];
         setupMenu();
         createjs.Ticker.removeEventListener("tick", beachRush);
     } else if (equi.lixo[faseIndex].length == faseAtual[faseIndex].total) {
         createjs.Ticker.removeEventListener("tick", beachRush);
-		stage.removeChild(text);
-		btVoltarAdd()
+        stage.removeChild(text);
+        btVoltarAdd()
     }
 }
 
-function Mapa(){
+function Mapa() {
     introVideo.visible = false;
-    
+
     bgMapa = new createjs.Bitmap(sonGoqueue.getResult("bgMapa"));
     bgMapa.x = 0;
     bgMapa.y = 0;
@@ -186,57 +188,57 @@ function Mapa(){
     stage.addChild(bgMapa);
     createjs.Tween.get(bgMapa).to({
         alpha: 1
-    }, 600);   
-    
+    }, 600);
+
     btMapa0 = new createjs.Bitmap(sonGoqueue.getResult("btMapa"));
     btMapa0.x = 920;
     btMapa0.y = 269;
     btMapa0.fase = 0;
     btMapa0.addEventListener("click", verificaFase);
     stage.addChild(btMapa0);
-    
+
     btMapa1 = new createjs.Bitmap(sonGoqueue.getResult("btMapa"));
     btMapa1.x = 699;
     btMapa1.y = 346;
-    btMapa1.fase = 1;  
+    btMapa1.fase = 1;
     btMapa1.addEventListener("click", verificaFase);
     stage.addChild(btMapa1);
-    
+
     btMapa2 = new createjs.Bitmap(sonGoqueue.getResult("btMapa"));
     btMapa2.x = 917;
     btMapa2.y = 170;
     btMapa2.fase = 2;
     btMapa2.addEventListener("click", verificaFase);
     stage.addChild(btMapa2);
-	
+
     btMapa3 = new createjs.Bitmap(sonGoqueue.getResult("btMapa"));
     btMapa3.x = 300;
     btMapa3.y = 374;
     btMapa3.fase = "ecoponto";
     btMapa3.addEventListener("click", verificaFase);
     stage.addChild(btMapa3);
-	
-	var text = new createjs.Text("🌱"+GreenScore, '20px Josefin Sans', '#0F0');
+
+    var text = new createjs.Text("🌱" + GreenScore, '20px Josefin Sans', '#0F0');
     text.x = 10;
     text.y = 730;
     stage.addChild(text);
-	var text = new createjs.Text("💰"+GoldScore, '20px Josefin Sans', '#FF0');
+    var text = new createjs.Text("💰" + GoldScore, '20px Josefin Sans', '#FF0');
     text.x = 10;
     text.y = 750;
     stage.addChild(text);
-	var text = new createjs.Text("lvl:"+Math.round(dificult/0.05), '20px Josefin Sans', '#FFF');
+    var text = new createjs.Text("lvl:" + Math.round(dificult / 0.05), '20px Josefin Sans', '#FFF');
     text.x = 10;
     text.y = 770;
     stage.addChild(text);
-    
+
     btVoltarAdd();
 }
 
-function verificaFase(e){
-	if(e.target.fase != "ecoponto"){
-		faseIndex = e.target.fase;
-		play();
-	} else {
-		Separar();
-	}
+function verificaFase(e) {
+    if (e.target.fase != "ecoponto") {
+        faseIndex = e.target.fase;
+        play();
+    } else {
+        Separar();
+    }
 }

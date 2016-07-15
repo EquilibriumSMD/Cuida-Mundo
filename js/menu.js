@@ -29,14 +29,11 @@ var ativaSom = true;
 
 createjs.Ticker.addEventListener("tick", draw);
 
-var btMapa0;
-var btMapa1;
-var btMapa2;
-
-function hideTabela(){
+function hideTabela() {
     tabela.visible = false;
 }
-function showTabela(){
+
+function showTabela() {
     tabela.visible = true;
     tabela.x = 250 + telaOffset;
     tabela.y = 800;
@@ -45,10 +42,11 @@ function showTabela(){
     }, 1000); //, createjs.Ease.quadInOut);
 }
 
-function hideTabelaDevs(){
+function hideTabelaDevs() {
     tabelaDevs.visible = false;
 }
-function showTabelaDevs(){
+
+function showTabelaDevs() {
     tabelaDevs.visible = true;
     tabelaDevs.x = 250 + telaOffset;
     tabelaDevs.y = 800;
@@ -57,10 +55,11 @@ function showTabelaDevs(){
     }, 1000); //, createjs.Ease.quadInOut);
 }
 
-function hideTabelaMoni(){
+function hideTabelaMoni() {
     tabelaMoni.visible = false;
 }
-function showTabelaMoni(){
+
+function showTabelaMoni() {
     tabelaMoni.visible = true;
     tabelaMoni.x = 250 + telaOffset;
     tabelaMoni.y = 800;
@@ -68,12 +67,13 @@ function showTabelaMoni(){
         y: 355
     }, 1000); //, createjs.Ease.quadInOut);
     console.log("Show monitores");
-} 
+}
 
-function hideTabelaOrient(){
+function hideTabelaOrient() {
     tabelaOrient.visible = false;
 }
-function showTabelaOrient(){
+
+function showTabelaOrient() {
     tabelaOrient.visible = true;
     tabelaOrient.x = 250 + telaOffset;
     tabelaOrient.y = 800;
@@ -102,7 +102,7 @@ function opMenu() {
     btnPlay = new createjs.Bitmap(sonGoqueue.getResult("btnPlay"));
     btnEquipe = new createjs.Bitmap(sonGoqueue.getResult("btnEquipe"));
     btnOpcoes = new createjs.Bitmap(sonGoqueue.getResult("btnOpcoes"));
-    
+
     //posicionamento dos botoes
     btnEco.x = 1140;
     btnEco.y = 50;
@@ -112,13 +112,13 @@ function opMenu() {
     btnEquipe.y = 665;
     btnOpcoes.x = 890;
     btnOpcoes.y = 665;
-    
+
     //fadeIn
     btnEco.alpha = 0;
     btnPlay.alpha = 0;
     btnEquipe.alpha = 0;
     btnOpcoes.alpha = 0;
-    
+
     //adicionando os botões
     stage.addChild(btnEco);
     stage.addChild(btnPlay);
@@ -203,7 +203,7 @@ function play() {
             icon: "img/icon-lixo1.png"
         });
         archivement[0] = true;
-		GoldScore += 5;
+        GoldScore += 5;
     }
     inGame = true;
     $(".scores").show();
@@ -214,19 +214,19 @@ function play() {
         alpha: 1
     }, 600).call(mainGame);
     btVoltarAdd();
-    
+
     soundMenu.stop();
     soundFase.play();
-	
-	var text = new createjs.Text("🌱"+GreenScore, '20px Josefin Sans', '#0F0');
+
+    var text = new createjs.Text("🌱" + GreenScore, '20px Josefin Sans', '#0F0');
     text.x = 10;
     text.y = 730;
     stage.addChild(text);
-	var text = new createjs.Text("💰"+GoldScore, '20px Josefin Sans', '#FF0');
+    var text = new createjs.Text("💰" + GoldScore, '20px Josefin Sans', '#FF0');
     text.x = 10;
     text.y = 750;
     stage.addChild(text);
-	var text = new createjs.Text("lvl:"+Math.round(dificult/0.05), '20px Josefin Sans', '#FFF');
+    var text = new createjs.Text("lvl:" + Math.round(dificult / 0.05), '20px Josefin Sans', '#FFF');
     text.x = 10;
     text.y = 770;
     stage.addChild(text);
@@ -244,7 +244,7 @@ function equipe() {
     createjs.Tween.get(bgEquipe).to({
         alpha: 1
     }, 600);
-    var showTxt = new createjs.Text("Projeto Cuida Mundo desenvolvido pela Equipe Equilibrium. ",'20px Josefin Sans', '#fff');
+    var showTxt = new createjs.Text("Projeto Cuida Mundo desenvolvido pela Equipe Equilibrium. ", '20px Josefin Sans', '#fff');
     showTxt.x = 300;
     showTxt.y = 800;
     showTxt.lineWidth = 670;
@@ -256,8 +256,9 @@ function equipe() {
     subMenu2();
     btVoltarAdd();
 }
+
 function monitores() {
-    
+
     bgEquipe = new createjs.Bitmap(sonGoqueue.getResult("bgEquipe"));
     bgEquipe.x = 0;
     bgEquipe.y = 0;
@@ -272,7 +273,7 @@ function monitores() {
     btnMonitores.x = 855;
     btnMonitores.y = 185;
     stage.addChild(btnMonitores);
-    
+
     btVoltarAdd();
     hideTabelaDevs();
     showTabelaMoni();
@@ -297,7 +298,7 @@ function orientadores() {
     hideTabelaDevs();
     hideTabelaMoni();
     showTabelaOrient();
-    
+
     btVoltarAdd();
 }
 
@@ -316,11 +317,11 @@ function desenvolvedores() {
     btnDesenvolvedores.x = 0;
     btnDesenvolvedores.y = 185;
     stage.addChild(btnDesenvolvedores);
-    
+
     showTabelaDevs();
     hideTabelaMoni();
     hideTabelaOrient();
-    
+
     btVoltarAdd();
 }
 
@@ -355,6 +356,7 @@ function subMenu() {
         alpha: 1
     }, 600);
 }
+
 function eco() {
     bgEco = new createjs.Bitmap(sonGoqueue.getResult("bgEco"));
     bgEco.x = 0;
@@ -395,9 +397,9 @@ function conheca() {
     btnConheca.x = 0;
     btnConheca.y = 185;
     stage.addChild(btnConheca);
-    
+
     hideTabela();
-    
+
     btVoltarAdd();
     var showTxt = new createjs.Text("Os EcoPontos são contêineres colocados em pontos importantes de cada regional, para que a população possa depositar o lixo, de forma selecionada, contribuindo para o meio ambiente e recebendo, além disso, vantagens sociais, como descontos nas contas de água e luz ou créditos no cartão do transporte público, por exemplo.", '20px Josefin Sans', '#fff');
     showTxt.x = 300;
@@ -427,7 +429,7 @@ function participe() {
     btnParticipar.y = 185;
     stage.addChild(btnParticipar);
     hideTabela();
-    
+
     btVoltarAdd();
     var showTxt = new createjs.Text('Para adquirir os créditos ou descontos basta que o Fortalezense siga dicas simples: \n' +
         '\n① Procurar o Ecoponto mais próximo, fazer o cadastro e receber o cartão Recicla Fortaleza; \n' +
@@ -458,9 +460,9 @@ function materiais() {
     btnCreditos.x = 855;
     btnCreditos.y = 185;
     stage.addChild(btnCreditos);
-    
+
     btVoltarAdd();
-    showTabela(); 
+    showTabela();
 }
 
 /* Menu Options e sub itens*/
@@ -471,25 +473,25 @@ function subMenuOptions() {
     //posicionamento dos botoes
     btnInstrucoes.x = 0;
     btnInstrucoes.y = 185;
-    
+
     btnSons.x = 643;
     btnSons.y = 185;
-    
+
     //fadeIn
     btnInstrucoes.alpha = 0;
     btnSons.alpha = 0;
-    
+
     //adicionando os botões
     stage.addChild(btnInstrucoes);
     stage.addChild(btnSons);
-    
+
     createjs.Tween.get(btnInstrucoes).to({
         alpha: 1
     }, 600);
     createjs.Tween.get(btnSons).to({
         alpha: 1
     }, 600);
-    
+
 }
 
 function options() {
@@ -502,13 +504,13 @@ function options() {
     createjs.Tween.get(bgOpcoes).to({
         alpha: 1
     }, 600);
-    
+
     subMenuOptions();
     btVoltarAdd();
 }
 
 
-function instrucoes(){
+function instrucoes() {
     bgOpcoes = new createjs.Bitmap(sonGoqueue.getResult("bgOpcoes"));
     bgOpcoes.x = 0;
     bgOpcoes.y = 0;
@@ -518,9 +520,9 @@ function instrucoes(){
     createjs.Tween.get(bgOpcoes).to({
         alpha: 1
     }, 600);
-    
+
     subMenuOptions();
-    
+
     btnInstrucoes = new createjs.Bitmap(sonGoqueue.getResult("btnInstrucoes2"));
     btnInstrucoes.x = 0;
     btnInstrucoes.y = 185;
@@ -529,7 +531,7 @@ function instrucoes(){
     createjs.Tween.get(btnInstrucoes).to({
         alpha: 1
     }, 600);
-    
+
     instrucoesBg = new createjs.Bitmap(sonGoqueue.getResult("instrucoesBg"));
     instrucoesBg.x = 107;
     instrucoesBg.y = 381;
@@ -538,11 +540,11 @@ function instrucoes(){
     createjs.Tween.get(instrucoesBg).to({
         alpha: 1
     }, 600);
-    
+
     btVoltarAdd();
 }
 
-function sons(){
+function sons() {
     bgOpcoes = new createjs.Bitmap(sonGoqueue.getResult("bgOpcoes"));
     bgOpcoes.x = 0;
     bgOpcoes.y = 0;
@@ -552,24 +554,24 @@ function sons(){
     createjs.Tween.get(bgOpcoes).to({
         alpha: 1
     }, 600);
-    
+
     subMenuOptions();
     btnSons = new createjs.Bitmap(sonGoqueue.getResult("btnSons2"));
-    
+
     //posicionamento dos botoes
     btnSons.x = 643;
     btnSons.y = 185;
-    
+
     //fadeIn
     btnSons.alpha = 0;
-    
+
     //adicionando os botões
     stage.addChild(btnSons);
-    
+
     createjs.Tween.get(btnSons).to({
         alpha: 1
     }, 600);
-    
+
     //som on
     somOn = new createjs.Bitmap(sonGoqueue.getResult("som-on"));
     somOn.x = 429;
@@ -581,7 +583,7 @@ function sons(){
     createjs.Tween.get(somOn).to({
         alpha: 1
     }, 600);
-    
+
     //som off
     somOff = new createjs.Bitmap(sonGoqueue.getResult("som-off"));
     somOff.x = 766;
@@ -593,31 +595,31 @@ function sons(){
     createjs.Tween.get(somOff).to({
         alpha: 1
     }, 600);
-    
+
     btVoltarAdd();
 }
 
-function verificaSom(e){
+function verificaSom(e) {
     ativaSom = e.target.som;
-    console.log("som: ",ativaSom);
+    console.log("som: ", ativaSom);
 }
 
-function introducao(){
+function introducao() {
     bgOverlay = new createjs.Bitmap(sonGoqueue.getResult("bgOverlay"));
     bgOverlay.x = 0;
     bgOverlay.y = 0;
     stage.addChild(bgOverlay);
     inMenu = false;
-    
+
     introVideo.visible = true;
-    introVideo.x = 30+telaOffset;
+    introVideo.x = 30 + telaOffset;
     introVideo.y = 80;
-    
+
     btSkip = new createjs.Bitmap(sonGoqueue.getResult("btSkip"));
     btSkip.addEventListener("click", Mapa);
     btSkip.x = 1130;
     btSkip.y = 10;
     stage.addChild(btSkip);
-    
+
     console.log("Rodando a introdução");
 }

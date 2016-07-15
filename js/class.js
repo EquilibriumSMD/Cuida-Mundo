@@ -8,14 +8,15 @@ var equi;
 var SAVE = {};
 
 function Save() {
-	SAVE.GreenScore = GreenScore;
-	SAVE.GoldScore = GoldScore;
-	SAVE.dificult = dificult;
-	SAVE.archivement = archivement;
-	localStorage.setItem('SAVE', JSON.stringify(SAVE) );
+    SAVE.GreenScore = GreenScore;
+    SAVE.GoldScore = GoldScore;
+    SAVE.dificult = dificult;
+    SAVE.archivement = archivement;
+    localStorage.setItem('SAVE', JSON.stringify(SAVE));
 }
-  function Wipe() {
-  	localStorage.removeItem('SAVE');
+
+function Wipe() {
+    localStorage.removeItem('SAVE');
 }
 
 // Comum ao jogo e ao menu:
@@ -36,32 +37,36 @@ var soundFase;
 function loadSound() {
     createjs.Sound.registerSound("sons/som-menu.mp3", "guitar");
     createjs.Sound.registerSound("sons/som-fase.mp3", "piano");
-    
-    var configs = new createjs.PlayPropsConfig().set({interrupt: createjs.Sound.INTERRUPT_ANY, loop: -1, volume: 0.5});
-    
+
+    var configs = new createjs.PlayPropsConfig().set({
+        interrupt: createjs.Sound.INTERRUPT_ANY,
+        loop: -1,
+        volume: 0.5
+    });
+
     soundMenu = createjs.Sound.play("guitar", configs);
     soundFase = createjs.Sound.play("piano", configs);
 }
 
 window.onload = function() {
-	
-	if (localStorage.getItem('SAVE') !== null) {
-		SAVE = JSON.parse(localStorage.getItem('SAVE'));
-		GreenScore = SAVE.GreenScore;
-		GoldScore = SAVE.GoldScore;
-		dificult = SAVE.dificult;
-		archivement = SAVE.archivement;
+
+    if (localStorage.getItem('SAVE') !== null) {
+        SAVE = JSON.parse(localStorage.getItem('SAVE'));
+        GreenScore = SAVE.GreenScore;
+        GoldScore = SAVE.GoldScore;
+        dificult = SAVE.dificult;
+        archivement = SAVE.archivement;
     }
-    
+
     main();
     loadSound();
-    
+
     //jogando as funções de cada botão
     stage.canvas.addEventListener("click", function(e) {
         var canvasX = document.getElementById("defaultCanvas0").offsetLeft;
         var canvasY = document.getElementById("defaultCanvas0").offsetTop;
         telaOffset = document.getElementById("defaultCanvas0").offsetLeft;
-        
+
         var clickX = e.clientX - canvasX;
         var clickY = e.clientY - canvasY;
         if (inMenu) {
@@ -72,7 +77,7 @@ window.onload = function() {
             } else if (dist(clickX, clickY, btnOpcoes.x + 32, btnOpcoes.y + 32) < 32) {
                 options();
             } else if (dist(clickX, clickY, btnPlay.x + 67, btnPlay.y + 67) < 67) {
-//                Mapa();
+                //                Mapa();
                 introducao();
             }
         }
@@ -85,7 +90,7 @@ window.onload = function() {
                 materiais();
             }
         }
-        
+
         if (inSubMenu2) {
             if (clickX > btnDesenvolvedores.x && clickX < btnDesenvolvedores.x + btnDesenvolvedores.getBounds().width && clickY > btnDesenvolvedores.y && clickY < btnDesenvolvedores.y + btnDesenvolvedores.getBounds().height) {
                 desenvolvedores();
@@ -95,7 +100,7 @@ window.onload = function() {
                 orientadores();
             }
         }
-        
+
         if (inSubOptions) {
             if (clickX > btnInstrucoes.x && clickX < btnInstrucoes.x + btnInstrucoes.getBounds().width && clickY > btnInstrucoes.y && clickY < btnInstrucoes.y + btnInstrucoes.getBounds().height) {
                 instrucoes();
@@ -124,28 +129,28 @@ function main() {
     stage = new createjs.Stage("defaultCanvas0");
     stage.canvas.width = 1280;
     stage.canvas.height = 800;
-    
+
     introVideo = new createjs.DOMElement(document.getElementById("video"));
     introVideo.visible = false;
     stage.addChild(introVideo);
-    
+
     tabela = new createjs.DOMElement(document.getElementById("tabela"));
     tabela.visible = false;
     stage.addChild(tabela);
-    
-    
+
+
     tabelaDevs = new createjs.DOMElement(document.getElementById("tabelaDevs"));
     tabelaDevs.visible = false;
     stage.addChild(tabelaDevs);
-    
+
     tabelaMoni = new createjs.DOMElement(document.getElementById("tabelaMoni"));
     tabelaMoni.visible = false;
     stage.addChild(tabelaMoni);
-    
+
     tabelaOrient = new createjs.DOMElement(document.getElementById("tabelaOrient"));
     tabelaOrient.visible = false;
     stage.addChild(tabelaOrient);
-    
+
     // Preload     
     sonGoqueue.on("complete", setupMenu, this);
     sonGoqueue.on("progress", loading, this);
@@ -448,7 +453,11 @@ function Boneco() {
     this.x = 12;
     this.y = 12;
     this.z = 1;
-    this.lixo = [[],[],[]];
+    this.lixo = [
+        [],
+        [],
+        []
+    ];
     //animacao    
     var spritePersonagem = new createjs.SpriteSheet({
         images: [sonGoqueue.getResult("sprite")],
@@ -514,7 +523,7 @@ function Boneco() {
             stage.removeChild(faseAtual[faseIndex].tiles[this.x][this.y][this.z].img);
             faseAtual[faseIndex].tiles[this.x][this.y][this.z] = new Tile("void", 0, x, y, z);
             this.score();
-			GreenScore += 5;
+            GreenScore += 5;
         }
     }
     this.score = function() {
@@ -561,10 +570,10 @@ function Tile(type, id, x, y, z) {
 
 function Fase(fase, create, ratio) {
     this.tiles = [];
-	this.equiX;
-	this.equiY;
-	this.equiZ;
-	this.total = 0;
+    this.equiX;
+    this.equiY;
+    this.equiZ;
+    this.total = 0;
     this.type = fase;
     if (ratio === undefined) {
         this.ratio = 0.5;
@@ -585,142 +594,142 @@ function Fase(fase, create, ratio) {
         switch (fase) {
             //Fase da casa
             case "casa":
-            rushBeach = 900 + dificult * 900;
-            this.equiX = 15;
-            this.equiY = 15;
-            this.equiZ = 1;
-            for (x = 0; x < 3; x++) {
-                for (y = 5; y < 9; y++) {
-                    this.tiles[x][y][4] = new Tile("floor", "-casa", x, y, 4);
+                rushBeach = 900 + dificult * 900;
+                this.equiX = 15;
+                this.equiY = 15;
+                this.equiZ = 1;
+                for (x = 0; x < 3; x++) {
+                    for (y = 5; y < 9; y++) {
+                        this.tiles[x][y][4] = new Tile("floor", "-casa", x, y, 4);
+                    }
                 }
-            }
-            for (y = 5; y < 13; y++) {
-                this.tiles[3][y][4] = new Tile("floor", "-casa", 3, y, 4);
-            }
-            for (x = 4; x < 7; x++) {
-                for (y = 3; y < 13; y++) {
-                    this.tiles[x][y][4] = new Tile("floor", "-casa", x, y, 4);
+                for (y = 5; y < 13; y++) {
+                    this.tiles[3][y][4] = new Tile("floor", "-casa", 3, y, 4);
                 }
-            }
-            this.tiles[7][7][4] = new Tile("stair", "s", 7, 8.5, 4.7);
-            this.tiles[8][7][3] = new Tile("stair", 7, 8, 7, 3);
-            this.tiles[9][7][2] = new Tile("stair", 7, 9, 7, 2);
-            this.tiles[10][7][1] = new Tile("stair", 7, 10, 7, 1);
-            this.tiles[11][7][0] = new Tile("stair", 7, 11, 7, 0);
-            for (x = 11; x < 21; x++) {
-                for (y = 1; y < 19; y++) {
-                    this.tiles[x][y][0] = new Tile("floor", "-casa", x, y, 0);
+                for (x = 4; x < 7; x++) {
+                    for (y = 3; y < 13; y++) {
+                        this.tiles[x][y][4] = new Tile("floor", "-casa", x, y, 4);
+                    }
                 }
-            }
-            //para consertar do topo
-            for (y = 5; y < 7; y++) {
-                this.tiles[0][y][5] = new Tile("wall", "-casa2", 0-0.2, y, 5);
-                this.tiles[0][y][6] = new Tile("wall", "-casa2", 0-0.2, y, 6);
-            }    
-            for (x = 0; x < 4; x++) {
-                this.tiles[x][4][5] = new Tile("wall", "-casa", x, 4+0.25, 5);
-                this.tiles[x][4][6] = new Tile("wall", "-casa", x, 4+0.25, 6);
-            }
-            for (y = 3; y < 5; y++) {
-                this.tiles[4][y][5] = new Tile("wall", "-casa2", 4-0.3, y, 5);
-                this.tiles[4][y][6] = new Tile("wall", "-casa2", 4-0.3, y, 6);
-            }
-            for (x = 4; x < 7; x++) {
-                this.tiles[x][2][4] = new Tile("wall", "-casa", x, 2+0.25, 4);
-                this.tiles[x][2][5] = new Tile("wall", "-casa", x, 2+0.25, 5);
-                this.tiles[x][2][6] = new Tile("wall", "-casa", x, 2+0.25, 6);
-            }
-            for (y = 9; y < 13; y++) {
-                this.tiles[3][y][5] = new Tile("wall", "-casa2", 3-0.25, y, 5);
-                this.tiles[3][y][6] = new Tile("wall", "-casa2", 3-0.25, y, 6);
-            }
-            
-            //cama
-//            this.tiles[1][6][6] = new Tile("wall", "-cama", 1, 6, 6);
-                
-            //banco
-//            for(y = 6; y < 7; y++){
-//                this.tiles[12][y][1] = new Tile("wall", "-sofa", 12+0.2, y, 1);
-//            }
-                
-            //mesa
-            this.tiles[18][2][1] = new Tile("wall", "-mesa", 18, 2, 1);
-                
-            //mesa
-            this.tiles[16][16][1] = new Tile("wall", "-mesa", 16, 16, 1);    
-            
-            //para consertar
-            for (x = 11; x < 16; x++) {
-                this.tiles[x][2][1] = new Tile("wall", "-casa", x, 2+0.25, 1);
-                this.tiles[x][2][2] = new Tile("wall", "-casa", x, 2+0.25, 2);
-            }
-            for (y = 1; y < 3; y++) {
-                this.tiles[16][y][1] = new Tile("wall", "-casa2", 16-0.3, y, 1);
-                this.tiles[16][y][2] = new Tile("wall", "-casa2", 16-0.3, y, 2);
-            }
-            for (x = 16; x < 21; x++) {
-                this.tiles[x][0][1] = new Tile("wall", "-casa", x-0.05, 0+0.25, 1);
-                this.tiles[x][0][2] = new Tile("wall", "-casa", x-0.05, 0+0.25, 2);
-            }    
-                
+                this.tiles[7][7][4] = new Tile("stair", "s", 7, 8.5, 4.7);
+                this.tiles[8][7][3] = new Tile("stair", 7, 8, 7, 3);
+                this.tiles[9][7][2] = new Tile("stair", 7, 9, 7, 2);
+                this.tiles[10][7][1] = new Tile("stair", 7, 10, 7, 1);
+                this.tiles[11][7][0] = new Tile("stair", 7, 11, 7, 0);
+                for (x = 11; x < 21; x++) {
+                    for (y = 1; y < 19; y++) {
+                        this.tiles[x][y][0] = new Tile("floor", "-casa", x, y, 0);
+                    }
+                }
+                //para consertar do topo
+                for (y = 5; y < 7; y++) {
+                    this.tiles[0][y][5] = new Tile("wall", "-casa2", 0 - 0.2, y, 5);
+                    this.tiles[0][y][6] = new Tile("wall", "-casa2", 0 - 0.2, y, 6);
+                }
+                for (x = 0; x < 4; x++) {
+                    this.tiles[x][4][5] = new Tile("wall", "-casa", x, 4 + 0.25, 5);
+                    this.tiles[x][4][6] = new Tile("wall", "-casa", x, 4 + 0.25, 6);
+                }
+                for (y = 3; y < 5; y++) {
+                    this.tiles[4][y][5] = new Tile("wall", "-casa2", 4 - 0.3, y, 5);
+                    this.tiles[4][y][6] = new Tile("wall", "-casa2", 4 - 0.3, y, 6);
+                }
+                for (x = 4; x < 7; x++) {
+                    this.tiles[x][2][4] = new Tile("wall", "-casa", x, 2 + 0.25, 4);
+                    this.tiles[x][2][5] = new Tile("wall", "-casa", x, 2 + 0.25, 5);
+                    this.tiles[x][2][6] = new Tile("wall", "-casa", x, 2 + 0.25, 6);
+                }
+                for (y = 9; y < 13; y++) {
+                    this.tiles[3][y][5] = new Tile("wall", "-casa2", 3 - 0.25, y, 5);
+                    this.tiles[3][y][6] = new Tile("wall", "-casa2", 3 - 0.25, y, 6);
+                }
 
-            //parede do meio   
-            for (y = 10; y < 13; y++) {
-                this.tiles[14][y][1] = new Tile("wall", "-casa3", 14 + 0.28, y, 1);
-                this.tiles[14][y][2] = new Tile("wall", "-casa3", 14 + 0.28, y, 2);
-            }
-            for (x = 11; x < 15; x++) {
-                this.tiles[x][12][1] = new Tile("wall", "-casa", x, 12-0.3, 1);
-                this.tiles[x][12][2] = new Tile("wall", "-casa", x, 12-0.3, 2);
-            }    
-            for (x = 16; x < 20; x++) {
-                this.tiles[x][10][1] = new Tile("wall", "-casa", x, 10-0.5, 1);
-                this.tiles[x][10][2] = new Tile("wall", "-casa", x, 10-0.5, 2);
-            }
-            for (y = 11; y < 14; y++) {
-                this.tiles[17][y][1] = new Tile("wall", "-casa2", 17, y - 0.75, 1);
-                this.tiles[17][y][2] = new Tile("wall", "-casa2", 17, y - 0.75, 2);
-            }
-                
-                
-            //area balcao
-            for (y = 18; y < 19; y++) {
-                this.tiles[13][y][1] = new Tile("wall", "-casa2", 13 - 0.25, y, 1);
-                this.tiles[13][y][2] = new Tile("wall", "-casa2", 13 - 0.25, y, 2);
-            }
-            for (y = 17; y < 18; y++) {
-                this.tiles[12][y][1] = new Tile("wall", "-casa3", 12 + 0.28, y, 1);
-                this.tiles[12][y][2] = new Tile("wall", "-casa3", 12 + 0.28, y, 2);
-            }
-            for (x = 11; x < 16; x++) {
+                //cama
+                //            this.tiles[1][6][6] = new Tile("wall", "-cama", 1, 6, 6);
+
+                //banco
+                //            for(y = 6; y < 7; y++){
+                //                this.tiles[12][y][1] = new Tile("wall", "-sofa", 12+0.2, y, 1);
+                //            }
+
+                //mesa
+                this.tiles[18][2][1] = new Tile("wall", "-mesa", 18, 2, 1);
+
+                //mesa
+                this.tiles[16][16][1] = new Tile("wall", "-mesa", 16, 16, 1);
+
+                //para consertar
+                for (x = 11; x < 16; x++) {
+                    this.tiles[x][2][1] = new Tile("wall", "-casa", x, 2 + 0.25, 1);
+                    this.tiles[x][2][2] = new Tile("wall", "-casa", x, 2 + 0.25, 2);
+                }
                 for (y = 1; y < 3; y++) {
-                    this.tiles[x][y][0] = new Tile("void", 0, x, y, 0);
+                    this.tiles[16][y][1] = new Tile("wall", "-casa2", 16 - 0.3, y, 1);
+                    this.tiles[16][y][2] = new Tile("wall", "-casa2", 16 - 0.3, y, 2);
                 }
-            }
-            for (y = 5; y < 19; y++) {
-                this.tiles[20][y][0] = new Tile("void", 0, 20, y, 0);
-            }
-            for (y = 14; y < 19; y++) {
-                this.tiles[19][y][0] = new Tile("void", 0, 19, y, 0);
-            }
-            for (x = 11; x < 13; x++) {
-                for (y = 17; y < 21; y++) {
-                    this.tiles[x][y][0] = new Tile("void", 0, x, y, 0);
+                for (x = 16; x < 21; x++) {
+                    this.tiles[x][0][1] = new Tile("wall", "-casa", x - 0.05, 0 + 0.25, 1);
+                    this.tiles[x][0][2] = new Tile("wall", "-casa", x - 0.05, 0 + 0.25, 2);
                 }
-            }
-            break;
+
+
+                //parede do meio   
+                for (y = 10; y < 13; y++) {
+                    this.tiles[14][y][1] = new Tile("wall", "-casa3", 14 + 0.28, y, 1);
+                    this.tiles[14][y][2] = new Tile("wall", "-casa3", 14 + 0.28, y, 2);
+                }
+                for (x = 11; x < 15; x++) {
+                    this.tiles[x][12][1] = new Tile("wall", "-casa", x, 12 - 0.3, 1);
+                    this.tiles[x][12][2] = new Tile("wall", "-casa", x, 12 - 0.3, 2);
+                }
+                for (x = 16; x < 20; x++) {
+                    this.tiles[x][10][1] = new Tile("wall", "-casa", x, 10 - 0.5, 1);
+                    this.tiles[x][10][2] = new Tile("wall", "-casa", x, 10 - 0.5, 2);
+                }
+                for (y = 11; y < 14; y++) {
+                    this.tiles[17][y][1] = new Tile("wall", "-casa2", 17, y - 0.75, 1);
+                    this.tiles[17][y][2] = new Tile("wall", "-casa2", 17, y - 0.75, 2);
+                }
+
+
+                //area balcao
+                for (y = 18; y < 19; y++) {
+                    this.tiles[13][y][1] = new Tile("wall", "-casa2", 13 - 0.25, y, 1);
+                    this.tiles[13][y][2] = new Tile("wall", "-casa2", 13 - 0.25, y, 2);
+                }
+                for (y = 17; y < 18; y++) {
+                    this.tiles[12][y][1] = new Tile("wall", "-casa3", 12 + 0.28, y, 1);
+                    this.tiles[12][y][2] = new Tile("wall", "-casa3", 12 + 0.28, y, 2);
+                }
+                for (x = 11; x < 16; x++) {
+                    for (y = 1; y < 3; y++) {
+                        this.tiles[x][y][0] = new Tile("void", 0, x, y, 0);
+                    }
+                }
+                for (y = 5; y < 19; y++) {
+                    this.tiles[20][y][0] = new Tile("void", 0, 20, y, 0);
+                }
+                for (y = 14; y < 19; y++) {
+                    this.tiles[19][y][0] = new Tile("void", 0, 19, y, 0);
+                }
+                for (x = 11; x < 13; x++) {
+                    for (y = 17; y < 21; y++) {
+                        this.tiles[x][y][0] = new Tile("void", 0, x, y, 0);
+                    }
+                }
+                break;
                 //Fase da Escola!
             case "escola":
                 rushBeach = 900 + dificult * 900;
                 this.equiX = 13;
                 this.equiY = 13;
-				this.equiZ = 1;
+                this.equiZ = 1;
                 for (x = 0; x < 18; x++) {
                     for (y = 0; y < 6; y++) {
                         this.tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
                     }
                 }
-				this.tiles[17][5][1] = new Tile("wall", "-vaso", 17, 5, 3);
+                this.tiles[17][5][1] = new Tile("wall", "-vaso", 17, 5, 3);
                 for (x = 3; x < 9; x++) {
                     for (y = 2; y < 4; y++) {
                         this.tiles[x][y][0] = new Tile("floor", 1, x, y, 0);
@@ -741,7 +750,7 @@ function Fase(fase, create, ratio) {
                         this.tiles[x][y][0] = new Tile("floor", 1, x, y, 0);
                     }
                 }
-				this.tiles[17][16][1] = new Tile("wall", "-vaso", 17, 16, 3);
+                this.tiles[17][16][1] = new Tile("wall", "-vaso", 17, 16, 3);
                 for (x = 0; x < 7; x++) {
                     for (y = 9; y < 20; y++) {
                         this.tiles[x][y][1] = new Tile("floor", 0, x, y, 1);
@@ -756,61 +765,61 @@ function Fase(fase, create, ratio) {
                 this.tiles[0][16][3] = new Tile("wall", 4, -0.5, 15.8, 3);
                 this.tiles[7][15][1] = new Tile("stair", 0, 7, 15, 1);
                 break;
-				//Praia!
-				case "praia":
+                //Praia!
+            case "praia":
                 rushBeach = 600 + dificult * 600;
                 this.equiX = 13;
                 this.equiY = 13;
-				this.equiZ = 1;
-				for (x = 0; x < 13; x++) {
-					for (y = 0; y < 18; y++) {
-							this.tiles[x][y][0] = new Tile("floor", "-areia", x, y, 0);
-					}
-				}
-				for (y = 0; y < 18; y++) {
-						this.tiles[13][y][0] = new Tile("floor", "-areiaD" + (4 - (y % 4) - 1), 13, y, 0);
-						this.tiles[14][y][0] = new Tile("mar", "-areiaE" + (4 - (y % 4) - 1), 14, y, 0);
-						this.tiles[15][y][0] = new Tile("mar", "-areiaM" + (4 - (y % 4) - 1), 15, y, 0);
-				}
-				for (x = 16; x < 18; x++) {
-					for (y = 0; y < 18; y++) {
-							this.tiles[x][y][0] = new Tile("mar", 0, x, y, 0);
-					}
-				}
-				this.tiles[0][1][1] = new Tile("wall", "-coqueiro", 0, 1, 1);
-				this.tiles[0][3][1] = new Tile("wall", "-coqueiro", 0, 3, 1);
-				this.tiles[0][5][1] = new Tile("wall", "-coqueiro", 0, 5, 1);
-				this.tiles[0][10][1] = new Tile("wall", "-coqueiro", 0, 10, 1);
-				this.tiles[0][12][1] = new Tile("wall", "-coqueiro", 0, 12, 1);
-				this.tiles[0][14][1] = new Tile("wall", "-coqueiro", 0, 14, 1);
-				this.tiles[0][6][1] = new Tile("wall", "-cabana2", 0, 6, 0.5);
-				this.tiles[0][9][1] = new Tile("wall", "-cabana2", 0, 9, 0.5);
-				this.tiles[0][6][2] = new Tile("wall", "-cabana1", 0, 6, 2);
-				this.tiles[0][9][2] = new Tile("wall", "-cabana1", 0, 9, 2);
-				this.tiles[3][1][1] = new Tile("wall", "-barraca", 3, 1, 1);
-				this.tiles[3][3][1] = new Tile("wall", "-barraca", 3, 3, 1);
-				this.tiles[3][5][1] = new Tile("wall", "-barraca", 3, 5, 1);
-				this.tiles[3][10][1] = new Tile("wall", "-barraca", 3, 10, 1);
-				this.tiles[3][12][1] = new Tile("wall", "-barraca", 3, 12, 1);
-				this.tiles[3][14][1] = new Tile("wall", "-barraca", 3, 14, 1);
-				this.tiles[6][1][1] = new Tile("wall", "-bPalha", 6, 1, 1);
-				this.tiles[6][3][1] = new Tile("wall", "-bPalha", 6, 3, 1);
-				this.tiles[6][5][1] = new Tile("wall", "-bPalha", 6, 5, 1);
-				this.tiles[6][10][1] = new Tile("wall", "-bPalha", 6, 10, 1);
-				this.tiles[6][12][1] = new Tile("wall", "-bPalha", 6, 12, 1);
-				this.tiles[6][14][1] = new Tile("wall", "-bPalha", 6, 14, 1);
-				break;
+                this.equiZ = 1;
+                for (x = 0; x < 13; x++) {
+                    for (y = 0; y < 18; y++) {
+                        this.tiles[x][y][0] = new Tile("floor", "-areia", x, y, 0);
+                    }
+                }
+                for (y = 0; y < 18; y++) {
+                    this.tiles[13][y][0] = new Tile("floor", "-areiaD" + (4 - (y % 4) - 1), 13, y, 0);
+                    this.tiles[14][y][0] = new Tile("mar", "-areiaE" + (4 - (y % 4) - 1), 14, y, 0);
+                    this.tiles[15][y][0] = new Tile("mar", "-areiaM" + (4 - (y % 4) - 1), 15, y, 0);
+                }
+                for (x = 16; x < 18; x++) {
+                    for (y = 0; y < 18; y++) {
+                        this.tiles[x][y][0] = new Tile("mar", 0, x, y, 0);
+                    }
+                }
+                this.tiles[0][1][1] = new Tile("wall", "-coqueiro", 0, 1, 1);
+                this.tiles[0][3][1] = new Tile("wall", "-coqueiro", 0, 3, 1);
+                this.tiles[0][5][1] = new Tile("wall", "-coqueiro", 0, 5, 1);
+                this.tiles[0][10][1] = new Tile("wall", "-coqueiro", 0, 10, 1);
+                this.tiles[0][12][1] = new Tile("wall", "-coqueiro", 0, 12, 1);
+                this.tiles[0][14][1] = new Tile("wall", "-coqueiro", 0, 14, 1);
+                this.tiles[0][6][1] = new Tile("wall", "-cabana2", 0, 6, 0.5);
+                this.tiles[0][9][1] = new Tile("wall", "-cabana2", 0, 9, 0.5);
+                this.tiles[0][6][2] = new Tile("wall", "-cabana1", 0, 6, 2);
+                this.tiles[0][9][2] = new Tile("wall", "-cabana1", 0, 9, 2);
+                this.tiles[3][1][1] = new Tile("wall", "-barraca", 3, 1, 1);
+                this.tiles[3][3][1] = new Tile("wall", "-barraca", 3, 3, 1);
+                this.tiles[3][5][1] = new Tile("wall", "-barraca", 3, 5, 1);
+                this.tiles[3][10][1] = new Tile("wall", "-barraca", 3, 10, 1);
+                this.tiles[3][12][1] = new Tile("wall", "-barraca", 3, 12, 1);
+                this.tiles[3][14][1] = new Tile("wall", "-barraca", 3, 14, 1);
+                this.tiles[6][1][1] = new Tile("wall", "-bPalha", 6, 1, 1);
+                this.tiles[6][3][1] = new Tile("wall", "-bPalha", 6, 3, 1);
+                this.tiles[6][5][1] = new Tile("wall", "-bPalha", 6, 5, 1);
+                this.tiles[6][10][1] = new Tile("wall", "-bPalha", 6, 10, 1);
+                this.tiles[6][12][1] = new Tile("wall", "-bPalha", 6, 12, 1);
+                this.tiles[6][14][1] = new Tile("wall", "-bPalha", 6, 14, 1);
+                break;
                 //Fase quadradinha de teste
             default:
                 rushBeach = 100 + dificult * 100;
                 this.equiX = 13;
                 this.equiY = 13;
-				this.equiZ = 1;
+                this.equiZ = 1;
                 for (x = 10; x < 20; x++) {
                     for (y = 10; y < 20; y++) {
                         if (x != 16 || y != 16) {
                             this.tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
-                            if (!(y != 12 || x == 15)){
+                            if (!(y != 12 || x == 15)) {
                                 this.tiles[x][y][1] = new Tile("wall", 3, x, y, 1);
                             }
                         }
@@ -818,31 +827,31 @@ function Fase(fase, create, ratio) {
                 }
                 break;
         }
-		//Cria os Lixos
+        //Cria os Lixos
         for (x = 0; x < 24; x++) {
             for (y = 0; y < 24; y++) {
                 for (z = 0; z < 6; z++) {
-                    if (this.tiles[x][y][z].tType == "floor" && this.tiles[x][y][z+1].tType == "void" ){
-						if (Math.random() < this.ratio) {
-							this.tiles[x][y][z+1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, z+1);
-							this.total++;
-						}
-					}
+                    if (this.tiles[x][y][z].tType == "floor" && this.tiles[x][y][z + 1].tType == "void") {
+                        if (Math.random() < this.ratio) {
+                            this.tiles[x][y][z + 1] = new Tile("lixo", Math.floor(Math.random() * 16), x, y, z + 1);
+                            this.total++;
+                        }
+                    }
                 }
             }
         }
     }
     this.load = function() {
-        if (this.total != 0){
-                stage.removeChild(btVoltar);
-                createjs.Ticker.addEventListener("tick", beachRush);
+        if (this.total != 0) {
+            stage.removeChild(btVoltar);
+            createjs.Ticker.addEventListener("tick", beachRush);
         }
-		equi.x = this.equiX;
-		equi.y = this.equiY;
-		equi.z = this.equiZ;
+        equi.x = this.equiX;
+        equi.y = this.equiY;
+        equi.z = this.equiZ;
         this.update();
     }
-	this.update = function() {
+    this.update = function() {
         for (x = 0; x < 24; x++) {
             for (y = 0; y < 24; y++) {
                 for (z = 0; z < 7; z++) {
