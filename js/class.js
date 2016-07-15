@@ -151,7 +151,7 @@ function main() {
         src: "img/opcao-monitores2.png"
     }, {
         id: "menuBG",
-        src: "img/menuBG.jpg"
+        src: "img/menuBG.png"
     }, {
         id: "Ecopontos",
         src: "img/Ecopontos  background.png"
@@ -324,8 +324,17 @@ function main() {
         id: "wall-bPalha",
         src: "img/Tile praia - barraca de palha.png"
     }, {
-        id: "wall-cabana",
-        src: "img/Tile praia - cabana.png"
+        id: "wall-cabana1",
+        src: "img/Tile Cabana 1.png"
+    }, {
+        id: "wall-cabana2",
+        src: "img/Tile Cabana 2.png"
+    }, {
+        id: "wall-coqueiro",
+        src: "img/Tile Praia - Coqueiro.png"
+    }, {
+        id: "wall-vaso",
+        src: "img/Tile Escola - vaso.png"
     }, {
         id: "sprite",
         src: "img/sprite.png"
@@ -422,6 +431,7 @@ function Boneco() {
             stage.removeChild(faseAtual[faseIndex].tiles[this.x][this.y][this.z].img);
             faseAtual[faseIndex].tiles[this.x][this.y][this.z] = new Tile("void", 0, x, y, z);
             this.score();
+			GreenScore += 5;
         }
     }
     this.score = function() {
@@ -494,8 +504,8 @@ function Fase(fase, create, ratio) {
         switch (fase) {
             //Fase da casa
             case "casa":
-            this.equiX = 13;
-            this.equiY = 13;
+            this.equiX = 15;
+            this.equiY = 15;
             this.equiZ = 1;
             for (x = 0; x < 3; x++) {
                 for (y = 5; y < 9; y++) {
@@ -627,6 +637,7 @@ function Fase(fase, create, ratio) {
                         this.tiles[x][y][0] = new Tile("floor", 0, x, y, 0);
                     }
                 }
+				this.tiles[17][5][1] = new Tile("wall", "-vaso", 17, 5, 3);
                 for (x = 3; x < 9; x++) {
                     for (y = 2; y < 4; y++) {
                         this.tiles[x][y][0] = new Tile("floor", 1, x, y, 0);
@@ -647,6 +658,7 @@ function Fase(fase, create, ratio) {
                         this.tiles[x][y][0] = new Tile("floor", 1, x, y, 0);
                     }
                 }
+				this.tiles[17][16][1] = new Tile("wall", "-vaso", 17, 16, 3);
                 for (x = 0; x < 7; x++) {
                     for (y = 9; y < 20; y++) {
                         this.tiles[x][y][1] = new Tile("floor", 0, x, y, 1);
@@ -687,9 +699,10 @@ function Fase(fase, create, ratio) {
 				this.tiles[0][10][1] = new Tile("wall", "-coqueiro", 0, 10, 1);
 				this.tiles[0][12][1] = new Tile("wall", "-coqueiro", 0, 12, 1);
 				this.tiles[0][14][1] = new Tile("wall", "-coqueiro", 0, 14, 1);
-				//this.tiles[18][6][1] = new Tile("wall", "-cabana", 3, 12, 10);
-				//this.tiles[0][6][1] = new Tile("wall", "vazio", 0, 10, 1);
-				//this.tiles[0][9][1] = new Tile("wall", "vazio", 0, 10, 1);
+				this.tiles[0][6][1] = new Tile("wall", "-cabana2", 0, 6, 0.5);
+				this.tiles[0][9][1] = new Tile("wall", "-cabana2", 0, 9, 0.5);
+				this.tiles[0][6][2] = new Tile("wall", "-cabana1", 0, 6, 2);
+				this.tiles[0][9][2] = new Tile("wall", "-cabana1", 0, 9, 2);
 				this.tiles[3][1][1] = new Tile("wall", "-barraca", 3, 1, 1);
 				this.tiles[3][3][1] = new Tile("wall", "-barraca", 3, 3, 1);
 				this.tiles[3][5][1] = new Tile("wall", "-barraca", 3, 5, 1);
@@ -737,12 +750,12 @@ function Fase(fase, create, ratio) {
     this.load = function() {
         if (this.type == "praia" && this.total != 0){
                 stage.removeChild(btVoltar);
-                rushBeach = 600;
+                rushBeach = 600 + dificult * 600;
                 createjs.Ticker.addEventListener("tick", beachRush);
         }
 		equi.x = this.equiX;
 		equi.y = this.equiY;
-		equi.Z = this.equiZ;
+		equi.z = this.equiZ;
         this.update();
     }
 	this.update = function() {
@@ -815,6 +828,19 @@ function beachRush(e) {
     stage.addChild(bgPlay);
     stage.addChild(text);
 	faseAtual[faseIndex].update();
+	
+	var text = new createjs.Text("🌱"+GreenScore, '20px Josefin Sans', '#0F0');
+    text.x = 10;
+    text.y = 730;
+    stage.addChild(text);
+	var text = new createjs.Text("💰"+GoldScore, '20px Josefin Sans', '#FF0');
+    text.x = 10;
+    text.y = 750;
+    stage.addChild(text);
+	var text = new createjs.Text("lvl:"+dificult/0.05, '20px Josefin Sans', '#FFF');
+    text.x = 10;
+    text.y = 770;
+    stage.addChild(text);
     
     if (rushBeach < 1){
         faseAtual[2] = new Fase("praia", null, 0.1);

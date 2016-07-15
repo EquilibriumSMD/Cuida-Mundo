@@ -204,7 +204,7 @@ function play() {
     bgPlay.alpha = 0;
     if (!archivement) {
         var n = new Notification("Archievement Get!", {
-            body: "First Step +50G\nSeu espírito de protetor ambiental é forte, mas o jogo ainda não está pronto ☹",
+            body: "First Step +5 💰\nSeu espírito de protetor ambiental é forte",
             icon: "img/icon-lixo1.png"
         });
         archivement = true;
@@ -221,6 +221,19 @@ function play() {
     
     soundMenu.stop();
     soundFase.play();
+	
+	var text = new createjs.Text("🌱"+GreenScore, '20px Josefin Sans', '#0F0');
+    text.x = 10;
+    text.y = 730;
+    stage.addChild(text);
+	var text = new createjs.Text("💰"+GoldScore, '20px Josefin Sans', '#FF0');
+    text.x = 10;
+    text.y = 750;
+    stage.addChild(text);
+	var text = new createjs.Text("lvl:"+dificult/0.05, '20px Josefin Sans', '#FFF');
+    text.x = 10;
+    text.y = 770;
+    stage.addChild(text);
 }
 
 function mais() {

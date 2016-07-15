@@ -9,7 +9,7 @@ var personagem;
 var faseAtual = [];
 var faseIndex = 0;
 var GreenScore = 0;
-var GoldScore = 0;
+var GoldScore = 5;
 var dificult = 0.05;
 
 mainGame = function() {
@@ -19,7 +19,7 @@ mainGame = function() {
         faseAtual[1] = new Fase("escola", null, dificult);
         faseAtual[2] = new Fase("praia", null, dificult);
 		//faseIndex = Math.floor(Math.random() * 3);
-		faseIndex = 2;
+		faseIndex = 1;
         faseAtual[faseIndex].load();
     } else {
 		faseIndex = Math.floor(Math.random() * 3);
@@ -117,28 +117,27 @@ function Separar() {
 }
 
 function checkSeparar(evt) {
-    console.log(evt.target);
     if (evt.target.id > 11) {
         if(evt.target.y > 25 && evt.target.y < 200 && evt.target.x > 680 && evt.target.x < 925 ){
             stage.removeChild(evt.target);
             GreenScore += 100;
-            GoldScore += 100;
+            GoldScore += 10;
         }
     } else if (evt.target.id > 8 || evt.target.id == 0) {
         if(evt.target.y > 110 && evt.target.y < 300 && evt.target.x > 800 && evt.target.x < 1075 ){
             stage.removeChild(evt.target);
             GreenScore += 100;
-            GoldScore +=300;
+            GoldScore +=30;
         }
     } else if (evt.target.id > 3) {
         if(evt.target.y > 225 && evt.target.y < 425 && evt.target.x > 570 && evt.target.x < 900 ){
             stage.removeChild(evt.target);
             GreenScore += 100;
-            GoldScore += 150;
+            GoldScore += 15;
         }
     } else if(evt.target.y > 140 && evt.target.y < 350 && evt.target.x > 425 && evt.target.x < 725 ){
             stage.removeChild(evt.target);
             GreenScore += 100;
-            GoldScore += 225;
+            GoldScore += 25;
         }
 }
