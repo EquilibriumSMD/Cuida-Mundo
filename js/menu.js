@@ -192,6 +192,14 @@ function btVoltarAdd() {
     stage.addChild(btVoltar);
 }
 
+function btVoltarMapaAdd() {
+    btVoltar = new createjs.Bitmap(sonGoqueue.getResult("btVoltar"));
+    btVoltar.addEventListener("click", Mapa);
+    btVoltar.x = 20;
+    btVoltar.y = 20;
+    stage.addChild(btVoltar);
+}
+
 function play() {
     bgPlay = new createjs.Bitmap(sonGoqueue.getResult("bgPlay"));
     bgPlay.x = 0;

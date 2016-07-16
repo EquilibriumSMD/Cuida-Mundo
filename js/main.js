@@ -107,7 +107,7 @@ function Separar() {
     createjs.Tween.get(eco).to({
         alpha: 1
     }, 600);
-    btVoltarAdd();
+    btVoltarMapaAdd();
     for (lixo in equi.lixo[faseIndex]) {
         temp = new Sep(equi.lixo[faseIndex][lixo]);
     }
@@ -173,7 +173,7 @@ function beachRush(e) {
     } else if (equi.lixo[faseIndex].length == faseAtual[faseIndex].total) {
         createjs.Ticker.removeEventListener("tick", beachRush);
         stage.removeChild(text);
-        btVoltarAdd()
+        btVoltarMapaAdd();
     }
 }
 

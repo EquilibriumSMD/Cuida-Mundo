@@ -77,8 +77,11 @@ window.onload = function() {
             } else if (dist(clickX, clickY, btnOpcoes.x + 32, btnOpcoes.y + 32) < 32) {
                 options();
             } else if (dist(clickX, clickY, btnPlay.x + 67, btnPlay.y + 67) < 67) {
-                //                Mapa();
-                introducao();
+				if (!archivement[0]) {
+					introducao();
+				} else {
+					Mapa();
+				}
             }
         }
         if (inSubMenu) {
