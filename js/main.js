@@ -14,7 +14,7 @@ var btMapa3;
 
 mainGame = function() {
     if (faseAtual[0] === undefined || (faseAtual[0].total + faseAtual[1].total + faseAtual[2].total == 0)) {
-        if (faseAtual[0].total + faseAtual[1].total + faseAtual[2].total == 0)
+        if (faseAtual[0] !== undefined && faseAtual[0].total + faseAtual[1].total + faseAtual[2].total == 0)
             dificult += 0.05;
         faseAtual[0] = new Fase("casa", null, dificult);
         faseAtual[1] = new Fase("escola", null, dificult);
