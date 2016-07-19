@@ -116,6 +116,7 @@ function Separar() {
 }
 
 function checkSeparar(evt) {
+	evt.target.cursor = 'grab';
     if (evt.target.id > 11) {
         if (evt.target.y > 25 && evt.target.y < 200 && evt.target.x > 680 && evt.target.x < 925) {
             stage.removeChild(evt.target);
@@ -145,30 +146,20 @@ var rushBeach = 0;
 
 function beachRush(e) {
     rushBeach--;
-    var text = new createjs.Text(Math.round(rushBeach / 30), '20px Josefin Sans', '#fff');
+    var text = new createjs.Text("\u{23f1}"+Math.round(rushBeach / 30), '20px Josefin Sans', '#fff');
     text.x = 10;
     text.y = 40;
     stage.addChild(bgPlay);
     stage.addChild(text);
     faseAtual[faseIndex].update();
 
-    var text = new createjs.Text("🌱" + GreenScore, '20px Josefin Sans', '#0F0');
-    text.x = 10;
-    text.y = 730;
-    stage.addChild(text);
-    var text = new createjs.Text("💰" + GoldScore, '20px Josefin Sans', '#FF0');
-    text.x = 10;
-    text.y = 750;
-    stage.addChild(text);
-    var text = new createjs.Text("lvl:" + Math.round(dificult / 0.05), '20px Josefin Sans', '#FFF');
-    text.x = 10;
-    text.y = 770;
-    stage.addChild(text);
+	Score();
 
     if (rushBeach < 1) {
         faseAtual[faseIndex] = new Fase(faseAtual[faseIndex].type, null, dificult);
+		GreenScore -= equi.lixo[faseIndex].length*5;
         equi.lixo[faseIndex] = [];
-        setupMenu();
+        Mapa();
         createjs.Ticker.removeEventListener("tick", beachRush);
     } else if (equi.lixo[faseIndex].length == faseAtual[faseIndex].total) {
         createjs.Ticker.removeEventListener("tick", beachRush);
@@ -218,19 +209,8 @@ function Mapa() {
     btMapa3.addEventListener("click", verificaFase);
     stage.addChild(btMapa3);
 
-    var text = new createjs.Text("🌱" + GreenScore, '20px Josefin Sans', '#0F0');
-    text.x = 10;
-    text.y = 730;
-    stage.addChild(text);
-    var text = new createjs.Text("💰" + GoldScore, '20px Josefin Sans', '#FF0');
-    text.x = 10;
-    text.y = 750;
-    stage.addChild(text);
-    var text = new createjs.Text("lvl:" + Math.round(dificult / 0.05), '20px Josefin Sans', '#FFF');
-    text.x = 10;
-    text.y = 770;
-    stage.addChild(text);
-
+	Score();
+	
     btVoltarAdd();
 }
 
@@ -241,4 +221,19 @@ function verificaFase(e) {
     } else {
         Separar();
     }
+}
+
+function Score() {
+var text = new createjs.Text("\u{1f331}" + GreenScore, '20px Josefin Sans', '#0F0');
+    text.x = 10;
+    text.y = 730;
+    stage.addChild(text);
+    var text = new createjs.Text("\u{1f4b0}" + GoldScore, '20px Josefin Sans', '#FF0');
+    text.x = 10;
+    text.y = 750;
+    stage.addChild(text);
+    var text = new createjs.Text("lvl:" + Math.round(dificult / 0.05), '20px Josefin Sans', '#FFF');
+    text.x = 10;
+    text.y = 770;
+    stage.addChild(text);
 }

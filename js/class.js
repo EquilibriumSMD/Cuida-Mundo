@@ -60,7 +60,8 @@ window.onload = function() {
 
     main();
     loadSound();
-
+	stage.enableMouseOver();
+	
     //jogando as funções de cada botão
     stage.canvas.addEventListener("click", function(e) {
         var canvasX = document.getElementById("defaultCanvas0").offsetLeft;
@@ -907,7 +908,9 @@ function Sep(id) {
     this.img.x = Math.random() * 100;
     this.img.y = Math.random() * 700;
     this.img.id = id;
+	this.img.cursor = 'grab';
     this.img.on("pressmove", function(evt) {
+		evt.target.cursor = 'grabbing';
         evt.target.x = evt.stageX - tSize;
         evt.target.y = evt.stageY - tSize;
     });

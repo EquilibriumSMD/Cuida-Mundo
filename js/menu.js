@@ -226,18 +226,7 @@ function play() {
     soundMenu.stop();
     soundFase.play();
 
-    var text = new createjs.Text("🌱" + GreenScore, '20px Josefin Sans', '#0F0');
-    text.x = 10;
-    text.y = 730;
-    stage.addChild(text);
-    var text = new createjs.Text("💰" + GoldScore, '20px Josefin Sans', '#FF0');
-    text.x = 10;
-    text.y = 750;
-    stage.addChild(text);
-    var text = new createjs.Text("lvl:" + Math.round(dificult / 0.05), '20px Josefin Sans', '#FFF');
-    text.x = 10;
-    text.y = 770;
-    stage.addChild(text);
+    Score();
 }
 
 /* Equipe e sub itens */
