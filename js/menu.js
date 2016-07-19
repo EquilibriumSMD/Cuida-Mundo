@@ -102,6 +102,12 @@ function opMenu() {
     btnPlay = new createjs.Bitmap(sonGoqueue.getResult("btnPlay"));
     btnEquipe = new createjs.Bitmap(sonGoqueue.getResult("btnEquipe"));
     btnOpcoes = new createjs.Bitmap(sonGoqueue.getResult("btnOpcoes"));
+	
+	//cursor dos botões
+	btnEco.cursor = 'pointer';
+	btnPlay.cursor = 'pointer';
+	btnEquipe.cursor = 'pointer';
+	btnOpcoes.cursor = 'pointer';
 
     //posicionamento dos botoes
     btnEco.x = 1140;
@@ -143,6 +149,10 @@ function subMenu2() {
     btnDesenvolvedores = new createjs.Bitmap(sonGoqueue.getResult("btnDesenvolvedores"));
     btnOrientadores = new createjs.Bitmap(sonGoqueue.getResult("btnOrientadores"));
     btnMonitores = new createjs.Bitmap(sonGoqueue.getResult("btnMonitores"));
+	//cursor dos botões
+	btnDesenvolvedores.cursor = 'pointer';
+	btnOrientadores.cursor = 'pointer';
+	btnMonitores.cursor = 'pointer';
     //posicionamento dos botoes
     btnDesenvolvedores.x = 0;
     btnDesenvolvedores.y = 185;
@@ -170,6 +180,7 @@ function subMenu2() {
 }
 
 function setupMenu() {
+	stage.cursor = 'default';
     tSize = 64;
     if (equi === undefined) {
         equi = new Boneco();
@@ -187,6 +198,7 @@ function setupMenu() {
 function btVoltarAdd() {
     btVoltar = new createjs.Bitmap(sonGoqueue.getResult("btVoltar"));
     btVoltar.addEventListener("click", setupMenu);
+	btVoltar.cursor = 'pointer';
     btVoltar.x = 20;
     btVoltar.y = 20;
     stage.addChild(btVoltar);
@@ -195,6 +207,7 @@ function btVoltarAdd() {
 function btVoltarMapaAdd() {
     btVoltar = new createjs.Bitmap(sonGoqueue.getResult("btVoltar"));
     btVoltar.addEventListener("click", Mapa);
+	btVoltar.cursor = 'pointer';
     btVoltar.x = 20;
     btVoltar.y = 20;
     stage.addChild(btVoltar);
@@ -267,6 +280,7 @@ function monitores() {
     }, 600);
     subMenu2();
     btnMonitores = new createjs.Bitmap(sonGoqueue.getResult("btnMonitores2"));
+	btnMonitores.cursor = 'pointer';
     btnMonitores.x = 855;
     btnMonitores.y = 185;
     stage.addChild(btnMonitores);
@@ -289,6 +303,7 @@ function orientadores() {
     }, 600);
     subMenu2();
     btnOrientadores = new createjs.Bitmap(sonGoqueue.getResult("btnOrientadores2"));
+	btnOrientadores.cursor = 'pointer';
     btnOrientadores.x = 429;
     btnOrientadores.y = 185;
     stage.addChild(btnOrientadores);
@@ -311,6 +326,7 @@ function desenvolvedores() {
     }, 600);
     subMenu2();
     btnDesenvolvedores = new createjs.Bitmap(sonGoqueue.getResult("btnDesenvolvedores2"));
+	btnDesenvolvedores.cursor = 'pointer';
     btnDesenvolvedores.x = 0;
     btnDesenvolvedores.y = 185;
     stage.addChild(btnDesenvolvedores);
@@ -328,6 +344,10 @@ function subMenu() {
     btnConheca = new createjs.Bitmap(sonGoqueue.getResult("btnConheca"));
     btnParticipar = new createjs.Bitmap(sonGoqueue.getResult("btnParticipar"));
     btnCreditos = new createjs.Bitmap(sonGoqueue.getResult("btnCreditos"));
+	//cursor dos botões
+    btnConheca.cursor = 'pointer';
+    btnParticipar.cursor = 'pointer';
+    btnCreditos.cursor = 'pointer';	
     //posicionamento dos botoes
     btnConheca.x = 0;
     btnConheca.y = 185;
@@ -391,6 +411,7 @@ function conheca() {
     }, 600);
     subMenu();
     btnConheca = new createjs.Bitmap(sonGoqueue.getResult("btnConheca2"));
+	btnConheca.cursor = 'pointer';
     btnConheca.x = 0;
     btnConheca.y = 185;
     stage.addChild(btnConheca);
@@ -422,6 +443,7 @@ function participe() {
     }, 600);
     subMenu();
     btnParticipar = new createjs.Bitmap(sonGoqueue.getResult("btnParticipar2"));
+	btnParticipar.cursor = 'pointer';
     btnParticipar.x = 429;
     btnParticipar.y = 185;
     stage.addChild(btnParticipar);
@@ -454,6 +476,7 @@ function materiais() {
     }, 600);
     subMenu();
     btnCreditos = new createjs.Bitmap(sonGoqueue.getResult("btnCreditos2"));
+	btnCreditos.cursor = 'pointer';
     btnCreditos.x = 855;
     btnCreditos.y = 185;
     stage.addChild(btnCreditos);
@@ -467,6 +490,8 @@ function subMenuOptions() {
     inSubOptions = true;
     btnInstrucoes = new createjs.Bitmap(sonGoqueue.getResult("btnInstrucoes"));
     btnSons = new createjs.Bitmap(sonGoqueue.getResult("btnSons"));
+	btnInstrucoes.cursor = 'pointer';
+	btnSons.cursor = 'pointer';
     //posicionamento dos botoes
     btnInstrucoes.x = 0;
     btnInstrucoes.y = 185;
@@ -521,6 +546,7 @@ function instrucoes() {
     subMenuOptions();
 
     btnInstrucoes = new createjs.Bitmap(sonGoqueue.getResult("btnInstrucoes2"));
+	btnInstrucoes.cursor = 'pointer';
     btnInstrucoes.x = 0;
     btnInstrucoes.y = 185;
     btnInstrucoes.alpha = 0;
@@ -554,6 +580,7 @@ function sons() {
 
     subMenuOptions();
     btnSons = new createjs.Bitmap(sonGoqueue.getResult("btnSons2"));
+	btnSons.cursor = 'pointer';
 
     //posicionamento dos botoes
     btnSons.x = 643;
@@ -571,6 +598,7 @@ function sons() {
 
     //som on
     somOn = new createjs.Bitmap(sonGoqueue.getResult("som-on"));
+	somOn.cursor = 'pointer';
     somOn.x = 429;
     somOn.y = 399;
     somOn.alpha = 0;
@@ -583,6 +611,7 @@ function sons() {
 
     //som off
     somOff = new createjs.Bitmap(sonGoqueue.getResult("som-off"));
+	somOff.cursor = 'pointer';
     somOff.x = 766;
     somOff.y = 399;
     somOff.alpha = 0;
@@ -613,6 +642,7 @@ function introducao() {
     introVideo.y = 80;
 
     btSkip = new createjs.Bitmap(sonGoqueue.getResult("btSkip"));
+	btSkip.cursor = 'pointer';
     btSkip.addEventListener("click", Mapa);
     btSkip.x = 1130;
     btSkip.y = 10;

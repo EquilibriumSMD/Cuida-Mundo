@@ -30,6 +30,7 @@ var inSubOptions = false;
 var offsetX = 0;
 var offsetY = 0;
 var telaOffset;
+var circle; //loading
 
 var soundMenu;
 var soundFase;
@@ -121,7 +122,8 @@ window.onload = function() {
 }
 
 function loading(e) {
-    var circle = new createjs.Shape();
+	stage.cursor = 'progress';
+    circle = new createjs.Shape();
     circle.graphics.beginFill("#00FF7F").drawCircle(0, 0, 755 * e.progress);
     circle.x = 640;
     circle.y = 400;

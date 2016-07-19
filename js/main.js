@@ -182,6 +182,7 @@ function Mapa() {
     }, 600);
 
     btMapa0 = new createjs.Bitmap(sonGoqueue.getResult("btMapa"));
+	btMapa0.cursor = 'pointer';
     btMapa0.x = 920;
     btMapa0.y = 269;
     btMapa0.fase = 0;
@@ -189,6 +190,7 @@ function Mapa() {
     stage.addChild(btMapa0);
 
     btMapa1 = new createjs.Bitmap(sonGoqueue.getResult("btMapa"));
+	btMapa1.cursor = 'pointer';
     btMapa1.x = 699;
     btMapa1.y = 346;
     btMapa1.fase = 1;
@@ -196,6 +198,7 @@ function Mapa() {
     stage.addChild(btMapa1);
 
     btMapa2 = new createjs.Bitmap(sonGoqueue.getResult("btMapa"));
+	btMapa2.cursor = 'pointer';
     btMapa2.x = 917;
     btMapa2.y = 170;
     btMapa2.fase = 2;
@@ -203,6 +206,7 @@ function Mapa() {
     stage.addChild(btMapa2);
 
     btMapa3 = new createjs.Bitmap(sonGoqueue.getResult("btMapa"));
+	btMapa3.cursor = 'pointer';
     btMapa3.x = 300;
     btMapa3.y = 374;
     btMapa3.fase = "ecoponto";
