@@ -233,6 +233,9 @@ function main() {
         id: "menuBG",
         src: "img/menuBG.jpg"
     }, {
+        id: "bossBG",
+        src: "img/Fábrica background.png"
+    }, {
         id: "Ecopontos",
         src: "img/Ecopontos  background.png"
     }, {
@@ -580,6 +583,7 @@ function Fase(fase, create, ratio) {
     this.equiY;
     this.equiZ;
     this.total = 0;
+    this.step = 0;
     this.type = fase;
     if (ratio === undefined) {
         this.ratio = 0.5;

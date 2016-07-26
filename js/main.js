@@ -7,15 +7,15 @@ var buttonAction
 var lixoC, lixoT;
 var personagem;
 var faseIndex = 0;
+var boss = false;
 var btMapa0;
 var btMapa1;
 var btMapa2;
 var btMapa3;
+var btMapa4;
 
 mainGame = function() {
-    if (faseAtual[0] === undefined || (faseAtual[0].total + faseAtual[1].total + faseAtual[2].total == 0)) {
-        if (faseAtual[0] !== undefined && faseAtual[0].total + faseAtual[1].total + faseAtual[2].total == 0)
-            dificult += 0.05;
+    if (faseAtual[0] === undefined) {
         faseAtual[0] = new Fase("casa", null, dificult);
         faseAtual[1] = new Fase("escola", null, dificult);
         faseAtual[2] = new Fase("praia", null, dificult);
@@ -171,6 +171,9 @@ function beachRush(e) {
 function Mapa() {
     introVideo.visible = false;
 
+    if (faseAtual[0].total + faseAtual[1].total + faseAtual[2].total == 0 && !boss)
+        boss = true;
+
     bgMapa = new createjs.Bitmap(sonGoqueue.getResult("bgMapa"));
     bgMapa.x = 0;
     bgMapa.y = 0;
@@ -213,6 +216,16 @@ function Mapa() {
     btMapa3.addEventListener("click", verificaFase);
     stage.addChild(btMapa3);
 
+    if (boss) {
+        btMapa4 = new createjs.Bitmap(sonGoqueue.getResult("btMapa"));
+        btMapa4.cursor = 'pointer';
+        btMapa4.x = 490;
+        btMapa4.y = 510;
+        btMapa4.fase = "boss";
+        btMapa4.addEventListener("click", verificaFase);
+        stage.addChild(btMapa4);
+    }
+
 	Score();
 	
     btVoltarAdd();
@@ -222,8 +235,10 @@ function verificaFase(e) {
     if (e.target.fase != "ecoponto") {
         faseIndex = e.target.fase;
         play();
-    } else {
+    } else if (e.target.fase == "ecoponto") {
         Separar();
+    } else if (e.target.fase == "boss") {
+        Boss();
     }
 }
 
@@ -240,4 +255,25 @@ var text = new createjs.Text("\u{1f331}" + GreenScore, '20px Josefin Sans', '#0F
     text.x = 10;
     text.y = 770;
     stage.addChild(text);
+}
+
+function Boss(){
+    bossBG = new createjs.Bitmap(sonGoqueue.getResult("bossBG"));
+    bossBG.x = 0;
+    bossBG.y = 0;
+    bossBG.alpha = 0;
+    inMenu = false;
+    stage.addChild(bossBG);
+    createjs.Tween.get(bossBG).to({
+        alpha: 1
+    }, 600);
+    
+    dificult += 0.05;
+    faseAtual[0] = new Fase("casa", null, dificult);
+    faseAtual[1] = new Fase("escola", null, dificult);
+    faseAtual[2] = new Fase("praia", null, dificult);
+
+    boss = false;
+
+    btVoltarAdd();
 }

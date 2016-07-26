@@ -220,7 +220,7 @@ function play() {
     bgPlay.alpha = 0;
     if (!archivement[0]) {
         var n = new Notification("Archievement Get!", {
-            body: "First Step +5 💰\nSeu espírito de protetor ambiental é forte",
+            body: "First Step +5 \u{1f4b0}\nSeu espírito de protetor ambiental é forte",
             icon: "img/icon-lixo1.png"
         });
         archivement[0] = true;
