@@ -171,7 +171,7 @@ function beachRush(e) {
 function Mapa() {
     introVideo.visible = false;
 
-    if (faseAtual[0].total + faseAtual[1].total + faseAtual[2].total == 0 && !boss)
+    if (faseAtual[0] !== undefined && faseAtual[0].total + faseAtual[1].total + faseAtual[2].total == 0 && !boss)
         boss = true;
 
     bgMapa = new createjs.Bitmap(sonGoqueue.getResult("bgMapa"));
